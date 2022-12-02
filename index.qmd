@@ -1,0 +1,6 @@
+---
+title: "Modélisation d'une variable quantitative"
+subtitle: "EE CIST 2023, Ouidah, Bénin"
+author: "Claude Grasland & Nadège Djossou"
+---
+
