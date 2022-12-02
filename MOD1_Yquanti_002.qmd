@@ -37,9 +37,9 @@ L'objectif de la présente note est de présenter un tableau du second type pouv
 Le chargement des données s'effectue à l'aide de trois fichiers qui peuvent être importées dans R mais aussi bien dans d'autres logiciels de statistique (format .csv) ou de cartographie (format .shp). 
 
 ```{r}
-don <- read.csv2("DEV-AFRIC-2018/afrika_don.csv")
-meta <- read.csv2("DEV-AFRIC-2018/afrika_don_meta.csv")
-map <- st_read("DEV-AFRIC-2018/afrika_map.shp",quiet = T)
+don <- read.csv2("DEV-AFRIC-2018/data/afrika_don.csv")
+meta <- read.csv2("DEV-AFRIC-2018/data/afrika_don_meta.csv")
+map <- st_read("DEV-AFRIC-2018/shp/afrika_map.shp",quiet = T)
 ```
 
 ### Liste des variables

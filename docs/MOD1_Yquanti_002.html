@@ -151,6 +151,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li class="nav-item">
     <a class="nav-link active" href="./MOD1_Yquanti_002.html" aria-current="page">Application n°1</a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./MOD1_Yquanti_003.html">Application n°2</a>
+  </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
@@ -251,9 +254,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="a.-données">A. Données</h2>
 <p>Le chargement des données s’effectue à l’aide de trois fichiers qui peuvent être importées dans R mais aussi bien dans d’autres logiciels de statistique (format .csv) ou de cartographie (format .shp).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>don <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"DEV-AFRIC-2018/afrika_don.csv"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"DEV-AFRIC-2018/afrika_don_meta.csv"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"DEV-AFRIC-2018/afrika_map.shp"</span>,<span class="at">quiet =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>don <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"DEV-AFRIC-2018/data/afrika_don.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"DEV-AFRIC-2018/data/afrika_don_meta.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"DEV-AFRIC-2018/shp/afrika_map.shp"</span>,<span class="at">quiet =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="liste-des-variables" class="level3">
 <h3 class="anchored" data-anchor-id="liste-des-variables">Liste des variables</h3>
