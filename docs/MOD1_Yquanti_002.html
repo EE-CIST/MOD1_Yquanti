@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Modélisation d’une variable quantitative - Application n°1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Modélisation d’une variable quantitative</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html">A propos</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./MOD1_Yquanti_001.html">Introduction</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./MOD1_Yquanti_002.html" aria-current="page">Application n°1</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a.-données" id="toc-a.-données" class="nav-link active" data-scroll-target="#a.-données">A. Données</a>
+  <ul class="collapse">
+  <li><a href="#liste-des-variables" id="toc-liste-des-variables" class="nav-link" data-scroll-target="#liste-des-variables">Liste des variables</a></li>
+  <li><a href="#sélection-dun-sous-tableau" id="toc-sélection-dun-sous-tableau" class="nav-link" data-scroll-target="#sélection-dun-sous-tableau">Sélection d’un sous-tableau</a></li>
+  <li><a href="#paramètres-principaux" id="toc-paramètres-principaux" class="nav-link" data-scroll-target="#paramètres-principaux">Paramètres principaux</a></li>
+  <li><a href="#fonds-de-carte" id="toc-fonds-de-carte" class="nav-link" data-scroll-target="#fonds-de-carte">Fonds de carte</a></li>
+  </ul></li>
+  <li><a href="#b.-variable-dépendant" id="toc-b.-variable-dépendant" class="nav-link" data-scroll-target="#b.-variable-dépendant">B. Variable dépendant</a>
+  <ul class="collapse">
+  <li><a href="#forme-de-la-distribution" id="toc-forme-de-la-distribution" class="nav-link" data-scroll-target="#forme-de-la-distribution">Forme de la distribution</a></li>
+  <li><a href="#valeurs-exceptionnelles" id="toc-valeurs-exceptionnelles" class="nav-link" data-scroll-target="#valeurs-exceptionnelles">Valeurs exceptionnelles</a></li>
+  <li><a href="#normalité" id="toc-normalité" class="nav-link" data-scroll-target="#normalité">Normalité</a></li>
+  </ul></li>
+  <li><a href="#c.-analyse-de-variance" id="toc-c.-analyse-de-variance" class="nav-link" data-scroll-target="#c.-analyse-de-variance">C. Analyse de variance</a>
+  <ul class="collapse">
+  <li><a href="#modèle-1-la-mortalité-infantile-varie-t-elle-selon-les-régions" id="toc-modèle-1-la-mortalité-infantile-varie-t-elle-selon-les-régions" class="nav-link" data-scroll-target="#modèle-1-la-mortalité-infantile-varie-t-elle-selon-les-régions">modèle 1 : La mortalité infantile varie-t-elle selon les régions ?</a></li>
+  <li><a href="#modèle-2-la-mortalité-infantile-varie-t-elle-selon-laccès-à-la-mer" id="toc-modèle-2-la-mortalité-infantile-varie-t-elle-selon-laccès-à-la-mer" class="nav-link" data-scroll-target="#modèle-2-la-mortalité-infantile-varie-t-elle-selon-laccès-à-la-mer">Modèle 2 : La mortalité infantile varie-t-elle selon l’accès à la mer</a></li>
+  <li><a href="#modèle-3-la-mortalité-infantile-varie-t-elle-selon-lhéritage-colonial" id="toc-modèle-3-la-mortalité-infantile-varie-t-elle-selon-lhéritage-colonial" class="nav-link" data-scroll-target="#modèle-3-la-mortalité-infantile-varie-t-elle-selon-lhéritage-colonial">Modèle 3 : La mortalité infantile varie-t-elle selon l’héritage colonial</a></li>
+  <li><a href="#analyse-de-variance-à-plusieurs-facteurs-y-fq1q2q3" id="toc-analyse-de-variance-à-plusieurs-facteurs-y-fq1q2q3" class="nav-link" data-scroll-target="#analyse-de-variance-à-plusieurs-facteurs-y-fq1q2q3">Analyse de variance à plusieurs facteurs : Y = f(Q1,Q2,Q3)</a></li>
+  </ul></li>
+  <li><a href="#d.-régression-linéaire" id="toc-d.-régression-linéaire" class="nav-link" data-scroll-target="#d.-régression-linéaire">D. Régression linéaire</a>
+  <ul class="collapse">
+  <li><a href="#modèle-1-la-richesse-par-habitant-log-fait-elle-diminuer-la-mortalité-infantile" id="toc-modèle-1-la-richesse-par-habitant-log-fait-elle-diminuer-la-mortalité-infantile" class="nav-link" data-scroll-target="#modèle-1-la-richesse-par-habitant-log-fait-elle-diminuer-la-mortalité-infantile">Modèle 1 : La richesse par habitant (log) fait-elle diminuer la mortalité infantile ?</a></li>
+  <li><a href="#modèle-2-lurbanisation-fait-elle-diminuer-la-mortalité-infantile" id="toc-modèle-2-lurbanisation-fait-elle-diminuer-la-mortalité-infantile" class="nav-link" data-scroll-target="#modèle-2-lurbanisation-fait-elle-diminuer-la-mortalité-infantile">Modèle 2 : L’urbanisation fait-elle diminuer la mortalité infantile ?</a></li>
+  <li><a href="#modèle-3-la-mortalité-infantile-est-elle-plus-forte-au-début-de-la-transition-démographique" id="toc-modèle-3-la-mortalité-infantile-est-elle-plus-forte-au-début-de-la-transition-démographique" class="nav-link" data-scroll-target="#modèle-3-la-mortalité-infantile-est-elle-plus-forte-au-début-de-la-transition-démographique">Modèle 3 : La mortalité infantile est-elle plus forte au début de la transition démographique ?</a></li>
+  <li><a href="#régression-linéaire-multiple-y-fx1x2x3" id="toc-régression-linéaire-multiple-y-fx1x2x3" class="nav-link" data-scroll-target="#régression-linéaire-multiple-y-fx1x2x3">Régression linéaire multiple : Y = f(X1,X2,X3, …)</a></li>
+  </ul></li>
+  <li><a href="#modeles-hybrides" id="toc-modeles-hybrides" class="nav-link" data-scroll-target="#modeles-hybrides">Modeles hybrides</a>
+  <ul class="collapse">
+  <li><a href="#ensemble-des-variables" id="toc-ensemble-des-variables" class="nav-link" data-scroll-target="#ensemble-des-variables">Ensemble des variables</a></li>
+  <li><a href="#variables-les-plus-pertinentes" id="toc-variables-les-plus-pertinentes" class="nav-link" data-scroll-target="#variables-les-plus-pertinentes">Variables les plus pertinentes</a></li>
+  <li><a href="#interactions" id="toc-interactions" class="nav-link" data-scroll-target="#interactions">Interactions</a></li>
+  </ul></li>
+  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">EXERCICES</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Application n°1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf, <span class="at">quietly=</span> <span class="cn">TRUE</span>,<span class="at">warn.conflicts =</span> F)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr, <span class="at">quietly =</span> <span class="cn">TRUE</span>,<span class="at">warn.conflicts =</span> F)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapsf)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car,<span class="at">warn.conflicts =</span> F,<span class="at">quietly=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pour des raisons de cohérence pédagogique, il est important que certains tableaux de données soient présents tout au long des cours qui seront dispensés pendant l’école d’été CIST 2022-2023. Compte-tenu des perspectives différentes qu’implique leur traitement, nous avons besoin d’au moins deux tableaux de nature différente :</p>
+<ul>
+<li>un tableau de <strong>données sociologiques ou économiques individuelles</strong> permettant de décrire le comportement d’acteurs développant des stratégies ou des pratiques en fonction de déterminants liées à des attributs personnels, familiaux ou contextuels.</li>
+<li>un tableau de <strong>données spatiales agrégées</strong> décrivant des variables relatives à un agrégat de population localisée dans l’espace pour lequel on pourra à la fois étudier les relations entre variables agrégées et introduire des variables plus spécifiquement spatiales. Ce tableau débouchant sur des questions de cartographie.</li>
+</ul>
+<p>L’objectif de la présente note est de présenter un tableau du second type pouvant être utilisé dans le module <em>Modélisation d’une variable Y quantitative</em>. Il s’agit d’un tableau décrivant les pays africains en 2017-2018 à l’aide d’indicateurs tirés du rapport mondial sur le développement humain de 2020 et complété par quelques variables tirées de la base des pays du Monde du CEPII. Il possède plusieurs avantages :</p>
+<ul>
+<li>Ce tableau a déjà été utilisé lors de l’initiation à R dispensé aux formateurs de l’EE CIST au printemps 2022 pour les premiers cours portant sur l’analyse de variance ou la régression linéaire simple ce qui est un avantage.</li>
+<li>Il est de taille assez réduite (49 pays) mais suffisante pour mener des analyses statistiques multivariées. On peut le réduire facilement à un plus petit nombre d’individu en utilisant par exemple le critère de découpage de l’Afrique en 5 régions proposé par les Nations-Unies.</li>
+<li>Il est assez complet mais contient quelques valeurs manquantes (notamment pour l’Érythrée ou le Soudan-Sud) ce qui permettra de mettre en place des exercices de prédiction issues d’un modèle de régression simple ou multiples.</li>
+<li>Il comporte des pays de taille très différente ce qui posera la question de la pondération des analyses.</li>
+<li>Il contient des valeurs exceptionnelles ou aberrantes et affiche des distributions non gaussienne pour plusieurs indicateurs ce qui permet de poser des problèmes de transformation d’indicateurs.</li>
+<li>Il pourra facilement être mis à jour à l’avenir dans la mesure où le rapport sur le développement humain reprend chaque année la plupart des indicateurs anérieurs.</li>
+<li>On pourra ultérieurement construire des données diachroniques afin de suivre des évolutions.</li>
+</ul>
+<section id="a.-données" class="level2">
+<h2 class="anchored" data-anchor-id="a.-données">A. Données</h2>
+<p>Le chargement des données s’effectue à l’aide de trois fichiers qui peuvent être importées dans R mais aussi bien dans d’autres logiciels de statistique (format .csv) ou de cartographie (format .shp).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>don <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"DEV-AFRIC-2018/afrika_don.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"DEV-AFRIC-2018/afrika_don_meta.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"DEV-AFRIC-2018/afrika_map.shp"</span>,<span class="at">quiet =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="liste-des-variables" class="level3">
+<h3 class="anchored" data-anchor-id="liste-des-variables">Liste des variables</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(meta, <span class="at">caption =</span> <span class="st">"Défintion et source des variables"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Défintion et source des variables</caption>
+<colgroup>
+<col style="width: 6%">
+<col style="width: 64%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Code</th>
+<th style="text-align: left;">Definition</th>
+<th style="text-align: left;">Souce</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">iso3</td>
+<td style="text-align: left;">ISO3 code of country</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">English name of country</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">nom</td>
+<td style="text-align: left;">French name of country</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">POP</td>
+<td style="text-align: left;">Population (Millions inhabitants)</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PIB</td>
+<td style="text-align: left;">Gross Domestic Product ($ per capita ppp)</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IDH</td>
+<td style="text-align: left;">Human Development Index</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ADOFEC</td>
+<td style="text-align: left;">Adolescent birth rate (births per 1,000 women ages 15-19)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CO2HAB</td>
+<td style="text-align: left;">Carbon Dioxyde Emissions per capita (tonnes)</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EMPAGR</td>
+<td style="text-align: left;">Employment in agriculture (% of total employment)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EMPSER</td>
+<td style="text-align: left;">Employment in services (% of total employment)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INTERN</td>
+<td style="text-align: left;">Internet users, total (% of population)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ESPVIE</td>
+<td style="text-align: left;">Life expectancy at birth (years)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AGEMED</td>
+<td style="text-align: left;">Median age (years)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TELMOB</td>
+<td style="text-align: left;">Mobile phone subscriptions (per 100 people)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MORINF</td>
+<td style="text-align: left;">Mortality rate, infant (per 1,000 live births)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TXMIGR</td>
+<td style="text-align: left;">Net migration rate (per 1,000 people)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DVIEUX</td>
+<td style="text-align: left;">Old-age (65 and older) dependency ratio (per 100 people ages 15-64)</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TUBERC</td>
+<td style="text-align: left;">Tuberculosis incidence (per 100,000 people)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">URBANI</td>
+<td style="text-align: left;">Urban population (%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DJEUNE</td>
+<td style="text-align: left;">Young age (0-14) dependency ratio (per 100 people ages 15-64)</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SUBREG</td>
+<td style="text-align: left;">United Nation subregions in Africa</td>
+<td style="text-align: left;">Human Development Report 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LOCKED</td>
+<td style="text-align: left;">Landlocked country (0/1)</td>
+<td style="text-align: left;">CEPII</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">COLFRA</td>
+<td style="text-align: left;">Colonisation by France (0/1)</td>
+<td style="text-align: left;">CEPII</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">COLGBR</td>
+<td style="text-align: left;">Colonisation by United Kingdom (0/1)</td>
+<td style="text-align: left;">CEPII</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LANGFR</td>
+<td style="text-align: left;">French official langage (0/1)</td>
+<td style="text-align: left;">CEPII</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LANGEN</td>
+<td style="text-align: left;">English official langage(0/1)</td>
+<td style="text-align: left;">CEPII</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="sélection-dun-sous-tableau" class="level3">
+<h3 class="anchored" data-anchor-id="sélection-dun-sous-tableau">Sélection d’un sous-tableau</h3>
+<p>A titre d’exemple, nous allons extraitre un petit tableau utile pour le module de modélisation d’une variable Y quantitative ainsi qu’un nombre limité de variable auquel on donnera un préfixe pour mieux repérer leur rôle dans les modèles statistiques qui seront développés :</p>
+<ul>
+<li><strong>W</strong> : variable de pondération</li>
+<li><strong>Y</strong> : variable dépendante (à expliquer) de type quantitatif continu</li>
+<li><strong>X</strong> : variable indépendante (explicative) de type quantitatif continu</li>
+<li><strong>Q</strong> : variable indépendante (explicative) de type qualitatif ou quantitatif discret</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sel<span class="ot">&lt;-</span>don <span class="sc">%&gt;%</span> <span class="fu">select</span>(   iso3,  </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                       nom,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">W_POP =</span> POP,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Y_TMI =</span> MORINF,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Y_FEC =</span> ADOFEC,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">X_PIB =</span> PIB,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">X_URB =</span> URBANI,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">X_JEU =</span> DJEUNE,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Q_ACC =</span> LOCKED,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Q_FRA =</span> COLFRA,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Q_REG =</span> SUBREG) <span class="sc">%&gt;%</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                <span class="fu">mutate</span>(<span class="at">Q_ACC =</span> <span class="fu">as.factor</span>(Q_ACC),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Q_FRA =</span> <span class="fu">as.factor</span>(Q_FRA),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Q_REG =</span> <span class="fu">as.factor</span>(<span class="fu">as.character</span>(Q_REG))) </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">levels</span>(sel<span class="sc">$</span>Q_ACC)  <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Pays côtier"</span>,<span class="st">"Pays enclavé"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">levels</span>(sel<span class="sc">$</span>Q_FRA)  <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Col. Fr. Non"</span>,<span class="st">"Col. Fr. Oui"</span>) </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># levels(sel$Q_REG) &lt;- c("Centre", "Ouest")</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a> sel<span class="ot">&lt;-</span>sel[<span class="fu">complete.cases</span>(sel),]</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(sel, <span class="at">caption =</span> <span class="st">"Tableau de données retenu"</span>, <span class="at">digits=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Tableau de données retenu</caption>
+<colgroup>
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 18%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">iso3</th>
+<th style="text-align: left;">nom</th>
+<th style="text-align: right;">W_POP</th>
+<th style="text-align: right;">Y_TMI</th>
+<th style="text-align: right;">Y_FEC</th>
+<th style="text-align: right;">X_PIB</th>
+<th style="text-align: right;">X_URB</th>
+<th style="text-align: right;">X_JEU</th>
+<th style="text-align: left;">Q_ACC</th>
+<th style="text-align: left;">Q_FRA</th>
+<th style="text-align: left;">Q_REG</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">AGO</td>
+<td style="text-align: left;">Angola</td>
+<td style="text-align: right;">31.3</td>
+<td style="text-align: right;">51.6</td>
+<td style="text-align: right;">152.6</td>
+<td style="text-align: right;">6793.7</td>
+<td style="text-align: right;">65.8</td>
+<td style="text-align: right;">91.5</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Middle Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">BDI</td>
+<td style="text-align: left;">Burundi</td>
+<td style="text-align: right;">11.4</td>
+<td style="text-align: right;">41.0</td>
+<td style="text-align: right;">56.2</td>
+<td style="text-align: right;">756.6</td>
+<td style="text-align: right;">13.2</td>
+<td style="text-align: right;">87.0</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">BEN</td>
+<td style="text-align: left;">Bénin</td>
+<td style="text-align: right;">11.6</td>
+<td style="text-align: right;">60.5</td>
+<td style="text-align: right;">87.4</td>
+<td style="text-align: right;">3224.0</td>
+<td style="text-align: right;">47.6</td>
+<td style="text-align: right;">77.8</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">BFA</td>
+<td style="text-align: left;">Burkina Faso</td>
+<td style="text-align: right;">20.0</td>
+<td style="text-align: right;">49.0</td>
+<td style="text-align: right;">105.7</td>
+<td style="text-align: right;">2160.6</td>
+<td style="text-align: right;">29.7</td>
+<td style="text-align: right;">84.9</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">BWA</td>
+<td style="text-align: left;">Botswana</td>
+<td style="text-align: right;">2.3</td>
+<td style="text-align: right;">30.0</td>
+<td style="text-align: right;">46.3</td>
+<td style="text-align: right;">17700.3</td>
+<td style="text-align: right;">69.8</td>
+<td style="text-align: right;">54.9</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Southern Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">CAF</td>
+<td style="text-align: left;">Rep.&nbsp;Centrafricaine</td>
+<td style="text-align: right;">4.7</td>
+<td style="text-align: right;">84.5</td>
+<td style="text-align: right;">130.2</td>
+<td style="text-align: right;">939.0</td>
+<td style="text-align: right;">41.6</td>
+<td style="text-align: right;">83.1</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Middle Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">CIV</td>
+<td style="text-align: left;">Côte d’Ivoire</td>
+<td style="text-align: right;">25.4</td>
+<td style="text-align: right;">59.4</td>
+<td style="text-align: right;">118.5</td>
+<td style="text-align: right;">5133.6</td>
+<td style="text-align: right;">51.0</td>
+<td style="text-align: right;">75.6</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">CMR</td>
+<td style="text-align: left;">Cameroun</td>
+<td style="text-align: right;">25.5</td>
+<td style="text-align: right;">50.6</td>
+<td style="text-align: right;">107.7</td>
+<td style="text-align: right;">3628.1</td>
+<td style="text-align: right;">56.7</td>
+<td style="text-align: right;">77.6</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Middle Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">COD</td>
+<td style="text-align: left;">Congo, Rép. dém. du</td>
+<td style="text-align: right;">85.4</td>
+<td style="text-align: right;">68.2</td>
+<td style="text-align: right;">124.9</td>
+<td style="text-align: right;">1091.9</td>
+<td style="text-align: right;">44.8</td>
+<td style="text-align: right;">90.5</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Middle Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">COG</td>
+<td style="text-align: left;">Congo</td>
+<td style="text-align: right;">5.3</td>
+<td style="text-align: right;">36.2</td>
+<td style="text-align: right;">113.0</td>
+<td style="text-align: right;">3356.2</td>
+<td style="text-align: right;">67.2</td>
+<td style="text-align: right;">74.8</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Middle Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">DJI</td>
+<td style="text-align: left;">Djibouti</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">49.8</td>
+<td style="text-align: right;">19.2</td>
+<td style="text-align: right;">5366.7</td>
+<td style="text-align: right;">77.8</td>
+<td style="text-align: right;">44.5</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">DZA</td>
+<td style="text-align: left;">Algérie</td>
+<td style="text-align: right;">42.6</td>
+<td style="text-align: right;">20.1</td>
+<td style="text-align: right;">10.3</td>
+<td style="text-align: right;">11414.6</td>
+<td style="text-align: right;">72.9</td>
+<td style="text-align: right;">48.0</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Northern Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">EGY</td>
+<td style="text-align: left;">Egypte</td>
+<td style="text-align: right;">99.4</td>
+<td style="text-align: right;">18.1</td>
+<td style="text-align: right;">54.1</td>
+<td style="text-align: right;">11564.8</td>
+<td style="text-align: right;">42.7</td>
+<td style="text-align: right;">55.5</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Northern Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">ETH</td>
+<td style="text-align: left;">Ethiopie</td>
+<td style="text-align: right;">110.7</td>
+<td style="text-align: right;">39.1</td>
+<td style="text-align: right;">68.1</td>
+<td style="text-align: right;">2161.6</td>
+<td style="text-align: right;">21.0</td>
+<td style="text-align: right;">72.5</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">GAB</td>
+<td style="text-align: left;">Gabon</td>
+<td style="text-align: right;">2.1</td>
+<td style="text-align: right;">32.7</td>
+<td style="text-align: right;">97.5</td>
+<td style="text-align: right;">14806.6</td>
+<td style="text-align: right;">89.6</td>
+<td style="text-align: right;">62.5</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Middle Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">GHA</td>
+<td style="text-align: left;">Ghana</td>
+<td style="text-align: right;">30.1</td>
+<td style="text-align: right;">34.9</td>
+<td style="text-align: right;">67.3</td>
+<td style="text-align: right;">5303.5</td>
+<td style="text-align: right;">56.4</td>
+<td style="text-align: right;">63.1</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">18</td>
+<td style="text-align: left;">GIN</td>
+<td style="text-align: left;">Guinée</td>
+<td style="text-align: right;">12.6</td>
+<td style="text-align: right;">64.9</td>
+<td style="text-align: right;">136.6</td>
+<td style="text-align: right;">2531.2</td>
+<td style="text-align: right;">36.3</td>
+<td style="text-align: right;">81.7</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">GMB</td>
+<td style="text-align: left;">Gambie</td>
+<td style="text-align: right;">2.3</td>
+<td style="text-align: right;">39.0</td>
+<td style="text-align: right;">79.8</td>
+<td style="text-align: right;">2175.6</td>
+<td style="text-align: right;">61.6</td>
+<td style="text-align: right;">83.0</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">GNB</td>
+<td style="text-align: left;">Guinée-Bissau</td>
+<td style="text-align: right;">1.9</td>
+<td style="text-align: right;">54.0</td>
+<td style="text-align: right;">105.2</td>
+<td style="text-align: right;">1969.3</td>
+<td style="text-align: right;">43.6</td>
+<td style="text-align: right;">76.9</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">21</td>
+<td style="text-align: left;">GNQ</td>
+<td style="text-align: left;">Guinée équatoriale</td>
+<td style="text-align: right;">1.3</td>
+<td style="text-align: right;">62.6</td>
+<td style="text-align: right;">157.0</td>
+<td style="text-align: right;">19458.9</td>
+<td style="text-align: right;">72.3</td>
+<td style="text-align: right;">61.2</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Middle Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">22</td>
+<td style="text-align: left;">KEN</td>
+<td style="text-align: left;">Kenya</td>
+<td style="text-align: right;">52.0</td>
+<td style="text-align: right;">30.6</td>
+<td style="text-align: right;">76.5</td>
+<td style="text-align: right;">4266.8</td>
+<td style="text-align: right;">27.2</td>
+<td style="text-align: right;">67.9</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">LBR</td>
+<td style="text-align: left;">Libéria</td>
+<td style="text-align: right;">4.9</td>
+<td style="text-align: right;">53.5</td>
+<td style="text-align: right;">136.3</td>
+<td style="text-align: right;">1462.4</td>
+<td style="text-align: right;">51.4</td>
+<td style="text-align: right;">73.4</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">LBY</td>
+<td style="text-align: left;">Libye</td>
+<td style="text-align: right;">6.7</td>
+<td style="text-align: right;">10.2</td>
+<td style="text-align: right;">5.8</td>
+<td style="text-align: right;">15096.1</td>
+<td style="text-align: right;">80.2</td>
+<td style="text-align: right;">41.8</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Northern Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">25</td>
+<td style="text-align: left;">LSO</td>
+<td style="text-align: left;">Lesotho</td>
+<td style="text-align: right;">2.1</td>
+<td style="text-align: right;">65.7</td>
+<td style="text-align: right;">92.3</td>
+<td style="text-align: right;">2758.1</td>
+<td style="text-align: right;">28.4</td>
+<td style="text-align: right;">52.2</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Southern Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">MAR</td>
+<td style="text-align: left;">Maroc</td>
+<td style="text-align: right;">36.3</td>
+<td style="text-align: right;">19.2</td>
+<td style="text-align: right;">31.4</td>
+<td style="text-align: right;">7476.2</td>
+<td style="text-align: right;">62.8</td>
+<td style="text-align: right;">41.2</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Northern Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">27</td>
+<td style="text-align: left;">MDG</td>
+<td style="text-align: left;">Madagascar</td>
+<td style="text-align: right;">26.6</td>
+<td style="text-align: right;">38.2</td>
+<td style="text-align: right;">110.9</td>
+<td style="text-align: right;">1629.7</td>
+<td style="text-align: right;">37.5</td>
+<td style="text-align: right;">71.8</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">28</td>
+<td style="text-align: left;">MLI</td>
+<td style="text-align: left;">Mali</td>
+<td style="text-align: right;">19.4</td>
+<td style="text-align: right;">62.0</td>
+<td style="text-align: right;">170.3</td>
+<td style="text-align: right;">2305.2</td>
+<td style="text-align: right;">42.8</td>
+<td style="text-align: right;">94.7</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">29</td>
+<td style="text-align: left;">MOZ</td>
+<td style="text-align: left;">Mozambique</td>
+<td style="text-align: right;">29.9</td>
+<td style="text-align: right;">54.0</td>
+<td style="text-align: right;">149.9</td>
+<td style="text-align: right;">1285.0</td>
+<td style="text-align: right;">36.2</td>
+<td style="text-align: right;">84.6</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">MRT</td>
+<td style="text-align: left;">Mauritanie</td>
+<td style="text-align: right;">4.5</td>
+<td style="text-align: right;">51.5</td>
+<td style="text-align: right;">72.0</td>
+<td style="text-align: right;">5119.7</td>
+<td style="text-align: right;">54.1</td>
+<td style="text-align: right;">70.3</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">31</td>
+<td style="text-align: left;">MWI</td>
+<td style="text-align: left;">Malawi</td>
+<td style="text-align: right;">18.4</td>
+<td style="text-align: right;">35.3</td>
+<td style="text-align: right;">134.1</td>
+<td style="text-align: right;">1051.1</td>
+<td style="text-align: right;">17.0</td>
+<td style="text-align: right;">81.4</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">32</td>
+<td style="text-align: left;">NAM</td>
+<td style="text-align: left;">Namibie</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">29.0</td>
+<td style="text-align: right;">65.5</td>
+<td style="text-align: right;">9784.6</td>
+<td style="text-align: right;">50.5</td>
+<td style="text-align: right;">62.1</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Southern Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">33</td>
+<td style="text-align: left;">NER</td>
+<td style="text-align: left;">Niger</td>
+<td style="text-align: right;">22.9</td>
+<td style="text-align: right;">48.0</td>
+<td style="text-align: right;">188.3</td>
+<td style="text-align: right;">1207.8</td>
+<td style="text-align: right;">16.4</td>
+<td style="text-align: right;">105.1</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">34</td>
+<td style="text-align: left;">NGA</td>
+<td style="text-align: left;">Nigéria</td>
+<td style="text-align: right;">198.4</td>
+<td style="text-align: right;">75.7</td>
+<td style="text-align: right;">108.5</td>
+<td style="text-align: right;">5145.3</td>
+<td style="text-align: right;">50.8</td>
+<td style="text-align: right;">81.9</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">35</td>
+<td style="text-align: left;">RWA</td>
+<td style="text-align: left;">Rwanda</td>
+<td style="text-align: right;">12.5</td>
+<td style="text-align: right;">27.0</td>
+<td style="text-align: right;">39.3</td>
+<td style="text-align: right;">2157.4</td>
+<td style="text-align: right;">17.2</td>
+<td style="text-align: right;">69.8</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">36</td>
+<td style="text-align: left;">SDN</td>
+<td style="text-align: left;">Soudan</td>
+<td style="text-align: right;">42.3</td>
+<td style="text-align: right;">42.1</td>
+<td style="text-align: right;">66.0</td>
+<td style="text-align: right;">4059.5</td>
+<td style="text-align: right;">34.8</td>
+<td style="text-align: right;">71.9</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Northern Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">38</td>
+<td style="text-align: left;">SEN</td>
+<td style="text-align: left;">Sénégal</td>
+<td style="text-align: right;">16.1</td>
+<td style="text-align: right;">31.8</td>
+<td style="text-align: right;">74.1</td>
+<td style="text-align: right;">3354.8</td>
+<td style="text-align: right;">47.5</td>
+<td style="text-align: right;">79.6</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">39</td>
+<td style="text-align: left;">SLE</td>
+<td style="text-align: left;">Sierra Leone</td>
+<td style="text-align: right;">7.7</td>
+<td style="text-align: right;">78.5</td>
+<td style="text-align: right;">114.5</td>
+<td style="text-align: right;">1690.8</td>
+<td style="text-align: right;">42.3</td>
+<td style="text-align: right;">72.8</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">41</td>
+<td style="text-align: left;">SWZ</td>
+<td style="text-align: left;">Swaziland</td>
+<td style="text-align: right;">1.1</td>
+<td style="text-align: right;">43.0</td>
+<td style="text-align: right;">77.1</td>
+<td style="text-align: right;">8647.1</td>
+<td style="text-align: right;">23.9</td>
+<td style="text-align: right;">65.5</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Southern Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">42</td>
+<td style="text-align: left;">TCD</td>
+<td style="text-align: left;">Tchad</td>
+<td style="text-align: right;">15.7</td>
+<td style="text-align: right;">71.4</td>
+<td style="text-align: right;">163.2</td>
+<td style="text-align: right;">1578.0</td>
+<td style="text-align: right;">23.2</td>
+<td style="text-align: right;">92.9</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Middle Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">43</td>
+<td style="text-align: left;">TGO</td>
+<td style="text-align: left;">Togo</td>
+<td style="text-align: right;">8.0</td>
+<td style="text-align: right;">47.4</td>
+<td style="text-align: right;">89.4</td>
+<td style="text-align: right;">1574.2</td>
+<td style="text-align: right;">42.0</td>
+<td style="text-align: right;">73.6</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Western Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">44</td>
+<td style="text-align: left;">TUN</td>
+<td style="text-align: left;">Tunisie</td>
+<td style="text-align: right;">11.6</td>
+<td style="text-align: right;">14.6</td>
+<td style="text-align: right;">7.8</td>
+<td style="text-align: right;">10759.7</td>
+<td style="text-align: right;">69.1</td>
+<td style="text-align: right;">35.9</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Oui</td>
+<td style="text-align: left;">Northern Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">45</td>
+<td style="text-align: left;">TZA</td>
+<td style="text-align: left;">Tanzanie</td>
+<td style="text-align: right;">57.2</td>
+<td style="text-align: right;">37.6</td>
+<td style="text-align: right;">119.0</td>
+<td style="text-align: right;">2625.2</td>
+<td style="text-align: right;">34.1</td>
+<td style="text-align: right;">82.3</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">46</td>
+<td style="text-align: left;">UGA</td>
+<td style="text-align: left;">Ouganda</td>
+<td style="text-align: right;">43.5</td>
+<td style="text-align: right;">33.8</td>
+<td style="text-align: right;">120.5</td>
+<td style="text-align: right;">2151.7</td>
+<td style="text-align: right;">24.1</td>
+<td style="text-align: right;">91.0</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">47</td>
+<td style="text-align: left;">ZAF</td>
+<td style="text-align: left;">Afrique du Sud</td>
+<td style="text-align: right;">58.2</td>
+<td style="text-align: right;">28.5</td>
+<td style="text-align: right;">68.4</td>
+<td style="text-align: right;">12556.3</td>
+<td style="text-align: right;">66.7</td>
+<td style="text-align: right;">44.2</td>
+<td style="text-align: left;">Pays côtier</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Southern Africa</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">48</td>
+<td style="text-align: left;">ZMB</td>
+<td style="text-align: left;">Zambie</td>
+<td style="text-align: right;">17.6</td>
+<td style="text-align: right;">40.4</td>
+<td style="text-align: right;">122.2</td>
+<td style="text-align: right;">3500.5</td>
+<td style="text-align: right;">43.8</td>
+<td style="text-align: right;">84.0</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">49</td>
+<td style="text-align: left;">ZWE</td>
+<td style="text-align: left;">Zimbabwe</td>
+<td style="text-align: right;">14.5</td>
+<td style="text-align: right;">33.9</td>
+<td style="text-align: right;">89.0</td>
+<td style="text-align: right;">2983.0</td>
+<td style="text-align: right;">32.2</td>
+<td style="text-align: right;">77.2</td>
+<td style="text-align: left;">Pays enclavé</td>
+<td style="text-align: left;">Col. Fr.&nbsp;Non</td>
+<td style="text-align: left;">Eastern Africa</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="paramètres-principaux" class="level3">
+<h3 class="anchored" data-anchor-id="paramètres-principaux">Paramètres principaux</h3>
+<p>On résume rapidement les variables retenues ce qui permet de constater qu’elles sont toutes complètes sauf la variable X1_PIB pour laquelle il y a trois valeurs manquantes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     iso3               nom                W_POP              Y_TMI      
+ Length:46          Length:46          Min.   :  0.9662   Min.   :10.24  
+ Class :character   Class :character   1st Qu.:  4.9867   1st Qu.:32.98  
+ Mode  :character   Mode  :character   Median : 15.8938   Median :41.57  
+                                       Mean   : 27.3386   Mean   :44.55  
+                                       3rd Qu.: 31.0113   3rd Qu.:54.02  
+                                       Max.   :198.4191   Max.   :84.46  
+     Y_FEC             X_PIB             X_URB           X_JEU       
+ Min.   :  5.814   Min.   :  756.6   Min.   :13.20   Min.   : 35.93  
+ 1st Qu.: 67.476   1st Qu.: 2014.9   1st Qu.:32.69   1st Qu.: 62.66  
+ Median : 94.866   Median : 3289.4   Median :43.70   Median : 74.21  
+ Mean   : 94.131   Mean   : 5168.8   Mean   :46.04   Mean   : 72.09  
+ 3rd Qu.:121.756   3rd Qu.: 6437.0   3rd Qu.:60.38   3rd Qu.: 82.86  
+ Max.   :188.314   Max.   :19458.9   Max.   :89.55   Max.   :105.10  
+          Q_ACC             Q_FRA                Q_REG   
+ Pays côtier :31   Col. Fr. Non:26   Eastern Africa :12  
+ Pays enclavé:15   Col. Fr. Oui:20   Middle Africa  : 8  
+                                     Northern Africa: 6  
+                                     Southern Africa: 5  
+                                     Western Africa :15  
+                                                         </code></pre>
+</div>
+</div>
+</section>
+<section id="fonds-de-carte" class="level3">
+<h3 class="anchored" data-anchor-id="fonds-de-carte">Fonds de carte</h3>
+<p>Nous disposons d’un fonds de carte permettant d’effectuer des jointures avec les données (via la variable iso3) ce qui permettra de procéder à des analyses cartographiques des variables dépendantes ou indépendantes ainsi que des résidus des modèles. Ces résidus sont souvent intéressant pour suggérer la présence de variables latentes oubliéesdans l’analyse.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_002_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="b.-variable-dépendant" class="level2">
+<h2 class="anchored" data-anchor-id="b.-variable-dépendant">B. Variable dépendant</h2>
+<p>On se propose d’expliquer la variable mortalité infantile. On va donc analyser rapidement ses caractéristiques statistiques</p>
+<section id="forme-de-la-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="forme-de-la-distribution">Forme de la distribution</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>Y_TMI</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>labelY<span class="ot">&lt;-</span><span class="st">"Tx de mort. infantile (p.1000)"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Y, <span class="at">main=</span>labelY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_002_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>La distribution est unimodale et globalement symétrique.</p>
+</section>
+<section id="valeurs-exceptionnelles" class="level3">
+<h3 class="anchored" data-anchor-id="valeurs-exceptionnelles">Valeurs exceptionnelles</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Y, <span class="at">main=</span>labelY, <span class="at">horizontal=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_002_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>La distribution ne comporte pas de valeurs exceptionnelles.</p>
+</section>
+<section id="normalité" class="level3">
+<h3 class="anchored" data-anchor-id="normalité">Normalité</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  Y
+W = 0.98461, p-value = 0.7953</code></pre>
+</div>
+</div>
+<p>La distribution est gaussienne avec une probabilité très élevée.</p>
+</section>
+</section>
+<section id="c.-analyse-de-variance" class="level2">
+<h2 class="anchored" data-anchor-id="c.-analyse-de-variance">C. Analyse de variance</h2>
+<p>On va tester tour à tour chacune de nos trois variables indépendantes qualitatives</p>
+<section id="modèle-1-la-mortalité-infantile-varie-t-elle-selon-les-régions" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-1-la-mortalité-infantile-varie-t-elle-selon-les-régions">modèle 1 : La mortalité infantile varie-t-elle selon les régions ?</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Q1<span class="ot">&lt;-</span>sel<span class="sc">$</span>Q_REG</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>labelQ1 <span class="ot">=</span> <span class="st">"Region"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>Q1,<span class="at">cex.axis=</span><span class="fl">0.6</span>, <span class="at">xlab=</span>labelQ1, <span class="at">ylab=</span>labelY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_002_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q1)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ Q1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-24.517  -6.656  -1.160   6.246  27.250 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        38.4057     3.7693  10.189 8.44e-13 ***
+Q1Middle Africa    18.8085     5.9598   3.156  0.00300 ** 
+Q1Northern Africa -17.6609     6.5286  -2.705  0.00990 ** 
+Q1Southern Africa   0.8209     6.9502   0.118  0.90656    
+Q1Western Africa   15.6041     5.0570   3.086  0.00363 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.06 on 41 degrees of freedom
+Multiple R-squared:  0.4864,    Adjusted R-squared:  0.4363 
+F-statistic: 9.708 on 4 and 41 DF,  p-value: 1.282e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: Y
+          Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+Q1         4 6620.2 1655.06  9.7076 1.282e-05 ***
+Residuals 41 6990.1  170.49                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="modèle-2-la-mortalité-infantile-varie-t-elle-selon-laccès-à-la-mer" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-2-la-mortalité-infantile-varie-t-elle-selon-laccès-à-la-mer">Modèle 2 : La mortalité infantile varie-t-elle selon l’accès à la mer</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Q2<span class="ot">&lt;-</span>sel<span class="sc">$</span>Q_ACC</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>labelQ2 <span class="ot">=</span> <span class="st">"Accès à la mer"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>Q2,<span class="at">cex.axis=</span><span class="fl">0.6</span>, <span class="at">xlab=</span>labelQ2, <span class="at">ylab=</span>labelY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_002_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q2)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ Q2)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-33.15 -12.48  -4.14  10.62  37.52 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      43.393      3.144  13.802   &lt;2e-16 ***
+Q2Pays enclavé    3.550      5.506   0.645    0.522    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 17.51 on 44 degrees of freedom
+Multiple R-squared:  0.009362,  Adjusted R-squared:  -0.01315 
+F-statistic: 0.4158 on 1 and 44 DF,  p-value: 0.5224</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: Y
+          Df  Sum Sq Mean Sq F value Pr(&gt;F)
+Q2         1   127.4  127.42  0.4158 0.5224
+Residuals 44 13483.0  306.43               </code></pre>
+</div>
+</div>
+</section>
+<section id="modèle-3-la-mortalité-infantile-varie-t-elle-selon-lhéritage-colonial" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-3-la-mortalité-infantile-varie-t-elle-selon-lhéritage-colonial">Modèle 3 : La mortalité infantile varie-t-elle selon l’héritage colonial</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Q3<span class="ot">&lt;-</span>sel<span class="sc">$</span>Q_FRA</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>labelQ3 <span class="ot">=</span> <span class="st">"Héritage colonial"</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>Q3,<span class="at">cex.axis=</span><span class="fl">0.6</span>, <span class="at">xlab=</span>labelQ3, <span class="at">ylab=</span>labelY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_002_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q3)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ Q3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-32.661 -11.649  -0.894  11.557  37.197 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      42.461      3.416  12.430 5.42e-16 ***
+Q3Col. Fr. Oui    4.806      5.181   0.928    0.359    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 17.42 on 44 degrees of freedom
+Multiple R-squared:  0.01918,   Adjusted R-squared:  -0.003111 
+F-statistic: 0.8604 on 1 and 44 DF,  p-value: 0.3587</code></pre>
+</div>
+</div>
+</section>
+<section id="analyse-de-variance-à-plusieurs-facteurs-y-fq1q2q3" class="level3">
+<h3 class="anchored" data-anchor-id="analyse-de-variance-à-plusieurs-facteurs-y-fq1q2q3">Analyse de variance à plusieurs facteurs : Y = f(Q1,Q2,Q3)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q1<span class="sc">+</span>Q2<span class="sc">+</span>Q3)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ Q1 + Q2 + Q3)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-22.1534  -7.2555  -0.6981   6.8263  24.3054 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        35.7507     4.6881   7.626 3.01e-09 ***
+Q1Middle Africa    21.8452     6.5632   3.328  0.00191 ** 
+Q1Northern Africa -13.6335     7.2992  -1.868  0.06932 .  
+Q1Southern Africa   0.2744     7.0270   0.039  0.96905    
+Q1Western Africa   19.0220     5.8946   3.227  0.00254 ** 
+Q2Pays enclavé      5.3356     4.6465   1.148  0.25784    
+Q3Col. Fr. Oui     -2.7451     4.5460  -0.604  0.54944    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.12 on 39 degrees of freedom
+Multiple R-squared:  0.5066,    Adjusted R-squared:  0.4306 
+F-statistic: 6.673 on 6 and 39 DF,  p-value: 6.481e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Y
+             Sum Sq Df F value    Pr(&gt;F)    
+(Intercept) 10014.1  1 58.1531 3.010e-09 ***
+Q1           6445.0  4  9.3567 2.117e-05 ***
+Q2            227.1  1  1.3186    0.2578    
+Q3             62.8  1  0.3646    0.5494    
+Residuals    6715.9 39                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>On retient les deux variables qui avaient des effets isolés significatifs</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>Y_TMI</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>Q1<span class="ot">&lt;-</span>sel<span class="sc">$</span>Q_REG</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>Q2<span class="ot">&lt;-</span>sel<span class="sc">$</span>Q_ACC</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>Q3<span class="ot">&lt;-</span>sel<span class="sc">$</span>Q_FRA</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q1<span class="sc">+</span>Q2<span class="sc">+</span>Q3)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ Q1 + Q2 + Q3)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-22.1534  -7.2555  -0.6981   6.8263  24.3054 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        35.7507     4.6881   7.626 3.01e-09 ***
+Q1Middle Africa    21.8452     6.5632   3.328  0.00191 ** 
+Q1Northern Africa -13.6335     7.2992  -1.868  0.06932 .  
+Q1Southern Africa   0.2744     7.0270   0.039  0.96905    
+Q1Western Africa   19.0220     5.8946   3.227  0.00254 ** 
+Q2Pays enclavé      5.3356     4.6465   1.148  0.25784    
+Q3Col. Fr. Oui     -2.7451     4.5460  -0.604  0.54944    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 13.12 on 39 degrees of freedom
+Multiple R-squared:  0.5066,    Adjusted R-squared:  0.4306 
+F-statistic: 6.673 on 6 and 39 DF,  p-value: 6.481e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Y
+             Sum Sq Df F value    Pr(&gt;F)    
+(Intercept) 10014.1  1 58.1531 3.010e-09 ***
+Q1           6445.0  4  9.3567 2.117e-05 ***
+Q2            227.1  1  1.3186    0.2578    
+Q3             62.8  1  0.3646    0.5494    
+Residuals    6715.9 39                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="d.-régression-linéaire" class="level2">
+<h2 class="anchored" data-anchor-id="d.-régression-linéaire">D. Régression linéaire</h2>
+<p>On reprend la même variable dépendante (Y = fécondité des femmes de 15-19 ans) et on la confronte cette fois-ci à trois variables indépendantes de type quantitatif continu.</p>
+<section id="modèle-1-la-richesse-par-habitant-log-fait-elle-diminuer-la-mortalité-infantile" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-1-la-richesse-par-habitant-log-fait-elle-diminuer-la-mortalité-infantile">Modèle 1 : La richesse par habitant (log) fait-elle diminuer la mortalité infantile ?</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>X1<span class="ot">&lt;-</span><span class="fu">log10</span>(sel<span class="sc">$</span>X_PIB)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>labelX1 <span class="ot">&lt;-</span><span class="st">"log10(PIB/hab)"</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>N<span class="ot">&lt;-</span>sel<span class="sc">$</span>iso3</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X1)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-22.410 -12.346  -2.527  11.737  34.657 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  123.762     21.985   5.629 1.18e-06 ***
+X1           -22.295      6.155  -3.622 0.000752 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 15.44 on 44 degrees of freedom
+Multiple R-squared:  0.2297,    Adjusted R-squared:  0.2122 
+F-statistic: 13.12 on 1 and 44 DF,  p-value: 0.0007516</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X1,Y, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab=</span>labelX1,<span class="at">ylab=</span>labelY)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(X1),<span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(Y),<span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(X1,Y,N,<span class="at">cex=</span><span class="fl">0.6</span>,<span class="at">pos =</span> <span class="dv">1</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_002_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="modèle-2-lurbanisation-fait-elle-diminuer-la-mortalité-infantile" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-2-lurbanisation-fait-elle-diminuer-la-mortalité-infantile">Modèle 2 : L’urbanisation fait-elle diminuer la mortalité infantile ?</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>Y_TMI</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>X2<span class="ot">&lt;-</span>sel<span class="sc">$</span>X_URB</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>labelX2<span class="ot">&lt;-</span><span class="st">"Taux d'urbanisation (%)"</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>N<span class="ot">&lt;-</span>sel<span class="sc">$</span>iso3</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X2)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-27.348 -12.294  -3.534  11.561  39.010 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  53.9180     6.6916   8.058 3.33e-10 ***
+X2           -0.2035     0.1346  -1.512    0.138    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 17.15 on 44 degrees of freedom
+Multiple R-squared:  0.04939,   Adjusted R-squared:  0.02778 
+F-statistic: 2.286 on 1 and 44 DF,  p-value: 0.1377</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X2,Y, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab=</span>labelX2,<span class="at">ylab=</span>labelY)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(X2),<span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(Y),<span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(X2,Y,N,<span class="at">cex=</span><span class="fl">0.6</span>,<span class="at">pos =</span> <span class="dv">1</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_002_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="modèle-3-la-mortalité-infantile-est-elle-plus-forte-au-début-de-la-transition-démographique" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-3-la-mortalité-infantile-est-elle-plus-forte-au-début-de-la-transition-démographique">Modèle 3 : La mortalité infantile est-elle plus forte au début de la transition démographique ?</h3>
+<p>Le taux de dépendance des jeunes (Jeunes/Adulte) est un bon proxi de l’avancement dans la transition démographique. Très fort au début de celle-ci, il diminue ensuite réguièrement.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>Y_TMI</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>X3<span class="ot">&lt;-</span>sel<span class="sc">$</span>X_JEU</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>labelX3<span class="ot">&lt;-</span><span class="st">"Jeunes/adultes (%)"</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>N<span class="ot">&lt;-</span>sel<span class="sc">$</span>iso3</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X3)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-21.830 -11.397  -4.335   8.137  33.492 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   2.3106    10.3009   0.224 0.823552    
+X3            0.5860     0.1396   4.197 0.000129 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 14.86 on 44 degrees of freedom
+Multiple R-squared:  0.2859,    Adjusted R-squared:  0.2696 
+F-statistic: 17.61 on 1 and 44 DF,  p-value: 0.0001294</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X3,Y, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab=</span>labelX3,<span class="at">ylab=</span>labelY)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(X3),<span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(Y),<span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(X3,Y,N,<span class="at">cex=</span><span class="fl">0.6</span>,<span class="at">pos =</span> <span class="dv">1</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_002_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="régression-linéaire-multiple-y-fx1x2x3" class="level3">
+<h3 class="anchored" data-anchor-id="régression-linéaire-multiple-y-fx1x2x3">Régression linéaire multiple : Y = f(X1,X2,X3, …)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X1<span class="sc">+</span>X2<span class="sc">+</span>X3)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X1 + X2 + X3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-18.489 -10.752  -2.656   7.905  33.218 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)  59.8527    41.7027   1.435   0.1586  
+X1          -17.2938     9.6954  -1.784   0.0817 .
+X2            0.2614     0.1624   1.610   0.1149  
+X3            0.4731     0.1974   2.396   0.0211 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 14.56 on 42 degrees of freedom
+Multiple R-squared:  0.3455,    Adjusted R-squared:  0.2988 
+F-statistic: 7.391 on 3 and 42 DF,  p-value: 0.0004385</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Y
+            Sum Sq Df F value Pr(&gt;F)  
+(Intercept)  436.9  1  2.0599 0.1586  
+X1           674.8  1  3.1816 0.0817 .
+X2           549.6  1  2.5913 0.1149  
+X3          1217.8  1  5.7419 0.0211 *
+Residuals   8907.8 42                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="modeles-hybrides" class="level2">
+<h2 class="anchored" data-anchor-id="modeles-hybrides">Modeles hybrides</h2>
+<p>On aurait enfin pu tenter de combiner les variables continues et discrètes dans un même modèle.</p>
+<section id="ensemble-des-variables" class="level3">
+<h3 class="anchored" data-anchor-id="ensemble-des-variables">Ensemble des variables</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X1<span class="sc">+</span>X2<span class="sc">+</span>X3<span class="sc">+</span>Q1<span class="sc">+</span>Q2<span class="sc">+</span>Q3)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X1 + X2 + X3 + Q1 + Q2 + Q3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-20.135  -6.914  -1.917   8.809  25.596 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       110.8534    38.4525   2.883  0.00661 ** 
+X1                -17.4380     9.4626  -1.843  0.07360 .  
+X2                 -0.1194     0.2052  -0.582  0.56416    
+X3                 -0.1298     0.2458  -0.528  0.60076    
+Q1Middle Africa    27.8628     7.7229   3.608  0.00093 ***
+Q1Northern Africa  -5.7272     8.0850  -0.708  0.48327    
+Q1Southern Africa  10.1633     8.4388   1.204  0.23631    
+Q1Western Africa   20.6276     6.2928   3.278  0.00232 ** 
+Q2Pays enclavé     -0.1326     5.4793  -0.024  0.98082    
+Q3Col. Fr. Oui     -3.1760     4.5795  -0.694  0.49242    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 12.37 on 36 degrees of freedom
+Multiple R-squared:  0.595, Adjusted R-squared:  0.4937 
+F-statistic: 5.876 on 9 and 36 DF,  p-value: 5.08e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Y
+            Sum Sq Df F value   Pr(&gt;F)   
+(Intercept) 1272.6  1  8.3109 0.006609 **
+X1           520.0  1  3.3961 0.073598 . 
+X2            51.9  1  0.3388 0.564160   
+X3            42.7  1  0.2787 0.600763   
+Q1          3375.8  4  5.5116 0.001444 **
+Q2             0.1  1  0.0006 0.980825   
+Q3            73.7  1  0.4810 0.492420   
+Residuals   5512.4 36                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       GVIF Df GVIF^(1/(2*Df))
+X1 3.678123  1        1.917843
+X2 4.464910  1        2.113033
+X3 4.471582  1        2.114612
+Q1 7.306947  4        1.282233
+Q2 1.982002  1        1.407836
+Q3 1.548242  1        1.244284</code></pre>
+</div>
+</div>
+</section>
+<section id="variables-les-plus-pertinentes" class="level3">
+<h3 class="anchored" data-anchor-id="variables-les-plus-pertinentes">Variables les plus pertinentes</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>Y_TMI</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X1<span class="sc">+</span>Q1)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X1 + Q1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-21.931  -6.845  -1.999   7.007  27.227 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        102.017     21.046   4.847 1.92e-05 ***
+X1                 -19.073      6.226  -3.064 0.003904 ** 
+Q1Middle Africa     23.352      5.629   4.148 0.000170 ***
+Q1Northern Africa   -5.571      7.139  -0.780 0.439706    
+Q1Southern Africa   12.416      7.378   1.683 0.100183    
+Q1Western Africa    17.217      4.638   3.712 0.000625 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 11.9 on 40 degrees of freedom
+Multiple R-squared:  0.584, Adjusted R-squared:  0.532 
+F-statistic: 11.23 on 5 and 40 DF,  p-value: 8.325e-07</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Y
+            Sum Sq Df F value    Pr(&gt;F)    
+(Intercept) 3325.8  1 23.4967 1.923e-05 ***
+X1          1328.4  1  9.3854  0.003904 ** 
+Q1          4822.1  4  8.5171 4.541e-05 ***
+Residuals   5661.7 40                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="interactions" class="level3">
+<h3 class="anchored" data-anchor-id="interactions">Interactions</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X1<span class="sc">:</span>Q1)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X1:Q1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-21.396  -7.070  -1.586   7.579  26.540 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)           113.952     22.287   5.113 8.25e-06 ***
+X1:Q1Eastern Africa   -22.549      6.728  -3.352 0.001764 ** 
+X1:Q1Middle Africa    -15.987      6.244  -2.560 0.014343 *  
+X1:Q1Northern Africa  -23.544      5.736  -4.104 0.000194 ***
+X1:Q1Southern Africa  -19.095      5.786  -3.301 0.002036 ** 
+X1:Q1Western Africa   -17.465      6.555  -2.664 0.011063 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 11.95 on 40 degrees of freedom
+Multiple R-squared:  0.5802,    Adjusted R-squared:  0.5278 
+F-statistic: 11.06 on 5 and 40 DF,  p-value: 9.891e-07</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Y
+            Sum Sq Df F value    Pr(&gt;F)    
+(Intercept) 3734.0  1  26.143 8.254e-06 ***
+X1:Q1       7897.1  5  11.058 9.891e-07 ***
+Residuals   5713.3 40                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="exercices" class="level2">
+<h2 class="anchored" data-anchor-id="exercices">EXERCICES</h2>
+<p>Refaire l’analyse avec la variable Y = Fécondité des 15-19 ans</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

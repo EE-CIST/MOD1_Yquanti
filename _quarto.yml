@@ -4,12 +4,15 @@ project:
 render:
       - index.qmd
       - about.qmd
+      - MOD1_Yquanti_001.qmd
+      - MOD1_Yquanti_002.qmd
 website:
   title: "Modélisation d'une variable quantitative"
   navbar:
     left:
       - about.qmd
       - MOD1_Yquanti_001.qmd
+      - MOD1_Yquanti_002.qmd
 
 format:
   html:
