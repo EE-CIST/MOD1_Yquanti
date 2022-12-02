@@ -9,6 +9,7 @@ website:
   navbar:
     left:
       - about.qmd
+      - MOD1_Yquanti_001.qmd
 
 format:
   html:
