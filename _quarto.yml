@@ -3,18 +3,20 @@ project:
   output-dir: docs
 render:
       - index.qmd
-      - about.qmd
       - MOD1_Yquanti_001.qmd
+      - MOD1_Yquanti_004.qmd
       - MOD1_Yquanti_002.qmd
       - MOD1_Yquanti_003.qmd
+
 website:
   title: "Modélisation d'une variable quantitative"
   navbar:
     left:
-      - about.qmd
       - MOD1_Yquanti_001.qmd
+      - MOD1_Yquanti_004.qmd
       - MOD1_Yquanti_002.qmd
       - MOD1_Yquanti_003.qmd
+
 
 format:
   html:

@@ -4,3 +4,25 @@ subtitle: "EE CIST 2023, Ouidah, Bénin"
 author: "Claude Grasland & Nadège Djossou"
 ---
 
+
+Ce site est la version **provisoire** du cours de modélisation d'une variable quantitative qui sera dispensé lors de l'école d'été CIST 2023 à Ouidah au Bénin. Il a été mis au point par Claude Grasland (Géographe, Université Paris Cité) et Nadège Gbetoton (économiste Université de Parakou) puis relu et complété par les autres formateurs. 
+
+L'**introduction du cours** utilise un exemple pédagogique simple mais efficace, celui des précipitations en Californie. Sans entrer immédiatement dans les détails statistiques, cet exemple inventé par le géographe Peter Taylor possède l'avantage de décrire des relations déterministes où il est facile de comprendre intuitivement le sens des relations causales qui relient la variable dépendante Y et les différentes variables indépendantes X1...Xn.
+
+Le **cours d'économétrie** repris d'un enseignement de L2 dispensé à l'ENSPD de Parakou par Nagège Gbetoton fournit l'ensemble des bases statistiques et mathématiques nécessaires pour les personnes souhaitant approfondir les élémenrs donnés en introduction. 
+
+Les **exercices d'applications sous R** utilisent quant à eux les fonctions de base du logiciel pour ne pas perdre le débutant. Très peu de packages supplémentaires sont moblisés pour que l'on se concentre sur l'apprentissage de la statistique plutôt que sur celui des graphiques !
+
+Pour des raisons de cohérence pédagogique, il est important que certains tableaux de données soient présents tout au long des cours qui seront dispensés pendant l'école d'été CIST 2022-2023. Compte-tenu des perspectives différentes qu'implique leur traitement, nous avons besoin d'au moins deux tableaux de nature différente :
+
+- L'**application n°1** porte sur un tableau de **données spatiales agrégées** décrivant des variables relatives à un agrégat de population localisée dans l'espace pour lequel on pourra à la fois étudier les relations entre variables agrégées et introduire des variables plus spécifiquement spatiales. Ce tableau débouchant sur des questions de cartographie. 
+
+- L'**application n°2** utilise quant à elle un tableau de **données d'enquête** permettant de décrire les revenus des ménages et un certain nombre d'indicateurs de confort en fonction d'attributs du chef de ménage ou du ménage proprement dit.
+
+On peut imaginer que l'exercice n°1 soit plus familier pour les géographe et que l'exercice n°2 correspondent davantage aux attentes de démographes, sociologues ou économistes. Mais il est important de pratiquer autant que possible les deux exemples pour une formation complète. 
+
+N'hésitez pas à faire part de vos remarques ou critiques aux auteurs :
+
+Claude Grasland : <claude.grasland@parisgeo.cnrs.fr>
+Nadège Gbetoton : <nadeged2001@yahoo.fr>
+

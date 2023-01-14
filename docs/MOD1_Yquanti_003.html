@@ -122,6 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -143,10 +144,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">A propos</a>
+    <a class="nav-link" href="./MOD1_Yquanti_001.html">Introduction</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./MOD1_Yquanti_001.html">Introduction</a>
+    <a class="nav-link" href="./MOD1_Yquanti_004.html">Cours d’économétrie</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./MOD1_Yquanti_002.html">Application n°1</a>
@@ -178,25 +179,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#paramètres-principaux" id="toc-paramètres-principaux" class="nav-link" data-scroll-target="#paramètres-principaux">Paramètres principaux</a></li>
   <li><a href="#fonds-de-carte" id="toc-fonds-de-carte" class="nav-link" data-scroll-target="#fonds-de-carte">Fonds de carte</a></li>
   </ul></li>
-  <li><a href="#b.-variable-dépendante" id="toc-b.-variable-dépendante" class="nav-link" data-scroll-target="#b.-variable-dépendante">B. Variable dépendante</a>
+  <li><a href="#modélisation-du-revenu-total-des-ménages" id="toc-modélisation-du-revenu-total-des-ménages" class="nav-link" data-scroll-target="#modélisation-du-revenu-total-des-ménages">Modélisation du revenu total des ménages</a>
   <ul class="collapse">
   <li><a href="#forme-de-la-distribution" id="toc-forme-de-la-distribution" class="nav-link" data-scroll-target="#forme-de-la-distribution">Forme de la distribution</a></li>
   <li><a href="#valeurs-exceptionnelles" id="toc-valeurs-exceptionnelles" class="nav-link" data-scroll-target="#valeurs-exceptionnelles">Valeurs exceptionnelles</a></li>
   <li><a href="#normalité" id="toc-normalité" class="nav-link" data-scroll-target="#normalité">Normalité</a></li>
+  <li><a href="#modèle-1-ajustement-linéaire" id="toc-modèle-1-ajustement-linéaire" class="nav-link" data-scroll-target="#modèle-1-ajustement-linéaire">Modèle 1 : Ajustement linéaire</a></li>
+  <li><a href="#modèle-1-bis-ajustement-linéaire-sans-outlier" id="toc-modèle-1-bis-ajustement-linéaire-sans-outlier" class="nav-link" data-scroll-target="#modèle-1-bis-ajustement-linéaire-sans-outlier">Modèle 1-bis : Ajustement linéaire sans outlier</a></li>
+  <li><a href="#modèle-2-ajustement-exponentiel" id="toc-modèle-2-ajustement-exponentiel" class="nav-link" data-scroll-target="#modèle-2-ajustement-exponentiel">Modèle 2 : Ajustement exponentiel</a></li>
+  <li><a href="#modèle-3-ajustement-puissance" id="toc-modèle-3-ajustement-puissance" class="nav-link" data-scroll-target="#modèle-3-ajustement-puissance">Modèle 3 : Ajustement puissance</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
   </ul></li>
-  <li><a href="#c.-analyse-de-variance" id="toc-c.-analyse-de-variance" class="nav-link" data-scroll-target="#c.-analyse-de-variance">C. Analyse de variance</a>
+  <li><a href="#c.-analyse-des-déterminants-de-la-richesse-relative-du-ménage" id="toc-c.-analyse-des-déterminants-de-la-richesse-relative-du-ménage" class="nav-link" data-scroll-target="#c.-analyse-des-déterminants-de-la-richesse-relative-du-ménage">C. Analyse des déterminants de la richesse relative du ménage</a>
   <ul class="collapse">
-  <li><a href="#modèle-1-le-revenu-est-il-plus-faible-pour-les-activités-agricoles" id="toc-modèle-1-le-revenu-est-il-plus-faible-pour-les-activités-agricoles" class="nav-link" data-scroll-target="#modèle-1-le-revenu-est-il-plus-faible-pour-les-activités-agricoles">modèle 1 : Le revenu est-il plus faible pour les activités agricoles ?</a></li>
-  <li><a href="#modèle-2-le-revenu-est-il-plus-faible-si-le-chef-de-ménages-est-une-femme" id="toc-modèle-2-le-revenu-est-il-plus-faible-si-le-chef-de-ménages-est-une-femme" class="nav-link" data-scroll-target="#modèle-2-le-revenu-est-il-plus-faible-si-le-chef-de-ménages-est-une-femme">Modèle 2 : Le revenu est-il plus faible si le chef de ménages est une femme ?</a></li>
-  <li><a href="#modèle-3-le-revenu-est-il-plus-fort-en-ville" id="toc-modèle-3-le-revenu-est-il-plus-fort-en-ville" class="nav-link" data-scroll-target="#modèle-3-le-revenu-est-il-plus-fort-en-ville">Modèle 3 : Le revenu est-il plus fort en ville</a></li>
-  <li><a href="#modèle-4-le-revenu-varie-t-il-entre-les-départements" id="toc-modèle-4-le-revenu-varie-t-il-entre-les-départements" class="nav-link" data-scroll-target="#modèle-4-le-revenu-varie-t-il-entre-les-départements">Modèle 4 : Le revenu varie-t-il entre les départements ?</a></li>
-  <li><a href="#analyse-de-variance-à-plusieurs-facteurs-y-fq1q2q3q4" id="toc-analyse-de-variance-à-plusieurs-facteurs-y-fq1q2q3q4" class="nav-link" data-scroll-target="#analyse-de-variance-à-plusieurs-facteurs-y-fq1q2q3q4">Analyse de variance à plusieurs facteurs : Y = f(Q1,Q2,Q3,Q4)</a></li>
+  <li><a href="#forme-de-la-distribution-1" id="toc-forme-de-la-distribution-1" class="nav-link" data-scroll-target="#forme-de-la-distribution-1">Forme de la distribution</a></li>
+  <li><a href="#valeurs-exceptionnelles-1" id="toc-valeurs-exceptionnelles-1" class="nav-link" data-scroll-target="#valeurs-exceptionnelles-1">Valeurs exceptionnelles</a></li>
+  <li><a href="#normalité-1" id="toc-normalité-1" class="nav-link" data-scroll-target="#normalité-1">Normalité</a></li>
+  <li><a href="#modèle-1-les-ménages-urbains-sont-ils-plus-riches" id="toc-modèle-1-les-ménages-urbains-sont-ils-plus-riches" class="nav-link" data-scroll-target="#modèle-1-les-ménages-urbains-sont-ils-plus-riches">Modèle 1 : Les ménages urbains sont-ils plus riches ?</a></li>
+  <li><a href="#modèle-2-les-ménages-dont-le-chef-est-un-homme-sont-ils-plus-riches" id="toc-modèle-2-les-ménages-dont-le-chef-est-un-homme-sont-ils-plus-riches" class="nav-link" data-scroll-target="#modèle-2-les-ménages-dont-le-chef-est-un-homme-sont-ils-plus-riches">Modèle 2 : Les ménages dont le chef est un homme sont-ils plus riches ?</a></li>
+  <li><a href="#modèle-3-la-richesse-des-ménages-varie-t-elle-selon-les-départements" id="toc-modèle-3-la-richesse-des-ménages-varie-t-elle-selon-les-départements" class="nav-link" data-scroll-target="#modèle-3-la-richesse-des-ménages-varie-t-elle-selon-les-départements">Modèle 3 : La richesse des ménages varie-t-elle selon les départements</a></li>
   </ul></li>
-  <li><a href="#d.-régression-linéaire" id="toc-d.-régression-linéaire" class="nav-link" data-scroll-target="#d.-régression-linéaire">D. Régression linéaire</a>
-  <ul class="collapse">
-  <li><a href="#modèle-1-la-richesse-par-habitant-log-dépend-elle-de-lâge" id="toc-modèle-1-la-richesse-par-habitant-log-dépend-elle-de-lâge" class="nav-link" data-scroll-target="#modèle-1-la-richesse-par-habitant-log-dépend-elle-de-lâge">Modèle 1 : La richesse par habitant (log) dépend-elle de l’âge</a></li>
-  </ul></li>
-  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices">EXERCICES</a></li>
   </ul>
 </nav>
     </div>
@@ -231,10 +233,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapsf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>L’objectif de la présente est d’analyser un tableau de <strong>données d’enquête</strong> permettant de décrire les revenus des ménages et un certain nombre d’indicateurs de confort en fonction d’attributs du chef de ménage ou du ménage proprement dit.</p>
-<p>(…)</p>
+<p>Nadège : (…)</p>
 <section id="a.-données" class="level2">
 <h2 class="anchored" data-anchor-id="a.-données">A. Données</h2>
-<p>(…)</p>
+<p>Nadège : (…)</p>
 <section id="importation" class="level3">
 <h3 class="anchored" data-anchor-id="importation">Importation</h3>
 <p>On importe les données depuis Excel</p>
@@ -421,6 +423,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p><strong>N.B.1</strong>: Nous avons éliminé du tableau initial les individus dont le revenu par personne se situait dans les 5% les plus élevés et les 5% les plus faibles, ainsi que les données incomplètes. Il ne reste donc plus que 4685 observations contre un peu plus de 6000 dans le tableau initial. La pondération n’est donc plus correcte pour effectuer des redressements et elle ne sera pas utilisée.</p>
 <p><strong>N.B.2</strong>: Le revenu total du ménage a été obtenu soit de façon absolue (la personne donne un chiffre unique), soit par tranche selon une grille de réponse. Dans ce dernier cas, nous avons pris comme valeur le centre de la tranche. Pour les tranches extrêmes nous avons alloué la valeur 20000 pour la modalité “<em>moins de 40000</em>” et la valeur 1000000 popur la modalité “<em>plus de 750000</em>”. Ceci entraîne donc une concentration artificielle des valeurs autour de 20000.</p>
+<p>Nadège (…)</p>
 </section>
 <section id="ajout-de-nouvelles-variables" class="level3">
 <h3 class="anchored" data-anchor-id="ajout-de-nouvelles-variables">Ajout de nouvelles variables</h3>
@@ -440,6 +443,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sel<span class="ot">&lt;-</span>don</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>nadège ? (possibilité de réduire l’échantillon ?)</p>
 </section>
 <section id="paramètres-principaux" class="level3">
 <h3 class="anchored" data-anchor-id="paramètres-principaux">Paramètres principaux</h3>
@@ -495,25 +499,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="b.-variable-dépendante" class="level2">
-<h2 class="anchored" data-anchor-id="b.-variable-dépendante">B. Variable dépendante</h2>
-<p>On se propose d’expliquer la variable <strong>hou_inc_cap</strong> qui mesure le revenu moyen des ménages</p>
+<section id="modélisation-du-revenu-total-des-ménages" class="level2">
+<h2 class="anchored" data-anchor-id="modélisation-du-revenu-total-des-ménages">Modélisation du revenu total des ménages</h2>
+<p>On se propose d’expliquer la variable <strong>hou_inc</strong> qui mesure le revenu total des ménages en fonction du nombre de membres du ménage.</p>
 <section id="forme-de-la-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="forme-de-la-distribution">Forme de la distribution</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>hou_inc_cap</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>labelY<span class="ot">&lt;-</span><span class="st">"Revenu moyen "</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>hou_inc</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>labelY<span class="ot">&lt;-</span><span class="st">"Revenu total "</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Y, <span class="at">main=</span>labelY,<span class="at">breaks =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Y, <span class="at">main=</span>labelY,<span class="at">breaks =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">log10</span>(Y), <span class="at">main=</span>labelY, <span class="at">xlab =</span> <span class="st">"logarithme décimal"</span>, <span class="at">breaks=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">log10</span>(Y), <span class="at">main=</span>labelY, <span class="at">xlab =</span> <span class="st">"logarithme décimal"</span>, <span class="at">breaks=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>La distribution est unimodale mais asymétrique à gauche. Après transformation logarithmique elle apparaît plus symétrique.</p>
+<p>La distribution comporte une forte anomalie statistique liée au fait que nous avons attribué la valeur 20000 CFA à tous les ménages gagnant “<em>moins de 40000 CFA</em>”.</p>
 </section>
 <section id="valeurs-exceptionnelles" class="level3">
 <h3 class="anchored" data-anchor-id="valeurs-exceptionnelles">Valeurs exceptionnelles</h3>
@@ -527,7 +531,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>La distribution comporte des valeurs exceptionnelles mais celles-ci disparaissent après transformation logarithmique.</p>
+<p>La distribution comporte des valeurs exceptionnelles mais celles-ci disparaissent pour la plupart après transformation logarithmique.</p>
 </section>
 <section id="normalité" class="level3">
 <h3 class="anchored" data-anchor-id="normalité">Normalité</h3>
@@ -538,7 +542,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     Shapiro-Wilk normality test
 
 data:  Y
-W = 0.87393, p-value &lt; 2.2e-16</code></pre>
+W = 0.65732, p-value &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">log</span>(Y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -546,84 +550,443 @@ W = 0.87393, p-value &lt; 2.2e-16</code></pre>
     Shapiro-Wilk normality test
 
 data:  log(Y)
-W = 0.9698, p-value &lt; 2.2e-16</code></pre>
+W = 0.88535, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>La distribution n’est pas gaussienne et elle ne le devient pas non plus après transformation logarithmique en raison de la cocnentration des valeurs autour de 20000 (Cf. introduction)</p>
-<p>On décide de poursuivre l’analyse en utilisant désormais le log. du revenu</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span><span class="fu">log10</span>(sel<span class="sc">$</span>hou_inc_cap)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>labelY<span class="ot">&lt;-</span><span class="st">"Revenu moyen (log10)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>La distribution n’est pas gaussienne et elle ne le devient pas non plus après transformation logarithmique en raison de la cocnentration des valeurs autour de 20000. On décide de poursuivre l’analyse en utilisant désormais le log. du revenu.</p>
 </section>
-</section>
-<section id="c.-analyse-de-variance" class="level2">
-<h2 class="anchored" data-anchor-id="c.-analyse-de-variance">C. Analyse de variance</h2>
-<p>On va tester l’effet de variables indépendantes qualitatives</p>
-<section id="modèle-1-le-revenu-est-il-plus-faible-pour-les-activités-agricoles" class="level3">
-<h3 class="anchored" data-anchor-id="modèle-1-le-revenu-est-il-plus-faible-pour-les-activités-agricoles">modèle 1 : Le revenu est-il plus faible pour les activités agricoles ?</h3>
+<section id="modèle-1-ajustement-linéaire" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-1-ajustement-linéaire">Modèle 1 : Ajustement linéaire</h3>
+<p>On commence par un modèle linéaire de type Y = aX+b</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Q1<span class="ot">&lt;-</span><span class="fu">as.factor</span>(sel<span class="sc">$</span>hou_agr)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(Q1)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Agricole"</span>,<span class="st">"Mixte"</span>,<span class="st">"Non-agricole"</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>labelQ1 <span class="ot">=</span> <span class="st">"Occupation agricole"</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>Q1,<span class="at">cex.axis=</span><span class="fl">0.6</span>, <span class="at">xlab=</span>labelQ1, <span class="at">ylab=</span>labelY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="fu">log</span>(Y)<span class="sc">~</span>Q1)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>hou_inc</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>labelY <span class="ot">&lt;-</span> <span class="st">"revenu total"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>X2<span class="ot">&lt;-</span>sel<span class="sc">$</span>hou_mbr</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>labelX2 <span class="ot">&lt;-</span><span class="st">"nombre de membres du ménage"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X2)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = log(Y) ~ Q1)
+lm(formula = Y ~ X2)
 
 Residuals:
-      Min        1Q    Median        3Q       Max 
--0.186343 -0.059905  0.005955  0.061417  0.171092 
+    Min      1Q  Median      3Q     Max 
+-114018  -21744   -8073   14585  731681 
 
 Coefficients:
-                Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     1.367959   0.001752 780.623   &lt;2e-16 ***
-Q1Mixte        -0.040071   0.002636 -15.203   &lt;2e-16 ***
-Q1Non-agricole -0.027968   0.002868  -9.753   &lt;2e-16 ***
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  13422.2     1030.5   13.03   &lt;2e-16 ***
+X2            5664.4      156.8   36.11   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.07909 on 4862 degrees of freedom
-Multiple R-squared:  0.04824,   Adjusted R-squared:  0.04785 
-F-statistic: 123.2 on 2 and 4862 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 37390 on 4863 degrees of freedom
+Multiple R-squared:  0.2115,    Adjusted R-squared:  0.2113 
+F-statistic:  1304 on 1 and 4863 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X2,Y, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab=</span>labelX2,<span class="at">ylab=</span>labelY)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(X2),<span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(Y),<span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>La relation est assez forte (r2= 21.1%) mais très significative (p &lt; 0.001). Toutefois elle est visiblement influencée par une valeur exceptionnelle correspondant à un ménage de plus de 45 personnes déclarant un revenu d’un million de CFA. On élimine ce cas exceptionnel (<em>outlier</em>) avant de refaire le calcul :</p>
+</section>
+<section id="modèle-1-bis-ajustement-linéaire-sans-outlier" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-1-bis-ajustement-linéaire-sans-outlier">Modèle 1-bis : Ajustement linéaire sans outlier</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sel<span class="ot">&lt;-</span>sel <span class="sc">%&gt;%</span> <span class="fu">filter</span>(hou_inc <span class="sc">&lt;</span> <span class="dv">500000</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>hou_inc</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>labelY <span class="ot">&lt;-</span> <span class="st">"revenu total"</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>X2<span class="ot">&lt;-</span>sel<span class="sc">$</span>hou_mbr</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>labelX2 <span class="ot">&lt;-</span><span class="st">"nombre de membres du ménage"</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X2)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-100621  -21908   -7194   13377  316949 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  16194.4      997.1   16.24   &lt;2e-16 ***
+X2            5142.8      152.5   33.73   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 35840 on 4862 degrees of freedom
+Multiple R-squared:  0.1896,    Adjusted R-squared:  0.1894 
+F-statistic:  1138 on 1 and 4862 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X2,Y, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab=</span>labelX2,<span class="at">ylab=</span>labelY)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(X2),<span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(Y),<span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>La relation est un peu moins forte (r2 =19%) mais toujours très significative (p &lt; 0.001). Toutefois elle est incorrecte sur le plan statistique car elle comporte visiblement une forte <strong>hétéroscédasticité</strong> (i.e.&nbsp;variance des résidus non homogène). Il faut donc procéder à des transformations logarithmiques sur X et/ou Y.</p>
+</section>
+<section id="modèle-2-ajustement-exponentiel" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-2-ajustement-exponentiel">Modèle 2 : Ajustement exponentiel</h3>
+<p>On passe à un modèle exponentiel de type log(Y) = aX+b</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span><span class="fu">log</span>(sel<span class="sc">$</span>hou_inc)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>labelY <span class="ot">&lt;-</span> <span class="st">"revenu total (log)"</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>X2<span class="ot">&lt;-</span>sel<span class="sc">$</span>hou_mbr</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>labelX2 <span class="ot">&lt;-</span><span class="st">"nombre de membres du ménage"</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X2)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.3847 -0.4673 -0.1379  0.5362  1.7580 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  9.88931    0.01824  542.12   &lt;2e-16 ***
+X2           0.09630    0.00279   34.52   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.6558 on 4862 degrees of freedom
+Multiple R-squared:  0.1969,    Adjusted R-squared:  0.1967 
+F-statistic:  1192 on 1 and 4862 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X2,Y, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab=</span>labelX2,<span class="at">ylab=</span>labelY)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(X2),<span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(Y),<span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Ce nouveau modèle demeure significatif (p&lt;0.001), explique un peu plus de variance (r2 = 20%) et élimine l’effet de l’hétéroscédasticité. Mais on voit que le nuage de point affiche désormais une courbure ce qui crée une <strong>autocorrélation des résidus</strong> indiquant que le modèle n’est toujours pas correct d’un point de vue statistique.</p>
+</section>
+<section id="modèle-3-ajustement-puissance" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-3-ajustement-puissance">Modèle 3 : Ajustement puissance</h3>
+<p>On passe à un modèle exponentiel de type log(Y) = a.log(X)+b</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span><span class="fu">log</span>(sel<span class="sc">$</span>hou_inc)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>labelY <span class="ot">&lt;-</span> <span class="st">"revenu total (log)"</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>X2<span class="ot">&lt;-</span><span class="fu">log</span>(sel<span class="sc">$</span>hou_mbr)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>labelX2 <span class="ot">&lt;-</span><span class="st">"nombre de membres du ménage (log)"</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X2)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.02346 -0.56251 -0.08335  0.51347  1.93356 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  9.62437    0.02391  402.48   &lt;2e-16 ***
+X2           0.52293    0.01432   36.52   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.6483 on 4862 degrees of freedom
+Multiple R-squared:  0.2152,    Adjusted R-squared:  0.2151 
+F-statistic:  1333 on 1 and 4862 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X2,Y, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab=</span>labelX2,<span class="at">ylab=</span>labelY)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(X2),<span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(Y),<span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">9.624</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15123.42</code></pre>
+</div>
+</div>
+<p>Le pouvoir explicatif du modèle est toujours très significatif un peu plus élevé que précédemment (r2 = 21.5%) et la plupart des défauts statistiques ont été corrigés même s’ils demeurent des imperfections liées au fait qu’on a utilisé des centres de tranches de revenus comportant une certaine imprécision. L’équation du modèle s’écrit donc sous la forme</p>
+<p><span class="math inline">\(log(Revenu) = 0.523.log(NBmembres) + 9.624\)</span></p>
+<p>Ce que l’on peut transformer en :</p>
+<p><span class="math inline">\(Revenu = exp[0.523.log(NBmembres) + 9.624]\)</span></p>
+<p>d’où</p>
+<p><span class="math inline">\(Revenu = exp(9.624) . (NBmembres)^{0.523}\)</span></p>
+<p>et finalement</p>
+<p><span class="math inline">\(Revenu = 15123 . (NBmembres)^{0.523}\)</span></p>
+<p>Cette équation signifie que le revenu total est en théorie de 15123 CFA pour un ménage d’une personne et qu’il augmente ensuite de façon à peu près proportionnelle à la racine carrée du nombre de membres du ménage (en effet <span class="math inline">\(X^{0.5} = \sqrt{X}\)</span>). On peut construire un tableau montrant le revenu attendu des ménages en fonction du nombre de personnes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>nb<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>inc<span class="ot">&lt;-</span><span class="dv">15123</span><span class="sc">*</span>nb<span class="sc">**</span><span class="fl">0.523</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">data.frame</span>(nb,inc)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(df, </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Revenu des ménages en fonction de leur taille"</span>,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">0</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Taille du ménage"</span>,<span class="st">"Revenu attendu"</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Revenu des ménages en fonction de leur taille</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Taille du ménage</th>
+<th style="text-align: right;">Revenu attendu</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">15123</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">21731</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">26864</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">31226</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">35091</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">38602</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">41843</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">44870</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">47721</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">50424</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">53001</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">55469</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">57840</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">60126</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">62335</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">64475</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">66552</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">68572</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">70538</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">72456</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Ou bien sous forme graphique :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>nb<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>inc<span class="ot">&lt;-</span><span class="dv">15123</span><span class="sc">*</span>nb<span class="sc">**</span><span class="fl">0.523</span> <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nb,inc,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">"l"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Taille du ménage (nb. membres)"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Revenu du ménage (1000 CFA)"</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Modélisation du revenu des ménages en fonction de leur taille"</span>,</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">grid</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="discussion" class="level3">
+<h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
+<p>Compte-tenu du caractère non-linéaire de la relation entre revenu et taille du ménage, il serait peu judicieux de calculer un indicateur tel que le revenu moyen par personne. Il semble plus judicieux de prendre comme indicateur de richesse relative du ménage le rapport entre la valeur observée et la valeur théorique selon le modèle défini ci-dessus.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>sel<span class="sc">$</span>hou_rich <span class="ot">&lt;-</span> sel<span class="sc">$</span>hou_inc<span class="sc">/</span>(<span class="dv">15123</span><span class="sc">*</span>(sel<span class="sc">$</span>hou_mbr<span class="sc">**</span><span class="fl">0.523</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="c.-analyse-des-déterminants-de-la-richesse-relative-du-ménage" class="level2">
+<h2 class="anchored" data-anchor-id="c.-analyse-des-déterminants-de-la-richesse-relative-du-ménage">C. Analyse des déterminants de la richesse relative du ménage</h2>
+<p>On se propose d’expliquer la variable <strong>hou_rich</strong> qui a été créée à l’étape précédente et qui mesure sa richesse relative, toutes choses égales quant à sa taille.</p>
+<section id="forme-de-la-distribution-1" class="level3">
+<h3 class="anchored" data-anchor-id="forme-de-la-distribution-1">Forme de la distribution</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>hou_rich</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>labelY<span class="ot">&lt;-</span><span class="st">"Richesse relative "</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Y, <span class="at">main=</span>labelY,<span class="at">breaks =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">log10</span>(Y), <span class="at">main=</span>labelY, <span class="at">xlab =</span> <span class="st">"logarithme décimal"</span>, <span class="at">breaks=</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>La distribution est unimodale mais asymétrique à gauche. Après transformation logarithmique elle apparaît plus symétrique.</p>
+</section>
+<section id="valeurs-exceptionnelles-1" class="level3">
+<h3 class="anchored" data-anchor-id="valeurs-exceptionnelles-1">Valeurs exceptionnelles</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Y, <span class="at">main=</span>labelY, <span class="at">horizontal=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">log</span>(Y), <span class="at">main=</span>labelY, <span class="at">horizontal=</span>T, <span class="at">xlab =</span> <span class="st">"Logarithme décimal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>La distribution comporte des valeurs exceptionnelles mais celles-ci disparaissent pratiquement après transformation logarithmique.</p>
+</section>
+<section id="normalité-1" class="level3">
+<h3 class="anchored" data-anchor-id="normalité-1">Normalité</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  Y
+W = 0.84285, p-value &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">log</span>(Y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  log(Y)
+W = 0.97933, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Commentaire</strong> : La distribution n’est pas gaussienne et elle ne le devient pas non plus après transformation logarithmique en raison de la cocnentration des valeurs autour de 20000 (Cf. introduction). On décide de poursuivre l’analyse en utilisant désormais le log. du revenu</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span><span class="fu">log</span>(sel<span class="sc">$</span>hou_rich)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>labelY<span class="ot">&lt;-</span><span class="st">"Richesse relative (log)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>On va tester l’effet de variables indépendantes qualitatives</p>
+</section>
+<section id="modèle-1-les-ménages-urbains-sont-ils-plus-riches" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-1-les-ménages-urbains-sont-ils-plus-riches">Modèle 1 : Les ménages urbains sont-ils plus riches ?</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>Q1<span class="ot">&lt;-</span><span class="fu">as.factor</span>(sel<span class="sc">$</span>loc_urb)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(Q1)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Rural"</span>,<span class="st">"Urbain"</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>labelQ1 <span class="ot">=</span> <span class="st">"Milieu urbain ou rural"</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>Q1,<span class="at">cex.axis=</span><span class="fl">0.6</span>, <span class="at">xlab=</span>labelQ1, <span class="at">ylab=</span>labelY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q1)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ Q1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.1191 -0.5415 -0.0233  0.4751  2.0118 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.07806    0.01242  -6.284 3.58e-10 ***
+Q1Urbain     0.17410    0.01852   9.403  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.6424 on 4862 degrees of freedom
+Multiple R-squared:  0.01786,   Adjusted R-squared:  0.01766 
+F-statistic: 88.41 on 1 and 4862 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
-Response: log(Y)
+Response: Y
             Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
-Q1           2  1.5417 0.77084  123.23 &lt; 2.2e-16 ***
-Residuals 4862 30.4137 0.00626                      
+Q1           1   36.49  36.489  88.407 &lt; 2.2e-16 ***
+Residuals 4862 2006.72   0.413                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+<ul>
+<li><strong>Commentaire</strong> : les ménages urbains sont légèrement plus riches que les ménages ruraux. La relation est significative mais son pouvoir explicatif est faible. La différence relative est égale à 0.174 en log soit un rapport de <span class="math inline">\(exp(0.174) = 1.19\)</span> qui implique une richesse supérieure d’environ 19% pour les ménages urbains.</li>
+</ul>
 </section>
-<section id="modèle-2-le-revenu-est-il-plus-faible-si-le-chef-de-ménages-est-une-femme" class="level3">
-<h3 class="anchored" data-anchor-id="modèle-2-le-revenu-est-il-plus-faible-si-le-chef-de-ménages-est-une-femme">Modèle 2 : Le revenu est-il plus faible si le chef de ménages est une femme ?</h3>
+<section id="modèle-2-les-ménages-dont-le-chef-est-un-homme-sont-ils-plus-riches" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-2-les-ménages-dont-le-chef-est-un-homme-sont-ils-plus-riches">Modèle 2 : Les ménages dont le chef est un homme sont-ils plus riches ?</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Q2<span class="ot">&lt;-</span><span class="fu">as.factor</span>(sel<span class="sc">$</span>hea_sex)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(Q2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>Q2<span class="ot">&lt;-</span><span class="fu">as.factor</span>(sel<span class="sc">$</span>hea_sex)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(Q2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Female" "Male"  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(Q2)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Femme"</span>,<span class="st">"Homme"</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>labelQ2 <span class="ot">=</span> <span class="st">"Sexe du chef de ménage"</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>Q2,<span class="at">cex.axis=</span><span class="fl">0.6</span>, <span class="at">xlab=</span>labelQ2, <span class="at">ylab=</span>labelY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(Q2)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Femme"</span>,<span class="st">"Homme"</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>labelQ2 <span class="ot">=</span> <span class="st">"Sexe du chef de ménage"</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>Q2,<span class="at">cex.axis=</span><span class="fl">0.6</span>, <span class="at">xlab=</span>labelQ2, <span class="at">ylab=</span>labelY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q2)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q2)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -631,45 +994,47 @@ lm(formula = Y ~ Q2)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.61386 -0.25370 -0.01998  0.22342  0.63323 
+-2.07604 -0.49849 -0.00969  0.46290  1.93225 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 3.843891   0.006919 555.587   &lt;2e-16 ***
-Q2Homme     0.029602   0.009063   3.266   0.0011 ** 
+(Intercept) -0.07331    0.01432  -5.118 3.21e-07 ***
+Q2Homme      0.12629    0.01876   6.730 1.89e-11 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.3117 on 4863 degrees of freedom
-Multiple R-squared:  0.002189,  Adjusted R-squared:  0.001984 
-F-statistic: 10.67 on 1 and 4863 DF,  p-value: 0.001098</code></pre>
+Residual standard error: 0.6453 on 4862 degrees of freedom
+Multiple R-squared:  0.009231,  Adjusted R-squared:  0.009027 
+F-statistic:  45.3 on 1 and 4862 DF,  p-value: 1.888e-11</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
 Response: Y
-            Df Sum Sq Mean Sq F value   Pr(&gt;F)   
-Q2           1   1.04 1.03659  10.668 0.001098 **
-Residuals 4863 472.54 0.09717                    
+            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+Q2           1   18.86 18.8602  45.298 1.888e-11 ***
+Residuals 4862 2024.35  0.4164                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+<ul>
+<li><strong>Commentaire</strong> : les ménages dont le chef est un homme sont légèrement plus riches que les ménages dont le chef est une femme . La relation est significative mais son pouvoir explicatif est faible. La différence relative est égale à 0.126 en log soit un rapport de <span class="math inline">\(exp(0.126) = 1.13\)</span> qui implique une richesse supérieure d’environ 13% pour les ménages dont le chef est un homme.</li>
+</ul>
 </section>
-<section id="modèle-3-le-revenu-est-il-plus-fort-en-ville" class="level3">
-<h3 class="anchored" data-anchor-id="modèle-3-le-revenu-est-il-plus-fort-en-ville">Modèle 3 : Le revenu est-il plus fort en ville</h3>
+<section id="modèle-3-la-richesse-des-ménages-varie-t-elle-selon-les-départements" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-3-la-richesse-des-ménages-varie-t-elle-selon-les-départements">Modèle 3 : La richesse des ménages varie-t-elle selon les départements</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Q3<span class="ot">&lt;-</span><span class="fu">as.factor</span>(sel<span class="sc">$</span>loc_urb)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(Q3)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Rural"</span>,<span class="st">"Urbain"</span>)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>labelQ3 <span class="ot">=</span> <span class="st">"Milieu urbain ou rural"</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>Q3,<span class="at">cex.axis=</span><span class="fl">0.6</span>, <span class="at">xlab=</span>labelQ3, <span class="at">ylab=</span>labelY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>Q3<span class="ot">&lt;-</span><span class="fu">as.factor</span>(<span class="fu">substr</span>(sel<span class="sc">$</span>loc_dep,<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>labelQ3 <span class="ot">&lt;-</span> <span class="st">"Département"</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>Q3,<span class="at">cex.axis=</span><span class="fl">0.6</span>, <span class="at">xlab=</span>labelQ3, <span class="at">ylab=</span>labelY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q3)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q3)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -677,190 +1042,44 @@ lm(formula = Y ~ Q3)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.65646 -0.21713  0.00772  0.23933  0.67193 
+-2.02674 -0.50092 -0.04339  0.46192  1.94100 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 3.816185   0.005955  640.78   &lt;2e-16 ***
-Q3Urbain    0.099912   0.008878   11.25   &lt;2e-16 ***
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.009793   0.034441  -0.284  0.77617    
+Q3ATA       -0.006997   0.046921  -0.149  0.88147    
+Q3ATL       -0.005519   0.049791  -0.111  0.91175    
+Q3BOR        0.151092   0.046324   3.262  0.00112 ** 
+Q3COL        0.176282   0.044632   3.950 7.94e-05 ***
+Q3COU       -0.254332   0.045433  -5.598 2.29e-08 ***
+Q3DON        0.016994   0.047645   0.357  0.72135    
+Q3LIT        0.208135   0.046921   4.436 9.38e-06 ***
+Q3MON       -0.146867   0.045895  -3.200  0.00138 ** 
+Q3OUE        0.013460   0.045086   0.299  0.76531    
+Q3PLA        0.087189   0.045872   1.901  0.05740 .  
+Q3ZOU       -0.155016   0.049229  -3.149  0.00165 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.3081 on 4863 degrees of freedom
-Multiple R-squared:  0.02538,   Adjusted R-squared:  0.02518 
-F-statistic: 126.6 on 1 and 4863 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.6341 on 4852 degrees of freedom
+Multiple R-squared:  0.0451,    Adjusted R-squared:  0.04293 
+F-statistic: 20.83 on 11 and 4852 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
 Response: Y
-            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-Q3           1  12.02 12.0196  126.64 &lt; 2.2e-16 ***
-Residuals 4863 461.56  0.0949                      
+            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+Q3          11   92.15  8.3768  20.832 &lt; 2.2e-16 ***
+Residuals 4852 1951.06  0.4021                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+
+
 </section>
-<section id="modèle-4-le-revenu-varie-t-il-entre-les-départements" class="level3">
-<h3 class="anchored" data-anchor-id="modèle-4-le-revenu-varie-t-il-entre-les-départements">Modèle 4 : Le revenu varie-t-il entre les départements ?</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Q4<span class="ot">&lt;-</span><span class="fu">as.factor</span>(<span class="fu">substr</span>(sel<span class="sc">$</span>loc_dep,<span class="dv">1</span>,<span class="dv">3</span>))</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>labelQ4 <span class="ot">&lt;-</span> <span class="st">"Département"</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y<span class="sc">~</span>Q4,<span class="at">cex.axis=</span><span class="fl">0.6</span>, <span class="at">xlab=</span>labelQ4, <span class="at">ylab=</span>labelY)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q4)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Y ~ Q4)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--0.71570 -0.23374 -0.01139  0.24030  0.73475 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  3.804213   0.016611 229.018  &lt; 2e-16 ***
-Q4ATA        0.002192   0.022630   0.097 0.922843    
-Q4ATL        0.068936   0.024014   2.871 0.004115 ** 
-Q4BOR        0.052400   0.022342   2.345 0.019049 *  
-Q4COL        0.128494   0.021526   5.969 2.55e-09 ***
-Q4COU       -0.061842   0.021902  -2.824 0.004769 ** 
-Q4DON        0.024778   0.022979   1.078 0.280972    
-Q4LIT        0.184493   0.022630   8.152 4.50e-16 ***
-Q4MON        0.055495   0.022135   2.507 0.012205 *  
-Q4OUE        0.082235   0.021745   3.782 0.000158 ***
-Q4PLA        0.099330   0.022124   4.490 7.30e-06 ***
-Q4ZOU        0.024275   0.023743   1.022 0.306644    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.3058 on 4853 degrees of freedom
-Multiple R-squared:  0.04146,   Adjusted R-squared:  0.03929 
-F-statistic: 19.08 on 11 and 4853 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
-
-Response: Y
-            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-Q4          11  19.64 1.78506  19.084 &lt; 2.2e-16 ***
-Residuals 4853 453.94 0.09354                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
-</section>
-<section id="analyse-de-variance-à-plusieurs-facteurs-y-fq1q2q3q4" class="level3">
-<h3 class="anchored" data-anchor-id="analyse-de-variance-à-plusieurs-facteurs-y-fq1q2q3q4">Analyse de variance à plusieurs facteurs : Y = f(Q1,Q2,Q3,Q4)</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>Q1<span class="sc">+</span>Q2<span class="sc">+</span>Q3<span class="sc">+</span>Q4)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Y ~ Q1 + Q2 + Q3 + Q4)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--0.73364 -0.23169 -0.00707  0.23119  0.75936 
-
-Coefficients:
-                Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     3.874583   0.019728 196.400  &lt; 2e-16 ***
-Q1Mixte        -0.132647   0.012259 -10.820  &lt; 2e-16 ***
-Q1Non-agricole -0.089321   0.012192  -7.327 2.75e-13 ***
-Q2Homme         0.038037   0.008806   4.320 1.59e-05 ***
-Q3Urbain        0.049039   0.009801   5.003 5.84e-07 ***
-Q4ATA          -0.002996   0.022300  -0.134 0.893143    
-Q4ATL          -0.006768   0.024203  -0.280 0.779763    
-Q4BOR           0.026666   0.022011   1.212 0.225757    
-Q4COL           0.103906   0.021213   4.898 9.99e-07 ***
-Q4COU          -0.074447   0.021591  -3.448 0.000569 ***
-Q4DON          -0.002437   0.022650  -0.108 0.914323    
-Q4LIT           0.044981   0.024457   1.839 0.065948 .  
-Q4MON          -0.001256   0.022157  -0.057 0.954810    
-Q4OUE          -0.018882   0.022529  -0.838 0.402009    
-Q4PLA           0.045721   0.022167   2.063 0.039204 *  
-Q4ZOU          -0.033928   0.023782  -1.427 0.153760    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.2998 on 4849 degrees of freedom
-Multiple R-squared:  0.07991,   Adjusted R-squared:  0.07706 
-F-statistic: 28.07 on 15 and 4849 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Anova Table (Type III tests)
-
-Response: Y
-            Sum Sq   Df   F value    Pr(&gt;F)    
-(Intercept) 3466.2    1 38573.066 &lt; 2.2e-16 ***
-Q1            10.8    2    60.295 &lt; 2.2e-16 ***
-Q2             1.7    1    18.659 1.594e-05 ***
-Q3             2.2    1    25.032 5.837e-07 ***
-Q4            10.1   11    10.215 &lt; 2.2e-16 ***
-Residuals    435.7 4849                        
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="d.-régression-linéaire" class="level2">
-<h2 class="anchored" data-anchor-id="d.-régression-linéaire">D. Régression linéaire</h2>
-<p>On reprend la même variable dépendante.</p>
-<section id="modèle-1-la-richesse-par-habitant-log-dépend-elle-de-lâge" class="level3">
-<h3 class="anchored" data-anchor-id="modèle-1-la-richesse-par-habitant-log-dépend-elle-de-lâge">Modèle 1 : La richesse par habitant (log) dépend-elle de l’âge</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>X1<span class="ot">&lt;-</span>sel<span class="sc">$</span>hea_age</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>labelX1 <span class="ot">&lt;-</span><span class="st">"âge du chef de ménage"</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X1)</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Y ~ X1)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--0.60453 -0.25856 -0.03573  0.23614  0.62788 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 3.858e+00  1.182e-02 326.368   &lt;2e-16 ***
-X1          7.561e-05  2.741e-04   0.276    0.783    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.3121 on 4863 degrees of freedom
-Multiple R-squared:  1.565e-05, Adjusted R-squared:  -0.00019 
-F-statistic: 0.0761 on 1 and 4863 DF,  p-value: 0.7827</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X1,Y, <span class="at">cex=</span><span class="dv">1</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab=</span>labelX1,<span class="at">ylab=</span>labelY)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod,<span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(X1),<span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(Y),<span class="at">lty=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="MOD1_Yquanti_003_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-</section>
-<section id="exercices" class="level2">
-<h2 class="anchored" data-anchor-id="exercices">EXERCICES</h2>
-<p>Refaire l’analyse avec la variable Y = suroccupation des logements</p>
-
-
 </section>
 
 </main> <!-- /main -->
