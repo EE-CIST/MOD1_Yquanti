@@ -7,6 +7,7 @@ render:
       - MOD1_Yquanti_004.qmd
       - MOD1_Yquanti_002.qmd
       - MOD1_Yquanti_003.qmd
+      - MOD1_Yquanti_005.qmd
 
 website:
   title: "Modélisation d'une variable quantitative"
@@ -16,7 +17,7 @@ website:
       - MOD1_Yquanti_004.qmd
       - MOD1_Yquanti_002.qmd
       - MOD1_Yquanti_003.qmd
-
+      - MOD1_Yquanti_005.qmd
 
 format:
   html:
