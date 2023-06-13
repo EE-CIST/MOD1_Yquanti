@@ -178,22 +178,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#a.-données" id="toc-a.-données" class="nav-link active" data-scroll-target="#a.-données">A. Données</a>
+  <li><a href="#a.-donnees" id="toc-a.-donnees" class="nav-link active" data-scroll-target="#a.-donnees">A. DONNEES</a>
   <ul class="collapse">
   <li><a href="#importation" id="toc-importation" class="nav-link" data-scroll-target="#importation">Importation</a></li>
   <li><a href="#liste-des-variables" id="toc-liste-des-variables" class="nav-link" data-scroll-target="#liste-des-variables">Liste des variables</a></li>
   <li><a href="#fonds-de-carte" id="toc-fonds-de-carte" class="nav-link" data-scroll-target="#fonds-de-carte">Fonds de carte</a></li>
-  <li><a href="#sélection-dune-zone-détude" id="toc-sélection-dune-zone-détude" class="nav-link" data-scroll-target="#sélection-dune-zone-détude">Sélection d’une zone d’étude</a></li>
   </ul></li>
-  <li><a href="#b.-determinants-individuels" id="toc-b.-determinants-individuels" class="nav-link" data-scroll-target="#b.-determinants-individuels">B. DETERMINANTS INDIVIDUELS</a></li>
-  <li><a href="#c.-determinants-geographiques" id="toc-c.-determinants-geographiques" class="nav-link" data-scroll-target="#c.-determinants-geographiques">C. DETERMINANTS GEOGRAPHIQUES</a>
+  <li><a href="#b.-analyse-du-borgou" id="toc-b.-analyse-du-borgou" class="nav-link" data-scroll-target="#b.-analyse-du-borgou">B. ANALYSE DU BORGOU</a>
   <ul class="collapse">
-  <li><a href="#déterminants-territoriaux" id="toc-déterminants-territoriaux" class="nav-link" data-scroll-target="#déterminants-territoriaux">Déterminants territoriaux</a></li>
-  <li><a href="#urbainrural" id="toc-urbainrural" class="nav-link" data-scroll-target="#urbainrural">Urbain/Rural</a></li>
-  <li><a href="#fonction-administrative" id="toc-fonction-administrative" class="nav-link" data-scroll-target="#fonction-administrative">Fonction administrative</a></li>
-  <li><a href="#déterminants-spatiaux" id="toc-déterminants-spatiaux" class="nav-link" data-scroll-target="#déterminants-spatiaux">Déterminants spatiaux</a></li>
+  <li><a href="#variables-endogenes" id="toc-variables-endogenes" class="nav-link" data-scroll-target="#variables-endogenes">VARIABLES ENDOGENES</a></li>
+  <li><a href="#variables-contextuelles" id="toc-variables-contextuelles" class="nav-link" data-scroll-target="#variables-contextuelles">VARIABLES CONTEXTUELLES</a></li>
   <li><a href="#accessibilité-communale" id="toc-accessibilité-communale" class="nav-link" data-scroll-target="#accessibilité-communale">Accessibilité communale</a></li>
   <li><a href="#accessibilité-départementale" id="toc-accessibilité-départementale" class="nav-link" data-scroll-target="#accessibilité-départementale">Accessibilité départementale</a></li>
+  <li><a href="#synthese" id="toc-synthese" class="nav-link" data-scroll-target="#synthese">SYNTHESE</a></li>
+  <li><a href="#modèle-final" id="toc-modèle-final" class="nav-link" data-scroll-target="#modèle-final">Modèle final</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -230,8 +228,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>L’objectif de la présente analyse est d’analyser un tableau de <strong>données individuelles</strong> permettant de décrire le niveau de vie des ménages en fonction d’un certain nombre d’indicateurs endogènes ou exogènes.</p>
-<section id="a.-données" class="level2">
-<h2 class="anchored" data-anchor-id="a.-données">A. Données</h2>
+<section id="a.-donnees" class="level2">
+<h2 class="anchored" data-anchor-id="a.-donnees">A. DONNEES</h2>
 <p>Le jeu de données est un échantillon de variables relatives aux ménages du Bénin lors du RP 2013. Il s’agit plus précisément d’une extraction par tirage au sort de 100 ménages dans chacun des 546 arrondissements du Bénin. Le tirage au sort a été effectué en se limitant aux ménages composés d’au moins deux personnes, dont le chef de ménage est marié ou en union libre et dont les variables chosies ne comportent pas de valeurs manquantes ou non renseignés. La base de sondage se compose donc d’1.305 millions de ménages sur les 2 millions que compte le Bénin à cette date. L’échantillon comporte exactement 54600 lignes (100 pour chacun des 546 arrondissements).</p>
 <p>Les variables ont été anonymisées en supprimant le numéro d’identification des ménages du recensement et en le remplaçant par le code de l’arrondissement suivi d’un chiffre de 001 à 100. Les variables les plus discriminantes ont vu leur nombre de modalité réduit.</p>
 <section id="importation" class="level3">
@@ -753,16 +751,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="sélection-dune-zone-détude" class="level3">
-<h3 class="anchored" data-anchor-id="sélection-dune-zone-détude">Sélection d’une zone d’étude</h3>
+</section>
+<section id="b.-analyse-du-borgou" class="level2">
+<h2 class="anchored" data-anchor-id="b.-analyse-du-borgou">B. ANALYSE DU BORGOU</h2>
 <p>On choisit à titre d’exemple de limiter l’analyse au département de Borgou et d’étudier les facteurs de variation de l’indice d’équipement des ménages obtenu par analyse factorielle (<em>equip_acp</em>)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sel<span class="ot">&lt;-</span>don[don<span class="sc">$</span>DEP_NAME<span class="sc">==</span><span class="st">"BORGOU"</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-</section>
-<section id="b.-determinants-individuels" class="level2">
-<h2 class="anchored" data-anchor-id="b.-determinants-individuels">B. DETERMINANTS INDIVIDUELS</h2>
+<section id="variables-endogenes" class="level3">
+<h3 class="anchored" data-anchor-id="variables-endogenes">VARIABLES ENDOGENES</h3>
 <p>On peut modéliser tout d’abord l’effet des variables relatives au ménage ou au chef de ménage</p>
 <section id="sexe" class="level4">
 <h4 class="anchored" data-anchor-id="sexe">Sexe</h4>
@@ -1003,13 +1000,309 @@ F-statistic: 15.36 on 1 and 4298 DF,  p-value: 9.001e-05</code></pre>
 <li><strong>Commentaire</strong> : Relation significative mais à très faible pouvoir explicatif</li>
 </ul>
 </section>
-<section id="synthèse" class="level4">
-<h4 class="anchored" data-anchor-id="synthèse">Synthèse</h4>
+</section>
+<section id="variables-contextuelles" class="level3">
+<h3 class="anchored" data-anchor-id="variables-contextuelles">VARIABLES CONTEXTUELLES</h3>
+<p>Nous proposons maintenant une suite d’analyse portant sur les déterminants spatiaux en distinguant deux cas selon que la variable explicative est catégorielle ou selon qu’elle correspond à un effect continu d’éloignement.</p>
+<section id="déterminants-territoriaux" class="level4">
+<h4 class="anchored" data-anchor-id="déterminants-territoriaux">Déterminants territoriaux</h4>
+<p>Les <strong>déterminants territoriaux</strong> correspondent au cas où la variable explicative est <em>catégorielle</em> et où l’effet sur le ménage est lié à son <em>appartenance</em> à un type d’espace. Ceci nous permet d’identifier trois variables :</p>
+<ul>
+<li>URBA : l’arrondissement où le ménage est situé est-il déclaré “rural” ou “urbain” par l’état ?</li>
+<li>DEF_CHEF : l’arrondissement où le ménage est situé est-il le siège d’un chef-lieu de département</li>
+<li>COM_CHEF : l’arrondissement où le ménage est situé est-il le siège d’un chef-lieu de commune</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="at">data=</span>sel, equip_acp<span class="sc">~</span>sexe<span class="sc">+</span>age5<span class="sc">+</span>etud5<span class="sc">+</span>statoc<span class="sc">+</span><span class="fu">log</span>(tailmen))</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>map1<span class="ot">&lt;-</span>BEN1[BEN1<span class="sc">$</span>DEP_NAME<span class="sc">==</span><span class="st">"BORGOU"</span>,]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>map2<span class="ot">&lt;-</span>BEN2[BEN2<span class="sc">$</span>DEP_NAME<span class="sc">==</span><span class="st">"BORGOU"</span>,]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>map3<span class="ot">&lt;-</span>BEN3[BEN3<span class="sc">$</span>DEP_NAME<span class="sc">==</span><span class="st">"BORGOU"</span>,]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>map3<span class="sc">$</span>URBA<span class="ot">&lt;-</span><span class="fu">as.factor</span>(map3<span class="sc">$</span>URBA)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(map3<span class="sc">$</span>URBA)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Rural"</span>,<span class="st">"Urbain"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>map2ctr<span class="ot">&lt;-</span><span class="fu">st_centroid</span>(map3[map3<span class="sc">$</span>COM_CHEF<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> map3<span class="sc">$</span>DEP_CHEF<span class="sc">==</span><span class="dv">0</span>,])</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>map1ctr<span class="ot">&lt;-</span><span class="fu">st_centroid</span>(map3[ map3<span class="sc">$</span>DEP_CHEF<span class="sc">==</span><span class="dv">1</span>,])</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map3,<span class="at">type=</span><span class="st">"typo"</span>,<span class="at">var=</span><span class="st">"URBA"</span>,<span class="at">pal=</span><span class="fu">c</span>(<span class="st">"lightyellow"</span>,<span class="st">"orange"</span>), <span class="at">border=</span><span class="st">"gray"</span>,<span class="at">lwd=</span><span class="fl">0.3</span>,<span class="at">leg_title =</span> <span class="st">"Type d'espace"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map2,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">col=</span><span class="cn">NA</span>, <span class="at">border=</span><span class="st">"black"</span>,<span class="at">lwd=</span><span class="dv">1</span>, <span class="at">add=</span>T)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">col=</span><span class="cn">NA</span>, <span class="at">border=</span><span class="st">"black"</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">add=</span>T)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map2ctr,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">col=</span><span class="st">"blue"</span>,<span class="at">add=</span>T)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_label</span>(map2ctr,<span class="at">var =</span> <span class="st">"COM_NAME"</span>, <span class="at">col=</span><span class="st">"blue"</span>,<span class="at">pos=</span><span class="dv">1</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1ctr,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">pch=</span><span class="dv">15</span>,<span class="at">col=</span><span class="st">"red"</span>,<span class="at">add=</span>T, <span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_label</span>(map1ctr,<span class="at">var =</span> <span class="st">"COM_NAME"</span>, <span class="at">col=</span><span class="st">"red"</span>,<span class="at">pos=</span><span class="dv">1</span>,<span class="at">cex =</span> <span class="fl">1.2</span>)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_layout</span>(<span class="at">title =</span> <span class="st">"Communes et arrondissements du Borgou"</span>,</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">credits =</span> <span class="st">"Source : EE CIST 2023"</span>,<span class="at">frame =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="urbainrural" class="level4">
+<h4 class="anchored" data-anchor-id="urbainrural">Urbain/Rural</h4>
+<p>L’attribution du caractère <em>urbain</em> ou <em>rural</em> à un arrondissement est le résultat d’une décision administrative de l’état. Elle se traduit dans le recensement de 2013 par l’ajout d’un code “5” en quatrième position du code de l’arrondissement. Il peut y avoir plusieurs arrondissements “urbains” à l’intérieur d’une même commune. Il peut également arriver que l’ensemble d’une commune soit composée d’arrondissements urbain comme c’est le cas pour Parakou. Les arrondissements urbains contigus portent en général le même nom suivi d’un numéro (PARAKOU 01, PARAKOU 02, PARAKOU 03, PARAKOU 04) et leur réunion forment implicitement une “ville” dans une logique administrative. Mais les contours de ces villes sont très différents de ceux que l’on pourrait obtenir par des sources non administratives telles que les images de télédétection utilisées par la base Africapolis où des données détaillées de mobilité à l’échelon indiviuel (non accessibles pour des raisons de secret statistique).</p>
+<p>Qu’elle reflète ou non une réalité morphologique (continuité du bâti) ou fonctionnelle (solde migratoire positif) n’est cependant pas ici la question principale. En revanche il peut être intéressant de se demander si les arrondissements urbains bénéficient d’un traitement privilégié de l’état, conduisant par exemple celui-ci à mettre en place des politiques publiques qui privilégient ces lieux en matière de déploiement d’infrastructures (écoles, lycées, cliniques, …) ce qui peut attirer des populations plus riches ou plus éduquées, dotées d’un meilleur équipement.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sel<span class="sc">$</span>URBA<span class="ot">&lt;-</span><span class="fu">as.factor</span>(sel<span class="sc">$</span>URBA)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sel<span class="sc">$</span>URBA)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Rural"</span>,<span class="st">"Urbain"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span>sel<span class="sc">$</span>URBA</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>equip_acp</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>nameX<span class="ot">&lt;-</span><span class="st">"Catégorisation administrative de l'arrondissement"</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>nameY<span class="ot">&lt;-</span><span class="st">"Indice d'équipement (ACP)"</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>titre<span class="ot">&lt;-</span><span class="st">"Département de Borgou"</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>source<span class="ot">&lt;-</span><span class="st">"Source : RP2013, INS Bénin"</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Y<span class="sc">~</span>X, </span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span>titre,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">sub =</span> source,</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span>nameX,</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span>nameY,</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span><span class="st">"lightyellow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.4616 -0.4209 -0.1550  0.3096  2.5972 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.28426    0.01241  -22.91   &lt;2e-16 ***
+XUrbain      0.59587    0.02573   23.16   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7127 on 4298 degrees of freedom
+Multiple R-squared:  0.111, Adjusted R-squared:  0.1108 
+F-statistic: 536.4 on 1 and 4298 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Commentaire</strong> : La relation obtenue est très significative (p&lt;0.001) et son pouvoir explicatif est important (r2 = 11%).</li>
+</ul>
+</section>
+<section id="fonction-administrative" class="level4">
+<h4 class="anchored" data-anchor-id="fonction-administrative">Fonction administrative</h4>
+<p>Dans une logique légèrement différente, on peut se demander si les arrondissements qui remplissent des fonction de centralité administrative bénéficient d’un traitement privilégié de la part de l’état. Dans le cas du Bénin, tous les arrondissements qui sont centre de commune sont automatiquement déclarés urbains. Mais l’inverse n’est pas vrai et des arrondissements urbains peuvent ne pas être le siège d’un chef-lieu de commune ou de département.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sel<span class="sc">$</span>CHEF<span class="ot">&lt;-</span><span class="fu">as.factor</span>(sel<span class="sc">$</span>COM_CHEF<span class="sc">+</span>sel<span class="sc">$</span>DEP_CHEF)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sel<span class="sc">$</span>CHEF)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Aucune"</span>,<span class="st">"Centre de commune"</span>, <span class="st">"Centre de département"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span>sel<span class="sc">$</span>CHEF</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>equip_acp</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>nameX<span class="ot">&lt;-</span><span class="st">"Fonction administraive"</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>nameY<span class="ot">&lt;-</span><span class="st">"Indice d'équipement (ACP)"</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>titre<span class="ot">&lt;-</span><span class="st">"Département de Borgou"</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>source<span class="ot">&lt;-</span><span class="st">"Source : RP2013, INS Bénin"</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Y<span class="sc">~</span>X, </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span>titre,</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">sub =</span> source,</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span>nameX,</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span>nameY,</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span><span class="st">"lightyellow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.8020 -0.4863 -0.1964  0.2591  2.9371 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)            -0.21880    0.01244  -17.58   &lt;2e-16 ***
+XCentre de commune      0.32471    0.03048   10.65   &lt;2e-16 ***
+XCentre de département  0.87083    0.07467   11.66   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7362 on 4297 degrees of freedom
+Multiple R-squared:  0.05158,   Adjusted R-squared:  0.05113 
+F-statistic: 116.8 on 2 and 4297 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Commentaire</strong> : La relation obtenue est très significative (p&lt;0.001) même si son pouvoir explicatif est plus limité (r2 = 5%) que celui de l’opposition urbain-rural . On note un net accroissement du niveau d’équipement des ménages avec le niveau administraif de l’arrondissement où ils sont localisés (+0.32 pour un chef lieu de commune et +0.87 pour un chef lieu de département)</li>
+</ul>
+</section>
+<section id="accessibilité" class="level4">
+<h4 class="anchored" data-anchor-id="accessibilité">Accessibilité</h4>
+<p>Les <strong>déterminants spatiaux</strong> correspondent au cas où la variable explicative est de type <em>quantitatif continu</em> et où l’effet sur le ménage est lié à son <em>accessibilité</em> à une ressource c’est-à-dire à l’influence de la <em>distance</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>mypal<span class="ot">&lt;-</span><span class="fu">brewer.pal</span>(<span class="dv">7</span>,<span class="st">"RdYlGn"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Distance à la commune</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>mybreaks<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">80</span>, <span class="dv">160</span>, <span class="dv">320</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map3,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">type=</span><span class="st">"choro"</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">var=</span><span class="st">"COM_CHEF_DIST"</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">pal=</span>mypal,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks=</span>mybreaks,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">border=</span><span class="st">"gray"</span>,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="fl">0.3</span>,</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Distance(km)"</span>,</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_val_rnd =</span> <span class="dv">0</span>)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map2,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">col=</span><span class="cn">NA</span>, <span class="at">border=</span><span class="st">"black"</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">add=</span>T)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">col=</span><span class="cn">NA</span>, <span class="at">border=</span><span class="st">"black"</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">add=</span>T)</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map2ctr,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">col=</span><span class="st">"black"</span>,<span class="at">add=</span>T)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_label</span>(map2ctr,<span class="at">var =</span> <span class="st">"COM_NAME"</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pos=</span><span class="dv">1</span>)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1ctr,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">col=</span><span class="st">"black"</span>,<span class="at">add=</span>T, <span class="at">cex=</span><span class="dv">1</span>)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_label</span>(map1ctr,<span class="at">var =</span> <span class="st">"COM_NAME"</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pos=</span><span class="dv">1</span>)</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_layout</span>(<span class="at">title =</span> <span class="st">"Accessibilité Communale"</span>,</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">credits =</span> <span class="st">"Source : EE CIST 2023"</span>,<span class="at">frame =</span> T)</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Distance au dept</span></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>mybreaks<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">80</span>, <span class="dv">160</span>, <span class="dv">320</span>)</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map3,</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">type=</span><span class="st">"choro"</span>,</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">var=</span><span class="st">"DEP_CHEF_DIST"</span>,</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">pal=</span>mypal,</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks=</span>mybreaks,</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">border=</span><span class="st">"gray"</span>,</span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">1</span>,</span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Distance (km)"</span>,</span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_val_rnd =</span> <span class="dv">0</span>)</span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a><span class="co">#mf_map(map2,type="base",col=NA, border="black",lwd=1, add=T)</span></span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">col=</span><span class="cn">NA</span>, <span class="at">border=</span><span class="st">"black"</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">add=</span>T)</span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1ctr,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">pch=</span><span class="dv">15</span>,<span class="at">col=</span><span class="st">"black"</span>,<span class="at">add=</span>T, <span class="at">cex=</span><span class="dv">1</span>)</span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_label</span>(map1ctr,<span class="at">var =</span> <span class="st">"COM_NAME"</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pos=</span><span class="dv">1</span>)</span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_layout</span>(<span class="at">title =</span> <span class="st">"Accessibilité Départementale"</span>,</span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a>          <span class="at">credits =</span> <span class="st">"Source : EE CIST 2023"</span>,<span class="at">frame =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="768"></p>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(map3<span class="sc">$</span>NAT_CHEF_DIST)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  278.9   351.1   385.4   387.5   429.0   481.7 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="accessibilité-communale" class="level3">
+<h3 class="anchored" data-anchor-id="accessibilité-communale">Accessibilité communale</h3>
+<p>On utilise une fonction puissance dela distance en ajoutant une valeur minimale de 1km correspondant à l’acccessibilité interne du centre.</p>
+<p><span class="math inline">\(f(D_{ij})=\alpha\times (1+D_{ij})^{-\beta}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sel<span class="sc">$</span>log_Dis_COM<span class="ot">&lt;-</span><span class="fu">log</span>(<span class="dv">1</span><span class="sc">+</span>sel<span class="sc">$</span>COM_CHEF_DIST)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span>sel<span class="sc">$</span>log_Dis_COM</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>equip_acp</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>nameX<span class="ot">&lt;-</span><span class="st">"Distance au centre de la commune (racine carrée)"</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>nameY<span class="ot">&lt;-</span><span class="st">"Indice d'équipement (ACP)"</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>titre<span class="ot">&lt;-</span><span class="st">"Département de Borgou"</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>source<span class="ot">&lt;-</span><span class="st">"Source : RP2013, INS Bénin"</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X,Y ,</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">20</span>,</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="fl">0.4</span>,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span>titre,</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">sub =</span> source,</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span>nameX,</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span>nameY)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.3740 -0.5058 -0.1704  0.2952  2.8977 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.224016   0.025007   8.958   &lt;2e-16 ***
+X           -0.137577   0.008324 -16.527   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.733 on 4298 degrees of freedom
+Multiple R-squared:  0.05975,   Adjusted R-squared:  0.05953 
+F-statistic: 273.1 on 1 and 4298 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Commentaire</strong> : La relation obtenue est très significative (p&lt;0.001) même si son pouvoir explicatif est plus limité (r2 = 5.9%). Ceci s’explique tout d’abord par l’incertitude de mesure : la distance utilisée est l’éloignement entre les arrondissements et non pas entre l’individu et le centre de sa commune. Mais aussi par la diversité des ménages en matière d’équipement quelle que soit la distance au centre.</li>
+</ul>
+</section>
+<section id="accessibilité-départementale" class="level3">
+<h3 class="anchored" data-anchor-id="accessibilité-départementale">Accessibilité départementale</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>sel<span class="sc">$</span>log_Dis_DEP<span class="ot">&lt;-</span><span class="fu">log</span>(<span class="dv">1</span><span class="sc">+</span>sel<span class="sc">$</span>DEP_CHEF_DIST)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span>sel<span class="sc">$</span>log_Dis_DEP</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>equip_acp</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>nameX<span class="ot">&lt;-</span><span class="st">"Distance au centre du département (racine carrée)"</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>nameY<span class="ot">&lt;-</span><span class="st">"Indice d'équipement (ACP)"</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>titre<span class="ot">&lt;-</span><span class="st">"Département de Borgou"</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>source<span class="ot">&lt;-</span><span class="st">"Source : RP2013, INS Bénin"</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X,Y ,</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">20</span>,</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="fl">0.4</span>,</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span>titre,</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">sub =</span> source,</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span>nameX,</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span>nameY)</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ X)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.7701 -0.5303 -0.1672  0.3236  2.6581 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.62010    0.05284   11.74   &lt;2e-16 ***
+X           -0.18617    0.01255  -14.83   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7372 on 4298 degrees of freedom
+Multiple R-squared:  0.0487,    Adjusted R-squared:  0.04847 
+F-statistic:   220 on 1 and 4298 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><strong>Commentaire</strong> : La relation obtenue demeure très significative (p&lt;0.001) mais son pouvoir explicatif demeure limité (r2 = 4.8%). On peut toutefois se demander si la difficulté ne vient pas du fait que l’on emploie séparément les deux distances.</li>
+</ul>
+</section>
+<section id="synthese" class="level3">
+<h3 class="anchored" data-anchor-id="synthese">SYNTHESE</h3>
+<section id="variables-endogènes" class="level4">
+<h4 class="anchored" data-anchor-id="variables-endogènes">Variables endogènes</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mod1<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="at">data=</span>sel, equip_acp<span class="sc">~</span>sexe<span class="sc">+</span>age5<span class="sc">+</span>etud5<span class="sc">+</span>statoc<span class="sc">+</span><span class="fu">log</span>(tailmen))</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1042,7 +1335,7 @@ Residual standard error: 0.6451 on 4287 degrees of freedom
 Multiple R-squared:  0.2736,    Adjusted R-squared:  0.2715 
 F-statistic: 134.5 on 12 and 4287 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod1, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type III tests)
 
@@ -1063,309 +1356,69 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><strong>Commentaire</strong> : la combinaison des déterminants sociaux aboutit à un modèle où toutes les variables apportent une contribution significative au modèle à l’exception du sexe. L’analyse de variance de type III (toutes choses égales par ailleurs) confirme le rôle central du niveau de diplôme du chef de ménage qui est de lon la variable qui contribue le plus à l’explication du niveau d’équipement. La taille du ménage joue également un rôle ainsi que le statut d’occupation qui montre un meilleur équipement des locataires.</li>
 </ul>
 </section>
-</section>
-<section id="c.-determinants-geographiques" class="level2">
-<h2 class="anchored" data-anchor-id="c.-determinants-geographiques">C. DETERMINANTS GEOGRAPHIQUES</h2>
-<p>Nous proposons maintenant une suite d’analyse portant sur les déterminants spatiaux en distinguant deux cas selon que la variable explicative est catégorielle ou selon qu’elle correspond à un effect continu d’éloignement.</p>
-<section id="déterminants-territoriaux" class="level3">
-<h3 class="anchored" data-anchor-id="déterminants-territoriaux">Déterminants territoriaux</h3>
-<p>Les <strong>déterminants territoriaux</strong> correspondent au cas où la variable explicative est <em>catégorielle</em> et où l’effet sur le ménage est lié à son <em>appartenance</em> à un type d’espace. Ceci nous permet d’identifier trois variables :</p>
-<ul>
-<li>URBA : l’arrondissement où le ménage est situé est-il déclaré “rural” ou “urbain” par l’état ?</li>
-<li>DEF_CHEF : l’arrondissement où le ménage est situé est-il le siège d’un chef-lieu de département</li>
-<li>COM_CHEF : l’arrondissement où le ménage est situé est-il le siège d’un chef-lieu de commune</li>
-</ul>
+<section id="variables-contextuelles-1" class="level4">
+<h4 class="anchored" data-anchor-id="variables-contextuelles-1">Variables contextuelles</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>map1<span class="ot">&lt;-</span>BEN1[BEN1<span class="sc">$</span>DEP_NAME<span class="sc">==</span><span class="st">"BORGOU"</span>,]</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>map2<span class="ot">&lt;-</span>BEN2[BEN2<span class="sc">$</span>DEP_NAME<span class="sc">==</span><span class="st">"BORGOU"</span>,]</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>map3<span class="ot">&lt;-</span>BEN3[BEN3<span class="sc">$</span>DEP_NAME<span class="sc">==</span><span class="st">"BORGOU"</span>,]</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>map3<span class="sc">$</span>URBA<span class="ot">&lt;-</span><span class="fu">as.factor</span>(map3<span class="sc">$</span>URBA)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(map3<span class="sc">$</span>URBA)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Rural"</span>,<span class="st">"Urbain"</span>)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>map2ctr<span class="ot">&lt;-</span><span class="fu">st_centroid</span>(map3[map3<span class="sc">$</span>COM_CHEF<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> map3<span class="sc">$</span>DEP_CHEF<span class="sc">==</span><span class="dv">0</span>,])</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>map1ctr<span class="ot">&lt;-</span><span class="fu">st_centroid</span>(map3[ map3<span class="sc">$</span>DEP_CHEF<span class="sc">==</span><span class="dv">1</span>,])</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map3,<span class="at">type=</span><span class="st">"typo"</span>,<span class="at">var=</span><span class="st">"URBA"</span>,<span class="at">pal=</span><span class="fu">c</span>(<span class="st">"lightyellow"</span>,<span class="st">"orange"</span>), <span class="at">border=</span><span class="st">"gray"</span>,<span class="at">lwd=</span><span class="fl">0.3</span>,<span class="at">leg_title =</span> <span class="st">"Type d'espace"</span>)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map2,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">col=</span><span class="cn">NA</span>, <span class="at">border=</span><span class="st">"black"</span>,<span class="at">lwd=</span><span class="dv">1</span>, <span class="at">add=</span>T)</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">col=</span><span class="cn">NA</span>, <span class="at">border=</span><span class="st">"black"</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">add=</span>T)</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map2ctr,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">col=</span><span class="st">"blue"</span>,<span class="at">add=</span>T)</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_label</span>(map2ctr,<span class="at">var =</span> <span class="st">"COM_NAME"</span>, <span class="at">col=</span><span class="st">"blue"</span>,<span class="at">pos=</span><span class="dv">1</span>)</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1ctr,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">pch=</span><span class="dv">15</span>,<span class="at">col=</span><span class="st">"red"</span>,<span class="at">add=</span>T, <span class="at">cex=</span><span class="dv">2</span>)</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_label</span>(map1ctr,<span class="at">var =</span> <span class="st">"COM_NAME"</span>, <span class="at">col=</span><span class="st">"red"</span>,<span class="at">pos=</span><span class="dv">1</span>,<span class="at">cex =</span> <span class="fl">1.2</span>)</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_layout</span>(<span class="at">title =</span> <span class="st">"Communes et arrondissements du Borgou"</span>,</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">credits =</span> <span class="st">"Source : EE CIST 2023"</span>,<span class="at">frame =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="urbainrural" class="level3">
-<h3 class="anchored" data-anchor-id="urbainrural">Urbain/Rural</h3>
-<p>L’attribution du caractère <em>urbain</em> ou <em>rural</em> à un arrondissement est le résultat d’une décision administrative de l’état. Elle se traduit dans le recensement de 2013 par l’ajout d’un code “5” en quatrième position du code de l’arrondissement. Il peut y avoir plusieurs arrondissements “urbains” à l’intérieur d’une même commune. Il peut également arriver que l’ensemble d’une commune soit composée d’arrondissements urbain comme c’est le cas pour Parakou. Les arrondissements urbains contigus portent en général le même nom suivi d’un numéro (PARAKOU 01, PARAKOU 02, PARAKOU 03, PARAKOU 04) et leur réunion forment implicitement une “ville” dans une logique administrative. Mais les contours de ces villes sont très différents de ceux que l’on pourrait obtenir par des sources non administratives telles que les images de télédétection utilisées par la base Africapolis où des données détaillées de mobilité à l’échelon indiviuel (non accessibles pour des raisons de secret statistique).</p>
-<p>Qu’elle reflète ou non une réalité morphologique (continuité du bâti) ou fonctionnelle (solde migratoire positif) n’est cependant pas ici la question principale. En revanche il peut être intéressant de se demander si les arrondissements urbains bénéficient d’un traitement privilégié de l’état, conduisant par exemple celui-ci à mettre en place des politiques publiques qui privilégient ces lieux en matière de déploiement d’infrastructures (écoles, lycées, cliniques, …) ce qui peut attirer des populations plus riches ou plus éduquées, dotées d’un meilleur équipement.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sel<span class="sc">$</span>URBA<span class="ot">&lt;-</span><span class="fu">as.factor</span>(sel<span class="sc">$</span>URBA)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sel<span class="sc">$</span>URBA)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Rural"</span>,<span class="st">"Urbain"</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span>sel<span class="sc">$</span>URBA</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>equip_acp</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>nameX<span class="ot">&lt;-</span><span class="st">"Catégorisation administrative de l'arrondissement"</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>nameY<span class="ot">&lt;-</span><span class="st">"Indice d'équipement (ACP)"</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>titre<span class="ot">&lt;-</span><span class="st">"Département de Borgou"</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>source<span class="ot">&lt;-</span><span class="st">"Source : RP2013, INS Bénin"</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X)</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Y<span class="sc">~</span>X, </span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span>titre,</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">sub =</span> source,</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span>nameX,</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span>nameY,</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span><span class="st">"lightyellow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mod2<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="at">data=</span>sel, equip_acp<span class="sc">~</span>URBA<span class="sc">+</span>CHEF<span class="sc">+</span>log_Dis_COM<span class="sc">+</span>log_Dis_DEP)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = Y ~ X)
+lm(formula = equip_acp ~ URBA + CHEF + log_Dis_COM + log_Dis_DEP, 
+    data = sel)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--1.4616 -0.4209 -0.1550  0.3096  2.5972 
+-2.0592 -0.4579 -0.1302  0.2908  2.6133 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.28426    0.01241  -22.91   &lt;2e-16 ***
-XUrbain      0.59587    0.02573   23.16   &lt;2e-16 ***
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                0.19995    0.15359   1.302 0.193045    
+URBAUrbain                 1.01876    0.06919  14.723  &lt; 2e-16 ***
+CHEFCentre de commune     -1.00552    0.09711 -10.354  &lt; 2e-16 ***
+CHEFCentre de département -0.56667    0.13705  -4.135 3.62e-05 ***
+log_Dis_COM               -0.11424    0.03072  -3.718 0.000203 ***
+log_Dis_DEP               -0.02400    0.02131  -1.126 0.260113    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.7127 on 4298 degrees of freedom
-Multiple R-squared:  0.111, Adjusted R-squared:  0.1108 
-F-statistic: 536.4 on 1 and 4298 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.6951 on 4294 degrees of freedom
+Multiple R-squared:  0.1551,    Adjusted R-squared:  0.1541 
+F-statistic: 157.6 on 5 and 4294 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-</div>
-<ul>
-<li><strong>Commentaire</strong> : La relation obtenue est très significative (p&lt;0.001) et son pouvoir explicatif est important (r2 = 11%).</li>
-</ul>
-</section>
-<section id="fonction-administrative" class="level3">
-<h3 class="anchored" data-anchor-id="fonction-administrative">Fonction administrative</h3>
-<p>Dans une logique légèrement différente, on peut se demander si les arrondissements qui remplissent des fonction de centralité administrative bénéficient d’un traitement privilégié de la part de l’état. Dans le cas du Bénin, tous les arrondissements qui sont centre de commune sont automatiquement déclarés urbains. Mais l’inverse n’est pas vrai et des arrondissements urbains peuvent ne pas être le siège d’un chef-lieu de commune ou de département.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>sel<span class="sc">$</span>CHEF<span class="ot">&lt;-</span><span class="fu">as.factor</span>(sel<span class="sc">$</span>COM_CHEF<span class="sc">+</span>sel<span class="sc">$</span>DEP_CHEF)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sel<span class="sc">$</span>CHEF)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Aucune"</span>,<span class="st">"Centre de commune"</span>, <span class="st">"Centre de département"</span>)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span>sel<span class="sc">$</span>CHEF</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>equip_acp</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>nameX<span class="ot">&lt;-</span><span class="st">"Fonction administraive"</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>nameY<span class="ot">&lt;-</span><span class="st">"Indice d'équipement (ACP)"</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>titre<span class="ot">&lt;-</span><span class="st">"Département de Borgou"</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>source<span class="ot">&lt;-</span><span class="st">"Source : RP2013, INS Bénin"</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X)</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Y<span class="sc">~</span>X, </span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span>titre,</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">sub =</span> source,</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span>nameX,</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span>nameY,</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span><span class="st">"lightyellow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod2, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Y ~ X)
+<pre><code>Anova Table (Type III tests)
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.8020 -0.4863 -0.1964  0.2591  2.9371 
-
-Coefficients:
-                       Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)            -0.21880    0.01244  -17.58   &lt;2e-16 ***
-XCentre de commune      0.32471    0.03048   10.65   &lt;2e-16 ***
-XCentre de département  0.87083    0.07467   11.66   &lt;2e-16 ***
+Response: equip_acp
+             Sum Sq   Df  F value    Pr(&gt;F)    
+(Intercept)    0.82    1   1.6948  0.193045    
+URBA         104.74    1 216.7735 &lt; 2.2e-16 ***
+CHEF          52.69    2  54.5220 &lt; 2.2e-16 ***
+log_Dis_COM    6.68    1  13.8266  0.000203 ***
+log_Dis_DEP    0.61    1   1.2685  0.260113    
+Residuals   2074.86 4294                       
 ---
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.7362 on 4297 degrees of freedom
-Multiple R-squared:  0.05158,   Adjusted R-squared:  0.05113 
-F-statistic: 116.8 on 2 and 4297 DF,  p-value: &lt; 2.2e-16</code></pre>
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <ul>
-<li><strong>Commentaire</strong> : La relation obtenue est très significative (p&lt;0.001) même si son pouvoir explicatif est plus limité (r2 = 5%) que celui de l’opposition urbain-rural . On note un net accroissement du niveau d’équipement des ménages avec le niveau administraif de l’arrondissement où ils sont localisés (+0.32 pour un chef lieu de commune et +0.87 pour un chef lieu de département)</li>
+<li><strong>Commentaire : </strong> le mélange des variables contextuelles est difficile à interpréter en raison ds fortes redondances qu’il y a entre certaines variables explicatives. En effet la variable URBA est corrélée avec le fait d’être ou pas un centre de commune ou de département. Tandis que la distance à la commune ou au chef lieu est corrélée avec le fait d’être ou non un chef-lieu de commune ou de district. Il faudra donc n’en retenir qu’une partie par la suite, mais le point intéressant est le pouvoir explicatif élevé du modèle (r2 = 15.4%) alors même qu’aucune caractéristique endogène des ménages n’est prise en compte. Dit autrement, la simple connaissance de l’arrondissement où est localisé un ménage permet de prédire la probabilité que son niveau d’équipement soit faible ou élevée.</li>
 </ul>
 </section>
-<section id="déterminants-spatiaux" class="level3">
-<h3 class="anchored" data-anchor-id="déterminants-spatiaux">Déterminants spatiaux</h3>
-<p>Les <strong>déterminants spatiaux</strong> correspondent au cas où la variable explicative est de type <em>quantitatif continu</em> et où l’effet sur le ménage est lié à son <em>accessibilité</em> à une ressource c’est-à-dire à l’influence de la <em>distance</em>.</p>
+<section id="variables-endogènes-et-contextuelles" class="level4">
+<h4 class="anchored" data-anchor-id="variables-endogènes-et-contextuelles">Variables endogènes et contextuelles</h4>
+<p>On construit un modèle final reprenant l’ensemble des variables endogènes mais en leur ajoutant les deux mesures d’accessibilité a au centre de commune ou de district.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>mypal<span class="ot">&lt;-</span><span class="fu">brewer.pal</span>(<span class="dv">7</span>,<span class="st">"RdYlGn"</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Distance à la commune</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>mybreaks<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">80</span>, <span class="dv">160</span>, <span class="dv">320</span>)</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map3,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">type=</span><span class="st">"choro"</span>,</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">var=</span><span class="st">"COM_CHEF_DIST"</span>,</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">pal=</span>mypal,</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks=</span>mybreaks,</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">border=</span><span class="st">"gray"</span>,</span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="fl">0.3</span>,</span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Distance(km)"</span>,</span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_val_rnd =</span> <span class="dv">0</span>)</span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map2,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">col=</span><span class="cn">NA</span>, <span class="at">border=</span><span class="st">"black"</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">add=</span>T)</span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">col=</span><span class="cn">NA</span>, <span class="at">border=</span><span class="st">"black"</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">add=</span>T)</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map2ctr,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">col=</span><span class="st">"black"</span>,<span class="at">add=</span>T)</span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_label</span>(map2ctr,<span class="at">var =</span> <span class="st">"COM_NAME"</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pos=</span><span class="dv">1</span>)</span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1ctr,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">pch=</span><span class="dv">20</span>,<span class="at">col=</span><span class="st">"black"</span>,<span class="at">add=</span>T, <span class="at">cex=</span><span class="dv">1</span>)</span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_label</span>(map1ctr,<span class="at">var =</span> <span class="st">"COM_NAME"</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pos=</span><span class="dv">1</span>)</span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_layout</span>(<span class="at">title =</span> <span class="st">"Accessibilité Communale"</span>,</span>
-<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">credits =</span> <span class="st">"Source : EE CIST 2023"</span>,<span class="at">frame =</span> T)</span>
-<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Distance au dept</span></span>
-<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>mybreaks<span class="ot">=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">40</span>,<span class="dv">80</span>, <span class="dv">160</span>, <span class="dv">320</span>)</span>
-<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map3,</span>
-<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">type=</span><span class="st">"choro"</span>,</span>
-<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">var=</span><span class="st">"DEP_CHEF_DIST"</span>,</span>
-<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">pal=</span>mypal,</span>
-<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">breaks=</span>mybreaks,</span>
-<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">border=</span><span class="st">"gray"</span>,</span>
-<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">1</span>,</span>
-<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_title =</span> <span class="st">"Distance (km)"</span>,</span>
-<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">leg_val_rnd =</span> <span class="dv">0</span>)</span>
-<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a><span class="co">#mf_map(map2,type="base",col=NA, border="black",lwd=1, add=T)</span></span>
-<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">col=</span><span class="cn">NA</span>, <span class="at">border=</span><span class="st">"black"</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">add=</span>T)</span>
-<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(map1ctr,<span class="at">type=</span><span class="st">"base"</span>,<span class="at">pch=</span><span class="dv">15</span>,<span class="at">col=</span><span class="st">"black"</span>,<span class="at">add=</span>T, <span class="at">cex=</span><span class="dv">1</span>)</span>
-<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_label</span>(map1ctr,<span class="at">var =</span> <span class="st">"COM_NAME"</span>, <span class="at">col=</span><span class="st">"black"</span>,<span class="at">pos=</span><span class="dv">1</span>)</span>
-<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_layout</span>(<span class="at">title =</span> <span class="st">"Accessibilité Départementale"</span>,</span>
-<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>          <span class="at">credits =</span> <span class="st">"Source : EE CIST 2023"</span>,<span class="at">frame =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="768"></p>
-</div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(map3<span class="sc">$</span>NAT_CHEF_DIST)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  278.9   351.1   385.4   387.5   429.0   481.7 </code></pre>
-</div>
-</div>
-</section>
-<section id="accessibilité-communale" class="level3">
-<h3 class="anchored" data-anchor-id="accessibilité-communale">Accessibilité communale</h3>
-<p>On utilise une fonction puissance dela distance en ajoutant une valeur minimale de 1km correspondant à l’acccessibilité interne du centre.</p>
-<p><span class="math inline">\(f(D_{ij})=\alpha\times (1+D_{ij})^{-\beta}\)</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>sel<span class="sc">$</span>log_Dis_COM<span class="ot">&lt;-</span><span class="fu">log</span>(<span class="dv">1</span><span class="sc">+</span>sel<span class="sc">$</span>COM_CHEF_DIST)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span>sel<span class="sc">$</span>log_Dis_COM</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>equip_acp</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>nameX<span class="ot">&lt;-</span><span class="st">"Distance au centre de la commune (racine carrée)"</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>nameY<span class="ot">&lt;-</span><span class="st">"Indice d'équipement (ACP)"</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>titre<span class="ot">&lt;-</span><span class="st">"Département de Borgou"</span></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>source<span class="ot">&lt;-</span><span class="st">"Source : RP2013, INS Bénin"</span></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X)</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X,Y ,</span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">20</span>,</span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="fl">0.4</span>,</span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span>titre,</span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">sub =</span> source,</span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span>nameX,</span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span>nameY)</span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>mod3<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="at">data=</span>sel, equip_acp<span class="sc">~</span>sexe<span class="sc">+</span>age5<span class="sc">+</span>etud5<span class="sc">+</span>statoc<span class="sc">+</span><span class="fu">log</span>(tailmen)<span class="sc">+</span>log_Dis_COM<span class="sc">+</span>log_Dis_DEP)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = Y ~ X)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.3740 -0.5058 -0.1704  0.2952  2.8977 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.224016   0.025007   8.958   &lt;2e-16 ***
-X           -0.137577   0.008324 -16.527   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.733 on 4298 degrees of freedom
-Multiple R-squared:  0.05975,   Adjusted R-squared:  0.05953 
-F-statistic: 273.1 on 1 and 4298 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-</div>
-<ul>
-<li><strong>Commentaire</strong> : La relation obtenue est très significative (p&lt;0.001) même si son pouvoir explicatif est plus limité (r2 = 5.9%). Ceci s’explique tout d’abord par l’incertitude de mesure : la distance utilisée est l’éloignement entre les arrondissements et non pas entre l’individu et le centre de sa commune. Mais aussi par la diversité des ménages en matière d’équipement quelle que soit la distance au centre.</li>
-</ul>
-</section>
-<section id="accessibilité-départementale" class="level3">
-<h3 class="anchored" data-anchor-id="accessibilité-départementale">Accessibilité départementale</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>sel<span class="sc">$</span>log_Dis_DEP<span class="ot">&lt;-</span><span class="fu">log</span>(<span class="dv">1</span><span class="sc">+</span>sel<span class="sc">$</span>DEP_CHEF_DIST)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span>sel<span class="sc">$</span>log_Dis_DEP</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>sel<span class="sc">$</span>equip_acp</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>nameX<span class="ot">&lt;-</span><span class="st">"Distance au centre du département (racine carrée)"</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>nameY<span class="ot">&lt;-</span><span class="st">"Indice d'équipement (ACP)"</span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>titre<span class="ot">&lt;-</span><span class="st">"Département de Borgou"</span></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>source<span class="ot">&lt;-</span><span class="st">"Source : RP2013, INS Bénin"</span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(Y<span class="sc">~</span>X)</span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X,Y ,</span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">20</span>,</span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex=</span><span class="fl">0.4</span>,</span>
-<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span>titre,</span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">sub =</span> source,</span>
-<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span>nameX,</span>
-<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span>nameY)</span>
-<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="MOD1_Yquanti_005_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = Y ~ X)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--1.7701 -0.5303 -0.1672  0.3236  2.6581 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.62010    0.05284   11.74   &lt;2e-16 ***
-X           -0.18617    0.01255  -14.83   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.7372 on 4298 degrees of freedom
-Multiple R-squared:  0.0487,    Adjusted R-squared:  0.04847 
-F-statistic:   220 on 1 and 4298 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-</div>
-<ul>
-<li><strong>Commentaire</strong> : La relation obtenue demeure très significative (p&lt;0.001) mais son pouvoir explicatif demeure limité (r2 = 4.8%). On peut toutefois se demander si la difficulté ne vient pas du fait que l’on emploie séparément les deux distances.</li>
-</ul>
-<section id="synthèse-1" class="level4">
-<h4 class="anchored" data-anchor-id="synthèse-1">Synthèse</h4>
-<p>On construit un modèle associant nos variables d’accessibilité géographiques aux variables sociales, sans ajouter les variables relatif à l’urbanisation et au statut administratif des chef-lieux pour éviter les multicolinéarités.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="at">data=</span>sel, equip_acp<span class="sc">~</span>log_Dis_COM<span class="sc">+</span>log_Dis_DEP<span class="sc">+</span><span class="fu">log</span>(tailmen)<span class="sc">+</span>sexe<span class="sc">+</span>etud5<span class="sc">+</span>age5<span class="sc">+</span>statoc)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = equip_acp ~ log_Dis_COM + log_Dis_DEP + log(tailmen) + 
-    sexe + etud5 + age5 + statoc, data = sel)
+lm(formula = equip_acp ~ sexe + age5 + etud5 + statoc + log(tailmen) + 
+    log_Dis_COM + log_Dis_DEP, data = sel)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -1374,20 +1427,20 @@ Residuals:
 Coefficients:
                    Estimate Std. Error t value Pr(&gt;|t|)    
 (Intercept)       -0.306321   0.066409  -4.613 4.09e-06 ***
-log_Dis_COM       -0.074718   0.007444 -10.037  &lt; 2e-16 ***
-log_Dis_DEP       -0.096590   0.011519  -8.386  &lt; 2e-16 ***
-log(tailmen)       0.232541   0.018411  12.631  &lt; 2e-16 ***
 sexeF             -0.033727   0.044828  -0.752  0.45188    
-etud52.Primaire    0.458405   0.032875  13.944  &lt; 2e-16 ***
-etud53.Secondaire  0.881916   0.036459  24.189  &lt; 2e-16 ***
-etud54.Supérieur   1.383848   0.075567  18.313  &lt; 2e-16 ***
 age530-39          0.098110   0.031512   3.113  0.00186 ** 
 age540-49          0.091965   0.033702   2.729  0.00638 ** 
 age550-59          0.114730   0.037122   3.091  0.00201 ** 
 age560+            0.104669   0.038229   2.738  0.00621 ** 
+etud52.Primaire    0.458405   0.032875  13.944  &lt; 2e-16 ***
+etud53.Secondaire  0.881916   0.036459  24.189  &lt; 2e-16 ***
+etud54.Supérieur   1.383848   0.075567  18.313  &lt; 2e-16 ***
 statocPropFam      0.035043   0.020598   1.701  0.08897 .  
 statocAutre       -0.004955   0.054330  -0.091  0.92733    
 statocLocat        0.291012   0.040861   7.122 1.24e-12 ***
+log(tailmen)       0.232541   0.018411  12.631  &lt; 2e-16 ***
+log_Dis_COM       -0.074718   0.007444 -10.037  &lt; 2e-16 ***
+log_Dis_DEP       -0.096590   0.011519  -8.386  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -1395,76 +1448,87 @@ Residual standard error: 0.6323 on 4285 degrees of freedom
 Multiple R-squared:  0.3024,    Adjusted R-squared:  0.3001 
 F-statistic: 132.7 on 14 and 4285 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod3, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type III tests)
 
 Response: equip_acp
               Sum Sq   Df  F value    Pr(&gt;F)    
 (Intercept)     8.51    1  21.2764 4.092e-06 ***
+sexe            0.23    1   0.5660   0.45188    
+age5            4.94    4   3.0873   0.01503 *  
+etud5         359.98    3 300.1273 &lt; 2.2e-16 ***
+statoc         20.78    3  17.3252 3.523e-11 ***
+log(tailmen)   63.78    1 159.5393 &lt; 2.2e-16 ***
 log_Dis_COM    40.28    1 100.7420 &lt; 2.2e-16 ***
 log_Dis_DEP    28.11    1  70.3167 &lt; 2.2e-16 ***
-log(tailmen)   63.78    1 159.5393 &lt; 2.2e-16 ***
-sexe            0.23    1   0.5660   0.45188    
-etud5         359.98    3 300.1273 &lt; 2.2e-16 ***
-age5            4.94    4   3.0873   0.01503 *  
-statoc         20.78    3  17.3252 3.523e-11 ***
 Residuals    1713.17 4285                       
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <ul>
-<li><strong>Commentaire</strong> : Par rapport au modèle initial d’explication des comportements individuels par les attributs des ménages, le gain est assez faible en terme de qualité d’ajustement (passage de 27% à 30%). C’est plutôt au niveau de l’interprétation que le nouveau modèle est intéressant car il révèle que le niveau d’étude se combine étroitement dans l’explication avec l’accessibilité aux centres de commune ou de districts. Ce qui laisse soupçonner une interaction entre les deux facteurs</li>
+<li><strong>Commentaire</strong> : Par rapport au modèle purement endogène de modélistion des comportements individuels par les attributs des ménages, le gain est assez faible en terme de qualité d’ajustement (passage de 27% à 30%). C’est plutôt au niveau de l’interprétation que le nouveau modèle est intéressant car il révèle que le niveau d’étude se combine étroitement dans l’explication avec l’accessibilité aux centres de commune ou de districts. Ce qui laisse soupçonner une interaction entre les deux facteurs</li>
+</ul>
+</section>
+</section>
+<section id="modèle-final" class="level3">
+<h3 class="anchored" data-anchor-id="modèle-final">Modèle final</h3>
+<p>Pour aboutir à un modèle final qui soit le plus simple possible, on ne retient que trois variables dont l’interprétation sera plus facile et que l’on peut associer à des hypothèses empiriquement vérifiables :</p>
+<ul>
+<li>H1 : Plus un ménage comporte de personnes, plus il a de chances de posséder un niveau d’équipement élevé. Mais l’accroissement de la relation n’est pas linéaire et suit une loi logarithmique.</li>
+<li>H2 : Plus le chef de ménage dispose d’un niveau d’éducation élevé, plus son ménage disposera d’un équipement élevé. Cette relation s’explique par le jeu combiné du capital économique et scolaire (Bourdieu) qui rend possible (capital économique) et désirable (capital scolaire) la possession d’équipements diversifiés.</li>
+<li>H3 : Plus un ménage est éloigné du centre de son département, moins il a de chances de pouvoir accéder à certains équipements en raison de déficits d’infrastructure (e.g.&nbsp;électricité) ou de difficulté à se les procurer.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>mod<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="at">data=</span>sel, equip_acp<span class="sc">~</span>etud5<span class="sc">+</span>log_Dis_COM<span class="sc">+</span>log_Dis_COM<span class="sc">:</span>etud5)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>mod4<span class="ot">&lt;-</span><span class="fu">lm</span>(<span class="at">data=</span>sel, equip_acp<span class="sc">~</span><span class="fu">log</span>(tailmen)<span class="sc">+</span>etud5<span class="sc">+</span>log_Dis_DEP)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = equip_acp ~ etud5 + log_Dis_COM + log_Dis_COM:etud5, 
+lm(formula = equip_acp ~ log(tailmen) + etud5 + log_Dis_DEP, 
     data = sel)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--2.38923 -0.43717 -0.09121  0.30244  2.50125 
+    Min      1Q  Median      3Q     Max 
+-2.2606 -0.4323 -0.1118  0.3376  2.6442 
 
 Coefficients:
-                               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)                   -0.111465   0.027780  -4.012 6.11e-05 ***
-etud52.Primaire                0.606842   0.066169   9.171  &lt; 2e-16 ***
-etud53.Secondaire              1.032524   0.059007  17.498  &lt; 2e-16 ***
-etud54.Supérieur               1.350740   0.126259  10.698  &lt; 2e-16 ***
-log_Dis_COM                   -0.073067   0.009011  -8.108 6.64e-16 ***
-etud52.Primaire:log_Dis_COM   -0.046371   0.022486  -2.062   0.0392 *  
-etud53.Secondaire:log_Dis_COM -0.050726   0.022867  -2.218   0.0266 *  
-etud54.Supérieur:log_Dis_COM   0.055276   0.052085   1.061   0.2886    
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       -0.30691    0.05673   -5.41 6.64e-08 ***
+log(tailmen)       0.22826    0.01689   13.51  &lt; 2e-16 ***
+etud52.Primaire    0.49041    0.03333   14.71  &lt; 2e-16 ***
+etud53.Secondaire  1.00855    0.03512   28.72  &lt; 2e-16 ***
+etud54.Supérieur   1.54868    0.07532   20.56  &lt; 2e-16 ***
+log_Dis_DEP       -0.11718    0.01151  -10.18  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.6536 on 4292 degrees of freedom
-Multiple R-squared:  0.2533,    Adjusted R-squared:  0.2521 
-F-statistic:   208 on 7 and 4292 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.6452 on 4294 degrees of freedom
+Multiple R-squared:  0.2721,    Adjusted R-squared:  0.2713 
+F-statistic:   321 on 5 and 4294 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod4, <span class="at">type=</span><span class="st">"III"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type III tests)
 
 Response: equip_acp
-                   Sum Sq   Df  F value    Pr(&gt;F)    
-(Intercept)          6.88    1  16.0990 6.114e-05 ***
-etud5              176.38    3 137.6214 &lt; 2.2e-16 ***
-log_Dis_COM         28.09    1  65.7441 6.638e-16 ***
-etud5:log_Dis_COM    4.13    3   3.2236   0.02168 *  
-Residuals         1833.63 4292                       
+              Sum Sq   Df F value    Pr(&gt;F)    
+(Intercept)    12.18    1  29.271 6.637e-08 ***
+log(tailmen)   76.01    1 182.602 &lt; 2.2e-16 ***
+etud5         521.10    3 417.272 &lt; 2.2e-16 ***
+log_Dis_DEP    43.16    1 103.686 &lt; 2.2e-16 ***
+Residuals    1787.50 4294                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+<ul>
+<li><strong>Commentaire</strong>: notre modèle final met en valeur le rôle décisif du niveau d’étude (proxy du capital scolaire et économique) mais il confirme l’effet positif de la taille du ménage et l’effet négatif de la distance au centre de commandement du département. Son équation final peut s’écrire :</li>
+</ul>
+<p><span class="math inline">\(I_{equipt} = -0.31 + \alpha_{Niv.scolaire} + 0.22\times log({taille du ménage}) -0.11\times log({accessibilité})\)</span></p>
 
 
-</section>
 </section>
 </section>
 
