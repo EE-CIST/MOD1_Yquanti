@@ -122,8 +122,6 @@ mf_map(BEN1, type="typo",var="DEP_NAME")
 mf_map(BEN3, type="base",col=NA,border="white",lwd=0.1,add=T)
 mf_map(BEN2, type="base",col=NA,border="black",lwd=0.5,add=T)
 mf_map(BEN1, type="base",col=NA,border="black",lwd=2,add=T)
-mf_layout(title = "Carte administrative du Bénin en 2013",
-          credits = "Source : EE CIST 2023",frame = T)
 
 ```
 
@@ -131,32 +129,120 @@ mf_layout(title = "Carte administrative du Bénin en 2013",
 
 
 
-## B. ANALYSE DU BENIN
+## B. ANALYSE DU BORGOU
 
-On choisit de retenir l'ensemble des ménages de l'échantillon et de prendre comme variable dépendante (Y) le nombre total d'équipements dont ils disposent. La valeur minimale est de 0 et la valeur maximale de 24. La distribution est fortement dissymétrique à gauche ce qui est logique 
 
+
+
+On choisit à titre d'exemple de limiter l'analyse au département de Borgou et d'étudier les facteurs de variation de l'indice d'équipement des ménages obtenu par analyse factorielle (*equip_acp*)
 
 ```{r}
-sel<-don
-sel$equip<-sel$equip_tot
-hist(sel$equip, 
-     breaks=seq(0,24,1),
-     col="lightyellow",
-     probability = T,
-     main="Equipements des ménages du Bénin en 2013",
-     sub = "Source : RP2013, INS Bénin, échantillon stratifié par arrondissements",
-     xlab="Nombre d'équipements",
-     ylab= "Probabilité"
-     )
-summary(sel$equip)
+sel<-don[don$DEP_NAME=="BORGOU",]
 ```
-- **Commentaire** : le nombre moyen d'équipement des ménages est environ de 4 mais la médiane est de 3 et le mode de 0. La distribution est donc très fortement dissymétrique à gauche avec un grand nombre de ménages n'ayant que des équipements de base (radio, bicyclette, téléphone mobile,) et une très petite minorité accédant à tous les équipements y compris les plus rares et les plus coûteux (connexion internet, ordinateur, ...)
 
 
+### VARIABLES ENDOGENES
 
-### STRUCTURE DU MENAGE
+On peut modéliser tout d'abord l'effet des variables relatives au ménage ou au chef de ménage
 
-On peut modéliser tout d'abord l'effet de variables structurelles liées à la taille du ménage et au statut d'occupation du logement. 
+
+#### Sexe
+
+```{r}
+X<-sel$sexe
+Y<-sel$equip_acp
+nameX<-"Sexe"
+nameY<-"Indice d'équipement (ACP)"
+titre<-"Département de Borgou"
+source<-"Source : RP2013, INS Bénin, échantillon aléatoire de 100 ménages"
+mod<-lm(Y~X)
+
+boxplot(Y~X, 
+        main=titre,
+        sub = source,
+        xlab=nameX,
+        ylab=nameY,
+        col="lightyellow")
+summary(mod)
+```
+
+- **Commentaire** : Aucun effet significatif (p >0.3)
+
+
+#### Statut d'occupation
+
+```{r}
+X<-sel$statoc
+Y<-sel$equip_acp
+nameX<-"Statut d'occupation"
+nameY<-"Indice d'équipement (ACP)"
+titre<-"Département de Borgou"
+source<-"Source : RP2013, INS Bénin, échantillon aléatoire de 100 ménages"
+mod<-lm(Y~X)
+
+boxplot(Y~X, 
+        main=titre,
+        sub = source,
+        xlab=nameX,
+        ylab=nameY,
+        col="lightyellow")
+summary(mod)
+
+
+```
+
+- **Commentaire** : Avantage significatif des locataires (p <0.001) mais cela révèle sans doute un effet urbain-rural. 
+
+
+#### Classe d'âge
+
+```{r}
+sel$age5<-cut(sel$age, breaks=c(18,29,39,49,59,100),include.lowest = T)
+levels(sel$age5)<-c("18-29", "30-39","40-49","50-59","60+")
+X<-sel$age5
+Y<-sel$equip_acp
+nameX<-"Classe d'âge"
+nameY<-"Indice d'équipement (ACP)"
+titre<-"Département de Borgou"
+source<-"Source : RP2013, INS Bénin, échantillon aléatoire de 100 ménages"
+mod<-lm(Y~X)
+
+boxplot(Y~X, 
+        main=titre,
+        sub = source,
+        xlab=nameX,
+        ylab=nameY,
+        col="lightyellow")
+summary(mod)
+
+
+```
+
+- **Commentaire** : Relation significative mais à très faible pouvoir explicatif. Effet non linéaire avec maximum d'équipement pour la classe d'âge des 40-49 ans. 
+
+
+#### Niveau d'étude
+
+```{r}
+X<-sel$etud5
+Y<-sel$equip_acp
+nameX<-"Niveau d'étude"
+nameY<-"Indice d'équipement (ACP)"
+titre<-"Département de Borgou"
+source<-"Source : RP2013, INS Bénin, échantillon aléatoire de 100 ménages"
+mod<-lm(Y~X)
+
+boxplot(Y~X, 
+        main=titre,
+        sub = source,
+        xlab=nameX,
+        ylab=nameY,
+        col="lightyellow")
+summary(mod)
+
+```
+
+- **Commentaire** : Relation très significative et à très fort pouvoir explicatif comparée aux précédentes (r2 = 23%). Il s'agit du facteur le plus déterminant parmi ceux qui ont été retenus
 
 
 #### Taille du ménage
@@ -164,11 +250,11 @@ On peut modéliser tout d'abord l'effet de variables structurelles liées à la 
 
 ```{r}
 X<-log(sel$tailmen)
-Y<-sel$equip
+Y<-sel$equip_acp
 nameX<-"Taille du ménage (log)"
-nameY<-"Nombre d'équipements (0 à 24) "
-titre<-"Equipement des ménages du Bénin en 2013"
-source<-"Source : RP2013, INS Bénin"
+nameY<-"Indice d'équipement (ACP)"
+titre<-"Département de Borgou"
+source<-"Source : RP2013, INS Bénin, échantillon aléatoire de 100 ménages"
 mod<-lm(Y~X)
 
 plot(X,Y ,
@@ -181,123 +267,15 @@ summary(mod)
 
 ```
 
-- **Commentaire** : Relation significative mais à très faible pouvoir explicatif. Le nombre d'équipement augmente de 0.7 chaque fois que le logarithme du nombre de personnes présentes augmente de 1. Un ménage de 10 personnes devrait donc avoir 2.8 + 0.7*log(10) = 4.4 équipements. 
-
-```{r}
-2.8+0.7*log(10)
-```
-
-
-#### Statut d'occupation
-
-```{r}
-X<-sel$statoc
-Y<-sel$equip
-nameX<-"Statut d'occupation"
-nameY<-"Nombre d'équipements (0 à 24) "
-titre<-"Equipement des ménages du Bénin en 2013"
-source<-"Source : RP2013, INS Bénin"
-mod<-lm(Y~X)
-
-boxplot(Y~X, 
-        main=titre,
-        sub = source,
-        xlab=nameX,
-        ylab=nameY,
-        col="lightyellow")
-summary(mod)
-
-
-```
-
-- **Commentaire** : Avantage significatif des locataires (p <0.001) qui ont en moyenne 2 équipements de plus que les propriétaires individuels. Mais cela révèle sans doute indirectement un effet urbain-rural. 
-
-
-
-### ATTRIBUTS DU CHEF DE MENAGE
-
-Une seconde série de caractéristique concernant les attributs du chef de ménage permet de tester d'autres reltions.
-
-#### Sexe
-
-```{r}
-X<-sel$sexe
-Y<-sel$equip
-nameX<-"Sexe"
-nameY<-"Nombre d'équipements (0 à 24) "
-titre<-"Equipement des ménages du Bénin en 2013"
-source<-"Source : RP2013, INS Bénin"
-mod<-lm(Y~X)
-
-boxplot(Y~X, 
-        main=titre,
-        sub = source,
-        xlab=nameX,
-        ylab=nameY,
-        col="lightyellow")
-summary(mod)
-```
-
-- **Commentaire** : Les ménages dont le chef est une femme ont en moyenne 1.7 équipements de moins que les ménages dont le chef est un homme (4.3). La différence est significative. 
+- **Commentaire** : Relation significative mais à très faible pouvoir explicatif
 
 
 
 
-#### Classe d'âge
 
-```{r}
-sel$age5<-cut(sel$age, breaks=c(18,29,39,49,59,100),include.lowest = T)
-levels(sel$age5)<-c("18-29", "30-39","40-49","50-59","60+")
-X<-sel$age5
-Y<-sel$equip
-nameX<-"Classe d'âge"
-nameY<-"Nombre d'équipements (0 à 24) "
-titre<-"Equipement des ménages du Bénin en 2013"
-source<-"Source : RP2013, INS Bénin"
-mod<-lm(Y~X)
+### VARIABLES CONTEXTUELLES
 
-boxplot(Y~X, 
-        main=titre,
-        sub = source,
-        xlab=nameX,
-        ylab=nameY,
-        col="lightyellow")
-summary(mod)
-
-
-```
-
-- **Commentaire** : Relation significative mais à très faible pouvoir explicatif. Elle met en valeur le fait que les ménages les moins bien équipés sont ceux dont le chef est très jeune (moins de 30 ans) ou très âgé (plus de 60 ans). 
-
-
-#### Niveau d'étude
-
-```{r}
-X<-sel$etud5
-Y<-sel$equip
-nameX<-"Niveau d'étude"
-nameY<-"Nombre d'équipements (0 à 24) "
-titre<-"Equipement des ménages du Bénin en 2013"
-source<-"Source : RP2013, INS Bénin"
-mod<-lm(Y~X)
-
-boxplot(Y~X, 
-        main=titre,
-        sub = source,
-        xlab=nameX,
-        ylab=nameY,
-        col="lightyellow")
-summary(mod)
-
-```
-
-- **Commentaire** : Relation très significative et à très fort pouvoir explicatif comparée aux précédentes (r2 = 19.7%). Il s'agit du facteur le plus déterminant parmi ceux qui ont été retenus. Le niveau d'étude sert évidemment de proxy à d'autres variables telles que le revenu, la situation professionnelle, etc. 
-
-
-
-### POSISTION GEOGRAPHIQUE
-
-Nous proposons maintenant une suite d'analyse portant sur les déterminants géographiques en distinguant deux cas selon que la variable explicative est catégorielle ou selon qu'elle correspond à un effect continu d'éloignement.
+Nous proposons maintenant une suite d'analyse portant sur les déterminants spatiaux en distinguant deux cas selon que la variable explicative est catégorielle ou selon qu'elle correspond à un effect continu d'éloignement.
 
 #### Déterminants territoriaux
 
@@ -307,11 +285,10 @@ Les **déterminants territoriaux** correspondent au cas où la variable explicat
 - DEF_CHEF : l'arrondissement où le ménage est situé est-il le siège d'un chef-lieu de département
 - COM_CHEF : l'arrondissement où le ménage est situé est-il le siège d'un chef-lieu de commune
 
-```{r,fig.height=8,fig.width=6}
-map0<-BEN0
-map1<-BEN1
-map2<-BEN2
-map3<-BEN3
+```{r}
+map1<-BEN1[BEN1$DEP_NAME=="BORGOU",]
+map2<-BEN2[BEN2$DEP_NAME=="BORGOU",]
+map3<-BEN3[BEN3$DEP_NAME=="BORGOU",]
 map3$URBA<-as.factor(map3$URBA)
 levels(map3$URBA)<-c("Rural","Urbain")
 map2ctr<-st_centroid(map3[map3$COM_CHEF==1 & map3$DEP_CHEF==0,])
@@ -320,10 +297,10 @@ map1ctr<-st_centroid(map3[ map3$DEP_CHEF==1,])
 mf_map(map3,type="typo",var="URBA",pal=c("lightyellow","orange"), border="gray",lwd=0.3,leg_title = "Type d'espace")
 mf_map(map2,type="base",col=NA, border="black",lwd=1, add=T)
 mf_map(map1,type="base",col=NA, border="black",lwd=2, add=T)
-mf_map(map2ctr,type="base",pch=20,col="blue",add=T,cex=0.4)
-#mf_label(map2ctr,var = "COM_NAME", col="blue",pos=1, cex=0.4, overlap=F)
-mf_map(map1ctr,type="base",pch=15,col="red",add=T, cex=0.6)
-mf_label(map1ctr,var = "COM_NAME", col="red",pos=1,cex = 0.5,overlap = F)
+mf_map(map2ctr,type="base",pch=20,col="blue",add=T)
+mf_label(map2ctr,var = "COM_NAME", col="blue",pos=1)
+mf_map(map1ctr,type="base",pch=15,col="red",add=T, cex=2)
+mf_label(map1ctr,var = "COM_NAME", col="red",pos=1,cex = 1.2)
 mf_layout(title = "Communes et arrondissements du Borgou",
           credits = "Source : EE CIST 2023",frame = T)
 ```
@@ -340,10 +317,10 @@ Qu'elle reflète ou non une réalité morphologique (continuité du bâti) ou fo
 sel$URBA<-as.factor(sel$URBA)
 levels(sel$URBA)<-c("Rural","Urbain")
 X<-sel$URBA
-Y<-sel$equip
+Y<-sel$equip_acp
 nameX<-"Catégorisation administrative de l'arrondissement"
-nameY<-"Nombre d'équipements (0 à 24) "
-titre<-"Equipement des ménages du Bénin en 2013"
+nameY<-"Indice d'équipement (ACP)"
+titre<-"Département de Borgou"
 source<-"Source : RP2013, INS Bénin"
 mod<-lm(Y~X)
 
@@ -357,7 +334,7 @@ summary(mod)
 
 ```
 
-- **Commentaire** : La relation obtenue est très significative (p<0.001) et son pouvoir explicatif est plutôt élevé (r2 = 6%) bien qu'inférieur à celui du nveau d'étude.
+- **Commentaire** : La relation obtenue est très significative (p<0.001) et son pouvoir explicatif est important (r2 = 11%).
 
 
 #### Fonction administrative
@@ -368,10 +345,10 @@ Dans une logique légèrement différente, on peut se demander si les arrondisse
 sel$CHEF<-as.factor(sel$COM_CHEF+sel$DEP_CHEF)
 levels(sel$CHEF)<-c("Aucune","Centre de commune", "Centre de département")
 X<-sel$CHEF
-Y<-sel$equip
+Y<-sel$equip_acp
 nameX<-"Fonction administraive"
-nameY<-"Nombre d'équipements (0 à 24) "
-titre<-"Equipement des ménages du Bénin en 2013"
+nameY<-"Indice d'équipement (ACP)"
+titre<-"Département de Borgou"
 source<-"Source : RP2013, INS Bénin"
 mod<-lm(Y~X)
 
@@ -385,7 +362,7 @@ summary(mod)
 
 ```
 
-- **Commentaire** : La relation obtenue est très significative (p<0.001) même si son pouvoir explicatif est plus limité (r2 = 1.3%) que celui de l'opposition urbain-rural . On note un net accroissement du niveau d'équipement des ménages avec le niveau administraif de l'arrondissement où ils sont localisés (+0.6 pour les ménages résidant dans un chef lieu de commune et +2.3 pourceux qui sont localisés dans un chef lieu de département)
+- **Commentaire** : La relation obtenue est très significative (p<0.001) même si son pouvoir explicatif est plus limité (r2 = 5%) que celui de l'opposition urbain-rural . On note un net accroissement du niveau d'équipement des ménages avec le niveau administraif de l'arrondissement où ils sont localisés (+0.32 pour un chef lieu de commune et +0.87 pour un chef lieu de département)
 
 
 
@@ -394,12 +371,12 @@ summary(mod)
 
 Les **déterminants spatiaux** correspondent au cas où la variable explicative est de type *quantitatif continu* et où l'effet sur le ménage est lié à son *accessibilité* à une ressource c'est-à-dire à l'influence de la *distance*.  
 
-```{r,fig.height=8,fig.width=9}
-par(mfrow=c(1,3))
-mypal<-brewer.pal(8,"RdYlGn")
+```{r,fig.height=5,fig.width=8}
+par(mfrow=c(1,2))
+mypal<-brewer.pal(7,"RdYlGn")
 
 ## Distance à la commune
-mybreaks=c(0,1,2,4,8,16,32,64,128)
+mybreaks=c(0,5,10,20,40,80, 160, 320)
 mf_map(map3,
        type="choro",
        var="COM_CHEF_DIST",
@@ -412,16 +389,17 @@ mf_map(map3,
 
 
 mf_map(map2,type="base",col=NA, border="black",lwd=2, add=T)
+mf_map(map1,type="base",col=NA, border="black",lwd=2, add=T)
 mf_map(map2ctr,type="base",pch=20,col="black",add=T)
-mf_label(map2ctr,var = "COM_NAME", col="black",pos=1,cex=0.6)
-#mf_map(map1ctr,type="base",pch=20,col="black",add=T, cex=1)
-#mf_label(map1ctr,var = "DEP_NAME", col="black",pos=1)
+mf_label(map2ctr,var = "COM_NAME", col="black",pos=1)
+mf_map(map1ctr,type="base",pch=20,col="black",add=T, cex=1)
+mf_label(map1ctr,var = "COM_NAME", col="black",pos=1)
 mf_layout(title = "Accessibilité Communale",
           credits = "Source : EE CIST 2023",frame = T)
 
 
 ## Distance au dept
-mybreaks=c(0,4,8,16,32,64,128,256,512)
+mybreaks=c(0,5,10,20,40,80, 160, 320)
 mf_map(map3,
        type="choro",
        var="DEP_CHEF_DIST",
@@ -435,33 +413,11 @@ mf_map(map3,
 #mf_map(map2,type="base",col=NA, border="black",lwd=1, add=T)
 mf_map(map1,type="base",col=NA, border="black",lwd=2, add=T)
 mf_map(map1ctr,type="base",pch=15,col="black",add=T, cex=1)
-mf_label(map1ctr,var = "DEP_NAME", col="black",pos=1)
+mf_label(map1ctr,var = "COM_NAME", col="black",pos=1)
 mf_layout(title = "Accessibilité Départementale",
           credits = "Source : EE CIST 2023",frame = T)
 
-## Distance à la capitale nationale
-map0ctr<-st_centroid(map3[map3$NAT_CHEF_DIST==0,])
-
-
-mybreaks=c(0,8,16,32,64,128,256,512,1024)
-mf_map(map3,
-       type="choro",
-       var="NAT_CHEF_DIST",
-       pal=mypal,
-       breaks=mybreaks,
-        border="gray",
-       lwd=1,
-       leg_title = "Distance (km)",
-       leg_val_rnd = 0)
-
-#mf_map(map2,type="base",col=NA, border="black",lwd=1, add=T)
-mf_map(map0,type="base",col=NA, border="black",lwd=2, add=T)
-mf_map(map0ctr,type="base",pch=15,col="black",add=T, cex=2)
-mf_label(map0ctr,var = "COM_NAME", col="black",pos=1)
-mf_layout(title = "Accessibilité Nationale",
-          credits = "Source : EE CIST 2023",frame = T)
-
-
+summary(map3$NAT_CHEF_DIST)
 
 
 ```
@@ -469,15 +425,17 @@ mf_layout(title = "Accessibilité Nationale",
 
 ### Accessibilité communale
 
-On utilise une fonction racine carré pour modéliser l'effet de la distance. Pour une distance égale à zéro, la constante donnera l'effet du chefl-lieu de commune. 
+On utilise une fonction puissance dela distance en ajoutant une valeur minimale de 1km correspondant à l'acccessibilité interne du centre.
+
+$f(D_{ij})=\alpha\times (1+D_{ij})^{-\beta}$
 
 ```{r}
-sel$ACC_COM<-sqrt(sel$COM_CHEF_DIST)
-X<-sel$ACC_COM
-Y<-sel$equip
+sel$log_Dis_COM<-log(1+sel$COM_CHEF_DIST)
+X<-sel$log_Dis_COM
+Y<-sel$equip_acp
 nameX<-"Distance au centre de la commune (racine carrée)"
-nameY<-"Nombre d'équipements (0 à 24) "
-titre<-"Equipement des ménages du Bénin en 2013"
+nameY<-"Indice d'équipement (ACP)"
+titre<-"Département de Borgou"
 source<-"Source : RP2013, INS Bénin"
 mod<-lm(Y~X)
 
@@ -493,19 +451,19 @@ summary(mod)
 
 ```
 
-- **Commentaire** : La relation obtenue est très significative (p<0.001) même si son pouvoir explicatif est plus limité (r2 = 1.8%). Ceci s'explique tout d'abord  par l'incertitude de mesure : la distance utilisée est l'éloignement entre les arrondissements et non pas entre l'individu et le centre de sa commune. Mais aussi par la diversité des ménages en matière d'équipement quelle que soit la distance au centre. 
+- **Commentaire** : La relation obtenue est très significative (p<0.001) même si son pouvoir explicatif est plus limité (r2 = 5.9%). Ceci s'explique tout d'abord  par l'incertitude de mesure : la distance utilisée est l'éloignement entre les arrondissements et non pas entre l'individu et le centre de sa commune. Mais aussi par la diversité des ménages en matière d'équipement quelle que soit la distance au centre. 
 
 
 ### Accessibilité départementale
 
 
 ```{r}
-sel$ACC_DEP<-sqrt(sel$DEP_CHEF_DIST)
-X<-sel$ACC_DEP
-Y<-sel$equip
+sel$log_Dis_DEP<-log(1+sel$DEP_CHEF_DIST)
+X<-sel$log_Dis_DEP
+Y<-sel$equip_acp
 nameX<-"Distance au centre du département (racine carrée)"
-nameY<-"Nombre d'équipements (0 à 24) "
-titre<-"Equipement des ménages du Bénin en 2013"
+nameY<-"Indice d'équipement (ACP)"
+titre<-"Département de Borgou"
 source<-"Source : RP2013, INS Bénin"
 mod<-lm(Y~X)
 
@@ -521,52 +479,18 @@ summary(mod)
 
 ```
 
-- **Commentaire** : La relation obtenue demeure très significative (p<0.001) mais son pouvoir explicatif demeure limité (r2 = 1.0%). 
-
-
-### Accessibilité Nationale
-
-
-
-```{r}
-sel$ACC_NAT<-sqrt(sel$NAT_CHEF_DIST)
-X<-sel$ACC_NAT
-Y<-sel$equip
-nameX<-"Distance à la capitale nationale (racine carrée)"
-nameY<-"Nombre d'équipements (0 à 24) "
-titre<-"Equipement des ménages du Bénin en 2013"
-source<-"Source : RP2013, INS Bénin"
-mod<-lm(Y~X)
-
-plot(X,Y ,
-     pch=20,
-     cex=0.4,
-        main=titre,
-        sub = source,
-        xlab=nameX,
-        ylab=nameY)
-abline(mod, col="red")
-summary(mod)
-
-```
-
-- **Commentaire** : La relation obtenue est très significative (p<0.001) même si son pouvoir explicatif est très  limité (r2 = 0.4%). Il faut toutefois examiner le rôle de ces variables d'accessibilité lorsqu'on les combine avec les autres variables relatives aux ménages.  
-
+- **Commentaire** : La relation obtenue demeure très significative (p<0.001) mais son pouvoir explicatif demeure limité (r2 = 4.8%). On peut toutefois se demander si la difficulté ne vient pas du fait que l'on emploie séparément les deux distances.
 
 
 ### SYNTHESE
 
 
-#### Variables endogène
-
-On en retient d'abord que les variables relatives à la structure du ménage et aux attributs du chef de ménage. 
-
-
+#### Variables endogènes
 
 ```{r}
 
 
-mod1<-lm(data=sel, equip~log(tailmen)+statoc+sexe+age5+etud5)
+mod1<-lm(data=sel, equip_acp~sexe+age5+etud5+statoc+log(tailmen))
 
 
 summary(mod1)
@@ -574,7 +498,7 @@ Anova(mod1, type="III")
 
 ```
 
-- **Commentaire** : la combinaison des déterminants sociaux aboutit à un modèle satisfaisant (r2=26%) où toutes les variables apportent une contribution significative au modèle. L'analyse de variance de type III (toutes choses égales par ailleurs) confirme le rôle central du niveau de diplôme du chef de ménage qui est de lion la variable qui contribue le plus à l'explication du niveau d'équipement. La taille du ménage joue également un rôle important ainsi que le statut d'occupation qui montre un meilleur équipement des locataires.L'influence de l'âge et du sexe est plus limitée. 
+- **Commentaire** : la combinaison des déterminants sociaux aboutit à un modèle où toutes les variables apportent une contribution significative au modèle à l'exception du sexe. L'analyse de variance de type III (toutes choses égales par ailleurs) confirme le rôle central du niveau de diplôme du chef de ménage qui est de lon la variable qui contribue le plus à l'explication du niveau d'équipement. La taille du ménage joue également un rôle ainsi que le statut d'occupation qui montre un meilleur équipement des locataires.
 
 
 #### Variables contextuelles
@@ -582,7 +506,7 @@ Anova(mod1, type="III")
 ```{r}
 
 
-mod2<-lm(data=sel, equip~URBA+ACC_COM+ACC_DEP+ACC_NAT)
+mod2<-lm(data=sel, equip_acp~URBA+CHEF+log_Dis_COM+log_Dis_DEP)
 
 
 summary(mod2)
@@ -591,7 +515,7 @@ Anova(mod2, type="III")
 ```
 
 
-- **Commentaire : ** le mélange des variables contextuelles est difficile à interpréter en raison des fortes redondances qu'il y a entre certaines variables explicatives. En effet la variable URBA est corrélée avec le fait d'être ou pas un centre de commune ou de département. MAlgré son pouvoir explicatif limité (r2=6.9%) le modèle met bien en valeur la combinaison des différents effets d'urbanisation et d'accessibilité. On note une inversion de l'effet d'accessibilité au chef lieu de commune qui s'explique par l'ajout des deux autres variables d'accessibilité. 
+- **Commentaire : ** le mélange des variables contextuelles est difficile à interpréter en raison ds fortes redondances qu'il y a entre certaines variables explicatives. En effet la variable URBA est corrélée avec le fait d'être ou pas un centre de commune ou de département. Tandis que la distance à la commune ou au chef lieu est corrélée avec le fait d'être ou non un chef-lieu de commune ou de district. Il faudra donc n'en retenir qu'une partie par la suite, mais le point intéressant est le pouvoir explicatif élevé du modèle (r2 = 15.4%) alors même qu'aucune caractéristique endogène des ménages n'est prise en compte. Dit autrement, la simple connaissance de l'arrondissement où est localisé un ménage permet de prédire la probabilité que son niveau d'équipement soit faible ou élevée. 
 
 
 
@@ -603,11 +527,35 @@ On construit un modèle final reprenant l'ensemble des variables endogènes mais
 ```{r}
 
 
-mod3<-lm(data=sel, equip~log(tailmen)+statoc+sexe+age5+etud5+URBA+ACC_COM+ACC_DEP+ACC_NAT)
+mod3<-lm(data=sel, equip_acp~sexe+age5+etud5+statoc+log(tailmen)+log_Dis_COM+log_Dis_DEP)
 summary(mod3)
 Anova(mod3, type="III")
 
 ```
 
 
-- **Commentaire** : Par rapport au modèle purement endogène de modélistion des comportements individuels par les attributs des ménages, le gain est assez faible en terme de qualité d'ajustement (passage de 26% à 28.3%). C'est plutôt au niveau de l'interprétation que le nouveau modèle est intéressant car il révèle que le niveau d'étude se combine étroitement dans l'explication avec l'accessibilité aux centres de commune ou de districts. Ce qui laisse soupçonner une interaction entre les deux facteurs
+- **Commentaire** : Par rapport au modèle purement endogène de modélistion des comportements individuels par les attributs des ménages, le gain est assez faible en terme de qualité d'ajustement (passage de 27% à 30%). C'est plutôt au niveau de l'interprétation que le nouveau modèle est intéressant car il révèle que le niveau d'étude se combine étroitement dans l'explication avec l'accessibilité aux centres de commune ou de districts. Ce qui laisse soupçonner une interaction entre les deux facteurs
+
+
+### Modèle final
+
+Pour aboutir à un modèle final qui soit le plus simple possible, on ne retient que trois variables dont l'interprétation sera plus facile et que l'on peut associer à des hypothèses empiriquement vérifiables :
+
+- H1 : Plus un ménage comporte de personnes, plus il a de chances de posséder un niveau d'équipement élevé. Mais l'accroissement de la relation n'est pas linéaire et suit une loi logarithmique.
+- H2 : Plus le chef de ménage dispose d'un niveau d'éducation élevé, plus son ménage disposera d'un équipement élevé. Cette relation s'explique par le jeu combiné du capital économique et scolaire (Bourdieu) qui rend possible (capital économique) et désirable (capital scolaire) la possession d'équipements diversifiés.
+- H3 : Plus un ménage est éloigné du centre de son département, moins il a de chances de pouvoir accéder à certains équipements en raison de déficits d'infrastructure (e.g. électricité) ou de difficulté à se les procurer. 
+
+
+```{r}
+
+mod4<-lm(data=sel, equip_acp~log(tailmen)+etud5+log_Dis_DEP)
+summary(mod4)
+Anova(mod4, type="III")
+
+```
+
+
+- **Commentaire**: notre modèle final met en valeur le rôle décisif du niveau d'étude (proxy du capital scolaire et économique) mais il confirme l'effet positif de la taille du ménage et l'effet négatif de la distance au centre de commandement du département. Son équation final peut s'écrire :
+
+
+$I_{equipt} = -0.31 + \alpha_{Niv.scolaire} + 0.22\times log({taille du ménage}) -0.11\times log({accessibilité})$
