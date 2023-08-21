@@ -1,0 +1,602 @@
+---
+title: "Exo 1 : PIB et CO2 en Afrique"
+author: "Claude Grasland & Nadege Gbetoton Djossou "
+format: html
+embed-resources: true
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(car)
+```
+
+
+## Objectif
+
+On se propose dans ce TD de modéliser la relation entre PIB par habiatnt (X) et émission de CO2  des pays africains (Y) en 2018 à l'aide d'une relation linéaire de type Y = f(X). On commencera par utiliser un modèle de régression linéaire simple en soulignant les multiples violation des hypothèses qu'il entraîne. Puis on proposera deux solutions alternatives, l'une en retirant les valeurs exceptionnelles, l'autre en transformant les variables X et Y de façon logarithmique.
+
+
+# 1. PREPARATION DES DONNEES
+
+
+## 1.1 Importation des données
+
+
+
+```{r}
+don<-read.csv2("DEV-AFRIC-2018/data/afrika_don.csv")
+```
+
+
+## 1.2 Sélection des variables 
+
+On décide de renommer les deux variables choisies X et Y
+
+- X : PIB en $/habitant
+- Y : CO2 en tonnes/habitant
+
+```{r}
+don$X<-don$PIB
+don$Y<-don$CO2HAB
+```
+
+## 1.4 Extraction du tableau à analyser
+
+On ne garde que les colonnes iso3, name, reg, X et Y. Et on élimine les lignes comportant des valeurs manquantes à l'aide de la fonction *complete.case()*
+
+```{r}
+tab<-don[,c("iso3","name","X","Y")]
+tab<-tab[complete.cases(tab), ]
+```
+
+
+## 1.5 Astuce : stockage des textes d'habillage
+
+On prépare un ensemble de textes que l'on pourra utiliser pour l'habillage de nos graphiques. Cela évitera de devoir ensuite les retaper à chaque fois.
+
+```{r}
+nomX <- "PIB ($/hab)"
+nomY <- "Pollution (t. de CO2/hab)." 
+titre <- "Les pays Africains en 2018"
+note <- "Source : Rapport sur le développement humain 2020"
+```
+
+
+# 2. ANALYSE DES VARIABLES X et Y
+
+
+## 2.1 La distribution de X 
+
+### Calculer les paramètres principaux et commentez les
+
+```{r}
+summary(tab$X)
+```
+
+- **Commentaire :** Le PIB par habitant des pays africians varie entre 756 et 19459.  Il est en moyenne de 5169. La moitié des pays ont un taux compris entre Q1 (2015) et Q3 (6437)
+
+### Faire un histogramme
+
+- Histogramme rapide
+
+
+```{r}
+hist(tab$X)
+```
+
+
+
+- Histogramme amélioré
+
+
+```{r}
+hist(tab$X, 
+     xlab=nomX,
+     breaks=quantile(tab$X, c(0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1)),
+     main = titre,
+     sub = note,
+     col = "lightyellow")
+lines(density(tab$X),col="red")
+```
+
+
+- **Commentaire : ** La distribution semble unimodale mais fortement asymétrique à gauche.
+
+
+### Tester la normalité
+
+```{r}
+# Graphique 
+qqnorm(tab$X)
+qqline(tab$X, col = "red")
+
+# test
+shapiro.test(tab$X)
+```
+
+- **Commentaire :** Le graphique montre que la distribution ne suit pas une loi gaussienne, ce qui est confirmé par le test de Shapiro-Wilks (p < 0.001)
+
+
+### Examiner la présence de valeurs exceptionnelles
+
+```{r}
+boxplot(tab$X, 
+        horizontal = T,
+        xlab = nomX,
+        main = titre,
+        sub = note)
+```
+
+- **Commentaire :** La boxplot montre la présence d'au moins quatre valeurs excptionnelles situées à plus de 1.5*(Q3-Q1) de la médiane. 
+
+
+## 2.2 La distribution de Y
+
+### Calculer les paramètres principaux
+
+```{r}
+summary(tab$Y)
+```
+
+- **Commentaire :** En 2018 les émissions de CO2 des pays d'u Monde'Afrique varient entre 0.02 t/hab. et 8.1 t./hab. La moyenne est de 1.14 t.hab. La moitié des pays se situent entre 0.18 t./hab (Q1) et 1.10 t./hab (Q3). L'écart entre la moyenne et la médiane suggère une distribution dissymétrique à gauche. Ce que l'on va vérifier avec l'histogramme. 
+
+
+### Faire un histogramme
+
+- Histogramme rapide
+
+
+```{r}
+hist(tab$Y)
+```
+
+
+- Histogramme amélioré
+
+
+```{r}
+hist(tab$Y, 
+     xlab=nomY,
+     breaks=quantile(tab$Y, c(0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1)),
+     main = titre,
+     sub = note,
+     col="lightyellow")
+lines(density(tab$Y),col="red")
+```
+
+- **Commentaire :** La distribution de Y est unimodale mais très fortement dissymétrique à gauche. 
+
+
+### Tester la normalité
+
+```{r}
+# Graphique 
+qqnorm(tab$Y)
+qqline(tab$Y, col = "red")
+
+# test
+shapiro.test(tab$Y)
+```
+
+- **Commentaire :** Le graphique montre que la distribution ne suit pas une loi gaussienne, ce qui est confirmé par le test de Shapiro-Wilks (p < 0.001)
+
+
+### Examiner la présence de valeurs exceptionnelles
+
+```{r}
+boxplot(tab$Y, 
+        horizontal = T,
+        xlab = nomY,
+        main = titre,
+        sub = note)
+```
+
+- **Commentaire :** La boxplot montre la présence d'au moins cinq valeurs exceptionnelles situées à plus de 1.5*(Q3-Q1) de la médiane. 
+
+
+
+# 3. CORRELATION
+
+
+## 3.1 Visualiser la relation entre X et Y
+
+
+- Graphique rapide
+
+```{r}
+plot(tab$X,tab$Y)
+```
+
+- Graphique amélioré
+
+```{r}
+plot(tab$X,tab$Y,
+     cex = 0.6,
+     pch = 19,
+     col = "red",
+     xlab = nomX,
+     ylab = nomY,
+     main = titre,
+     sub = note)
+
+text(tab$X, tab$Y, tab$iso3,
+     cex = 0.6,
+     col = "blue",
+     pos = 1)
+
+
+```
+
+- **Commentaire :** : La relation est clairement positive ce qui signifie que plus le PIB/habitant augmente, plus les émissions de CO2 par habitant augmente. Plus un pays est riche, plus il pollue ! Il n'est toutefois pas évident que la relation soit linéaire car deux pays (Afrique du Sud et Libye) s'écartent clairement de la tendance générale et suggèrent une relation de type puissance ou exponentielle. 
+
+
+## 3.2 Tester la significativité de la relation entre X et Y
+
+
+### Coefficient de Pearson
+
+```{r}
+cor.test(tab$X,tab$Y)
+cor(tab$X,tab$Y)**2
+```
+
+- **Commentaire :** Selon le test du coefficient de Pearson, la relation est très significative (p < 0.001) et le pouvoir explicatif de X par rapport à Y (r2) sera élevé (65%)
+
+### Coefficien de Spearman
+
+```{r}
+cor.test(tab$X,tab$Y, method = "spearman")
+```
+
+- **Commentaire :** Le coefficient de corrélation de Spearman (+0.90) est sensiblement plus élevée que celui de Pearson (+0.80). Ceci constitue un signal d'alerte et suggère (i) soit la présence de valeurs exceptionnelles, (ii) soit l'existenced'une relation non linéaire. 
+
+
+# 4. REGRESSION LINEAIRE
+
+## 4.1 Calculer l'équation de la droite Y = aX+B
+
+
+```{r}
+monmodel <- lm(tab$Y~tab$X)
+summary(monmodel)
+```
+
+- **Commentaire :** L'équation de la droite est donc **Y = 0.0003*X - 0.432**. Le coefficient de pente de la droite indique que les émissions de CO2 augmentent de 0.0003 tonnes chaque fois que le PIB par habitant augmente de 1 dollar. Ou si l'on préfère, que les émissions de CO2 augmentent de 0.3 tonnes chaque fois que le PIB/hab. augmente de 1000 dollars. La constante (Intercept) indique la valeur qui correspondrait à un pays totalement pauvre et elle serait négative ce qui est évidemment absurde. Le modèle linéaire peut aboutir à des absurdités ...
+
+
+
+
+## 4.2 Visualiser  la droite
+
+```{r}
+plot(tab$X,tab$Y,
+     cex = 0.6,
+     pch = 19,
+     col = "red",
+     xlab = nomX,
+     ylab = nomY,
+     main = titre,
+     sub = note)
+text(tab$X, tab$Y, tab$iso3,
+     cex = 0.6,
+     col = "blue",
+     pos = 1)
+abline(monmodel, col ="black", lwd =2)
+
+```
+- **Commentaire: ** La droite s'ajuste plus ou moins au nuage de points mais on remarque que les résidus sont mal répartis autour de celle-ci (*autocorrélation*) et que les points s'éloignent de plus en plus de la droite au fur et à mesure que X augmente ce qui signifie que la variance n'est pas constante (*hétéroscédasticité*). Même s'il semble avoir un fort pouvoir explicatif, le modèle semble donc souffrir de défauts importants que l'on discutera dans la partie finale. 
+
+
+
+## 4.3 Calculer les valeurs estimées et les résidus
+
+```{r}
+# Extraction des valeurs estimées et résiduelles
+tab$Yest <- monmodel$fitted.values
+tab$Yres <- monmodel$residuals
+
+# Affichage du tableau trié
+tab[order(tab$Yres),]
+
+```
+
+- **Commentaire** : Le tableau permet de repérer les pays qui s'éloignent le plus de la droite en raison d'une surestimation ou d'une sous-estimation de leurs émissions de CO2 par le PIB. Les résidus négatifs correspondent à despays qui émettent moins de CO2 que ce que laisserait prévoir leur PIB. C'est par exemple le cas du Bostwana dont le PIB élevé (17700$/hab.) laissait prévoir 4.95 t. de CO2 par habitant mais qui en pratique n'en émet que 2.96 soit un résidu de -2 tonnes. Inversement le PIB de l'Afrique du Sud (12256 $/hab) laissait prévoir 3.9 tonnes de CO2 par habitan alors que la valeur observée est de 8.1 tonnes, soit un résidu de +4.7 tonnes de plus que prévu. Dans les deux cas on peut chercher des explications ad hoc (e.g. importance de la production de charbon en Afrique du Sud) mais il faut aussi se demander si ces écarts ne nont pas justes liés à une mauvaise spécification de notre modèle ...
+
+
+## 4.4 Sauvegarder les résultats du modèle
+
+```{r}
+write.table(x = tab,
+            file = "result.csv",
+            row.names = FALSE)
+```
+
+
+# 5. DIAGNOSTICS
+
+Avant de tirer des conclusions hâtives sur les résidus, il est préférable de vérifier si les hypothèses fondamentales du modèle de régression ont bien été respectées. On va utiliser pour cela quatre graphiques de bases fournis par R et des tests présents dans le package `car` (acronyme de "Companion for Applied Regression).
+
+## 5.1 Autocorrélation des résidus
+
+```{r}
+plot(monmodel,
+     which = 1,
+     labels.id = tab$name,
+     col="red")
+
+durbinWatsonTest(monmodel)
+```
+
+- **Commentaire** : le graphique permet de voir que les résidus ne sont pas indépendants des valeurs estimées de Y, ce qui signifie que les points se situent en moyenne tantôt au dessus de la droite de régression, tantôt en dessous ce qui fausse leur estimation. Dans un modèle sans autocorrélation, la courbe rouge devrait suivre la ligne pointillé correspondant à une moyenne nulle des résidus, ce qui n'est visiblement pas le cas. On peut s'en assurer à l'aide du *test de Durbin Watson* qui pose l'hypothèse *H0 : Il existe une autocorrélation des résidus*. Cette hypothèse ne peut pas être rejetée (p > 0.66) donc il existe bien une autocorrélation des résidus qui va fausser les prévisions du modèle de régression linéaire. 
+
+
+
+
+## 5.2 Normalité des résidus
+
+```{r}
+plot(monmodel,
+     which = 2,
+     labels.id = tab$name,
+     col="red")
+
+shapiro.test(tab$Yres)
+```
+
+- **Commentaire** : La normalité de la distribution des résidus est également une condition importante de validité du modèle de régression linéaire puisqu'elle permet de définir un intervalle de confiance des estimations en se servant de l'écart-type de ces résidus (e.g. + ou - 2 écarts-type pour un intervalle de confiance à 95%). Mais il est clair ici au vu du diragramme QQ plot que la condition de normalité des résidus n'est pas vérifiée, ce que confirme le test de shapiro (p < 0.001)
+
+
+## 5.3 Homogénéité des résidus
+
+
+```{r}
+plot(monmodel,
+     which = 3,
+     labels.id = tab$name,
+     col="red")
+
+ncvTest(monmodel)
+```
+
+- **Commentaire** : En liaison avec ce qui précède, l'analyse de l'homogénéité des résidus permet de vérifier si la variance des résidus est constante et donc si l'intervalle de confiance sera le même pour l'ensemble des valeurs estimées. Ici, ce n'est clairement pas le cas puisque le graphique monrre un net accroissement de la variance des résidus lorsque la valeur à estimer augmente. On peut vérifier l'absence d'homogénéité (appelée *hétéroscédasticité*) en appliquant le *test de Breush-Pagan* qui examine l'hypothèse "H0 : la distribution des résidus est homogène". Dans notre exemple H0 est rejetée (p < 0.001) ce qui signifie que l'hypothèse d'homogénéité est clairement violée. 
+
+
+## 5.4 Absence de valeurs exceptionnellement influentes
+
+
+```{r}
+plot(monmodel,
+     which = 4,
+     labels.id = tab$name,
+     col="red")
+
+outlierTest(monmodel, labels = tab$name)
+
+
+```
+
+- **Commentaire :** Le dernier test consiste à vérifier si la relation observée est bien le résultat d'un ensemble d'observations indépendante et non pas l'effet de la présence d'une ou deux valeurs exceptionnelles. Plusieurs tests sont ici possibles qui visent au même objectif : déterminer à quel point le retrait d'une valeur unique modifie le résultat de l'analyse, c'est à dire le coefficient de détermination et les paramètres *a* et *b* de l'équation Y=aX+b. Le graphique proposé par R utilise la *distance de Cook* pour mettre en valeur l'influence potentielle des valeurs exceptionnelles et on y retrouve sans surprise la Libye, l'Afrique du Sud et le Bostwana. On peut arriver à un résultat similaire en utilisant le test de Bonferroni qui signale le caractère exceptionellement influent de l'Afrique du Sud et de la Libye. 
+
+
+
+
+
+
+## 5.5 Tous les tests d'un coup
+
+Une fois que l'on a bien compris les tests précédents, on peut afficher les quatre graphiques correspondant en une seule commande : 
+
+```{r}
+par(mfrow=c(2,2))
+plot(monmodel,
+     which = c(1,2,3,4),
+     labels.id = tab$name,
+     col="red")
+
+```
+
+# 6. AUTRES MODELES
+
+
+Sans reprendre en détail toutes les étapes de l'analyse, proposez deux variantes du modèle initial, l'une en retirant les valeurs exceptionnelles, l'autre en transformant les variables X et Y à l'aide d'une fonction préalablement à leur mise en relation.
+
+## 6.1 Modèle linéaire sans valeurs  exceptionnelles.
+
+On décide de retirer les trois valeurs exceptionellement influentes qui ont été repérées dans la première analyse et de refaire une régression linéaire.
+
+### Correction du tableau
+
+```{r}
+tab2<-tab[!(tab$iso3 %in% c("ZAF","BWA","LBY")),]
+```
+
+
+### Corrélation
+
+```{r}
+cor.test(tab2$X,tab2$Y, method="pearson")
+cor.test(tab2$X,tab2$Y, method="spearman")
+```
+
+
+
+### Régression
+
+```{r}
+monmodel2 <- lm(tab2$Y~tab2$X)
+summary(monmodel2)
+# Extraction des valeurs estimées et résiduelles
+tab2$Yest <- monmodel2$fitted.values
+tab2$Yres <- monmodel2$residuals
+```
+
+### Visualisation
+
+```{r}
+plot(tab2$X,tab2$Y,
+     cex = 0.6,
+     pch = 19,
+     col = "red",
+     xlab = nomX,
+     ylab = nomY,
+     main = titre,
+     sub = note)
+text(tab2$X, tab2$Y, tab2$iso3,
+     cex = 0.6,
+     col = "blue",
+     pos = 1)
+abline(monmodel2, col ="black", lwd =2)
+
+```
+
+### Diagnostics
+
+```{r}
+par(mfrow=c(2,2))
+plot(monmodel2,
+     which = c(1,2,3,4),
+     labels.id = tab2$name,
+     col="red")
+
+durbinWatsonTest(monmodel2)
+shapiro.test(tab2$Yres)
+ncvTest(monmodel2)
+outlierTest(monmodel2,labels = tab2$name)
+
+
+```
+
+- **Commentaire :** Le nouveau modèle affiche une corrélation beaucoup plus élevée (r = = 0.96) et une bien meilleure qualité  d'ajustement (r2 = 86.5%).  Il demeure une forte autocorrélation des résidus (p >0.60) mais les résidus sont à peu près gaussiens (p >0.05). L'hétroscédasticité demeure élévée (p < 0.001) et on trouve une nouvelle valeur exceptionellement influente (Algérie). Il y a donc d'indéniables progrès mais le modèle n'est pas encore tout à fait satisfaisant. 
+
+
+## 6.2 Modèles non linéaires
+
+Il est toujours ennuyeux de retirer des valeurs exceptionnelles car on risque d'en trouver des nouvelles et c'est un processus sans fin. Il s'agit en outre d'une démarche criticable si on effectue le retrait des valeurs sans raisons objectives. Il est donc préférable d'essayer de garder toutes les valeurs mais de chercher à transformer les variables X et Y pour construire des fonctions différentes. On utilise classiquement quatre modèles (linéaire, exponentiel, logarithmique, puissance) selon que l'on applique ou non des transformations linéaires à X et Y.
+
+### Examen visuel des quatre modèles 
+
+```{r}
+par(mfrow=c(2,2))
+
+plot(tab$X,tab$Y, main = "Linéaire : Y=a.X+b", pch=20, col="red",cex=0.5)
+plot(tab$X,log(tab$Y), main = "Exponentiel : log(Y)=a.X+b", pch=20, col="red",cex=0.5)
+plot(log(tab$X),tab$Y, main = "Logarithmique : Y = a.log(X)+b", pch=20, col="red",cex=0.5)
+plot(log(tab$X),log(tab$Y), main = "Puissance : log(Y) = a.log(X)+b", pch=20, col="red",cex=0.5)
+```
+
+- **Commentaire :** Un simple examen visuel laisse présager que le modèle puissance est celui qui s'ajustera le mieux à une droite et offrira une répartition régulière des résidus conforme aux hypothèses.
+
+
+### Calcul des coefficients de corrélation
+
+```{r}
+paste("Linéaire : ",round(cor(tab$X,tab$Y),3))
+paste("Exponentiel : ", round(cor(tab$X,log(tab$Y)),3))
+paste("Logarithmique : ",round(cor(log(tab$X),tab$Y),3))
+paste("Puissance : ", round(cor(log(tab$X),log(tab$Y)),3))
+```
+
+- **Commentaire :** Le calcul des coefficients de corrélation confirme que cette solution donne le meilleur ajustement aux données. Noter bien que ce critère ne suffit pas à lui seul à choisir un modèle. Un modèle qui aurait un meilleur ajustement mais violerait les hypothèses ne devrait pas être retenu face à un modèle ayant un ajustement plus faible mais des résidus mieux distribués. 
+
+### Préparation des données
+
+On crée un nouveau tableau de données 
+
+```{r}
+don$X<-log(don$PIB)
+don$Y<-log(don$CO2)
+tab3<-don[,c("iso3","name","X","Y")]
+tab3<-tab3[complete.cases(tab3), ]
+nomXlog <- "log(PIB en $/hab)"
+nomYlog <- "log(CO2 en t./hab)" 
+titre <- "Les pays Africains en 2018"
+note <- "Source : Rapport sur le développement humain 2020"
+
+```
+
+
+
+
+### Régression
+
+```{r}
+monmodel3 <- lm(tab3$Y~tab3$X)
+summary(monmodel3)
+# Extraction des valeurs estimées et résiduelles
+tab3$Yest <- monmodel$fitted.values
+tab3$Yres <- monmodel$residuals
+```
+
+
+### Visualisation
+
+```{r}
+plot(tab3$X,tab3$Y,
+     cex = 0.6,
+     pch = 19,
+     col = "red",
+     xlab = nomXlog,
+     ylab = nomYlog,
+     main=titre,
+     sub = note)
+text(tab3$X, tab3$Y, tab3$iso3,
+     cex = 0.6,
+     col = "blue",
+     pos = 1)
+abline(monmodel3, col ="black", lwd =2)
+
+```
+
+### Diagnostics
+
+```{r}
+par(mfrow=c(2,2))
+plot(monmodel3,
+     which = c(1,2,3,4),
+     labels.id = tab3$name,
+     col="red")
+
+durbinWatsonTest(monmodel3)
+shapiro.test(tab3$Yres)
+ncvTest(monmodel3)
+outlierTest(monmodel3,labels = tab3$name)
+
+exp(-12.69)
+```
+
+- **Commentaires** : Outre sa qualité d'ajustement élevée (r2 = 83%), le modèle final respecte beaucoup mieux les hypothèses théoriques d'un modèle de régression linéaire. Il demeure certes une légère autocorrélation des résidus et une disribution qui n'est pas tout à fait gaussienne. Mais les résidus sont désormais homogènes (p > 0.26) et aucune valeur influente n'est plus détectée par le test de Bonferoni. Bref, le modèle est acceptable.
+
+### Représenter la forme finale du modèle Y = f(X)
+
+
+Le modèle ayant été ajusté sous forme bi-logarithmique, il faut en rétablir l'équation sous la forme Y = f(X), ce qui suppose de transformer l'équation de la façon suivante :
+
+- $log(Y) = a\times {log(X)}+b <=> Y = e^{b} \times X^{a}$
+
+Ce qui nous donne l'équation finale :
+
+- $log(CO2) = a\times log(PIB) + b <=> CO2 =  e^{-12.696}\times  PIB^{1.47} <=> CO2 = 0.000003\times PIB^{1.47}$
+
+Que l'on peut représenter de la façon suivante : 
+
+
+
+```{r}
+x<-seq(0,20000,100)
+y<- 0.000003*(x**1.47)
+plot(x,y,
+     type="l",
+     col="red",
+     lwd =2,
+     xlab = "PIB en $/hab.",
+     ylab = "Estimation du CO2 en t./hab",
+     main = "Modèle final") 
+grid()
+```
+
+- **Commentaire** : Notre modèle final offre une représentation assez fiable de la relation qui existe entre le PIB par habitant et les émissions de CO2 des pays africains en 2018. La forme de la relation est de type puissance avec un exposant de 1.41 > 1 ce qui indique que l'accroissement des émissions n'est pas linéaire mais de plus en plus rapide lorsque le développement augmente. Un pays dont le revenu est de 5000 \$/hab. émettra moins de 1 tonne de CO2 par habiatnt alors qu'un pays dont le revenu est de 10 000 \$/hab émettra plus de 2 tonnes et un pays dont le revenu est de 20 000 \$ par habiatnt plus de 6 tonnes !
+
+

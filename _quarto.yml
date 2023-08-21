@@ -3,21 +3,23 @@ project:
   output-dir: docs
 render:
       - index.qmd
-      - MOD1_Yquanti_001.qmd
-      - MOD1_Yquanti_004.qmd
-      - MOD1_Yquanti_002.qmd
-      - MOD1_Yquanti_003.qmd
-      - MOD1_Yquanti_005.qmd
+      - MOD1_Yquanti_intro.qmd
+      - MOD1_Yquanti_cours.qmd
+      - MOD1_Yquanti_exo1.qmd
+      - MOD1_Yquanti_exo2.qmd
+      - MOD1_Yquanti_exo3.qmd
+      - MOD1_Yquanti_exo4.qmd
 
 website:
   title: "Modélisation d'une variable quantitative"
   navbar:
     left:
-      - MOD1_Yquanti_001.qmd
-      - MOD1_Yquanti_004.qmd
-      - MOD1_Yquanti_002.qmd
-      - MOD1_Yquanti_003.qmd
-      - MOD1_Yquanti_005.qmd
+      - MOD1_Yquanti_intro.qmd
+      - MOD1_Yquanti_cours.qmd
+      - MOD1_Yquanti_exo1.qmd
+      - MOD1_Yquanti_exo2.qmd
+      - MOD1_Yquanti_exo3.qmd
+      - MOD1_Yquanti_exo4.qmd
 
 format:
   html:

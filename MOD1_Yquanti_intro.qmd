@@ -1,0 +1,447 @@
+---
+title: "Introduction : Les précipitations en Californie"
+author: "Claude Grasland & Nadege Gbetoton Djossou "
+format: html
+embed-resources: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,comment = "",warning = FALSE,error = FALSE,message = FALSE)
+# packages utilitaires
+library(knitr)
+library(dplyr)
+library(readxl)
+
+# packages cartographiques
+library(sf)
+library(leaflet)
+library(htmltools)
+
+# packages graphiques
+library(ggplot2)
+library(ggrepel)
+
+# Formatage des sorties de régression
+library(pander)
+library(memisc)
+library(stargazer)
+```
+
+## Objectif
+
+L'objectif de ce chapitre introductif est de présenter de façon non technique les objectifs du module en s'appuyant sur un célèbre exemple pédagogique mis au point par le géographe P.J. Taylor en 1980. Bien qu'il ne concerne pas directement les pays africains ou la France, cet exemple a été retenu pour l'EE CIST 2023 car l'expérience montre qu'il est particulièrement efficace pour l'apprentissage des mécanismes logiques de construction d'un modèle de régression multiple. La publication originale étant difficile à trouver, nous avons créé un lien sur le site de l'EE pour son téléchargement mais nous en rappelons ici la référence complète :
+
+-   **P. J. Taylor, 1980**, A Pedagogic Application of Multiple Regression Analysis: Precipitation in California, *Geography ,Vol. 65, No. 3, pp. 203-212* Published by: Geographical Association, <https://www.jstor.org/stable/40569273>
+
+Toute en reprenant l'essentiel de la démonstration de l'auteur, nous allons toutefois adapter sa démarche sur plusieurs points :
+
+-   traduction en français (!)
+-   développement plus important de la partie univariée
+-   reprise de la cartographie initiale de l'article
+-   réalisation de tous les calculs avec R
+
+## A. Introduction
+
+### Objectifs de la régression multiple
+
+La régression multiple est une méthode permettant de décrire comment les variations d'une phénomène sont reliés aux variations d'un ou plusieur autres phénomènes. On suppose en général que le premier phénomène est la variable *à expliquer* (qui sera notée $Y$) et que les autres phénomènes sont des variables *explicatives* (qui seront notées $X_1...X_n$). On suppose donc que les variations de ces variables explicatives "produisent", "déterminent" ou même "causent" les variations de la variable à expliquer.
+
+### Corrélation et causalité
+
+Dans l'exemple qui va suivre, les relations de causalité sont assez faciles à démontrer car elles reposent sur des phénomènes physiques bien établis tels que le refroidissement de la température avec l'altitude ou la direction générale de la circulation des masses d'air d'ouest en est dans les zones de moyenne latitude. Mais il faut d'emblée souligner que dans les exemples qui seront analysés par la suite de ce chapitre on sera confronté à des situations moins simples et pour lesquelles il n'est pas toujours évident d'identifier de façon absolue le sens de la relation de causalité entre la variable $Y$ et les autres variables $X_1...X_n$. Dans certains cas, on est plutôt en situation de *covariation* ce qui signifie que l'onpeut *prédire* la valeur d'un indicateur en fonction d'un autre sans pour autant pouvoir affirmer avec certitude lequel est la cause et l'autre la conséquence.
+
+### Une approche non technique
+
+Le but de ce chapitre d'introduction est de présenter le principe de la régression multiple de façon volontairement non technique afin de permettre aux étudiants de comprendre les rudiments de la méthode sans être immédiatement forcés d'en saisir les détails dans toute leur sophistication. Dit autrement , il s'agit de leur donner *envie d'apprendre* la technique en leur faisant saisir de façon intuitive tout son intérêt et toute sa puissance.
+
+### Un problème exemplaire
+
+Bien que l'exemple retenu par P.J. Taylor n'ait pas d'ambition scientifique (il concerne des faits bien connus des géographes et des climatologues), il est suffisamment exemplaire pour apparaître d'emblée intéressant à l'ensemble des géographes et - nous l'espérons - des chercheurs d'autres disciplines. Les prédictions météorologiques sont en effet un souci quotidien dans l'ensemble des pays du monde et les précipitations ont une importance de plus en plus vitale dans une période d'accélération du changement climatique.
+
+Il serait d'ailleurs intéressant de voir si on peut au cours de l'EE CIST 2023 actualiser les données de Taylor à près d'un demi-siècle de distance. Il fait en effet peu de doute que les préciptations en Californie ont certainement beaucoup changé depuis les années 1970...
+
+## B. Données
+
+Dans cette section, nous présentons les variables contenues dans le tableau de données, la localisatiion géographique des stations et enfin les hypothèses concernant les relations de causalité ou de covariations.
+
+### Le tableau de données
+
+Le tableau original de Taylor (1980) a été légèrement modifié afin de le rendre plus familier pour des lecteurs francophones. Il s'agit uniquement de transformation des unités de mesure afin que les précipitations soient désormais en millimètres (et non pas en pouces), les altitudes en mètres (et non pas en pieds), les distances à la mer en (kilomètres) et non pas en miles. Ces transformations ne modifient normalement pas les résultats mais facilitent la transmission pour un public moins familier des mesures anglo-saxonnes.
+
+```{r}
+don <- read_excel("PRE-CALIF-1965/data/California_data.xls")
+kable(don,caption = "Les précipitations en Californie vers 1960")
+```
+
+-   **CODE** : Code de la station
+-   **NOM** : Nom de la station
+-   **PRE** : Précipitations annuelles (en millimètres)
+-   **ALT** : Altitude (en mètres)
+-   **DIS** : Distance à la mer (en kilomètres)
+-   **ABR** : Situation d'abri par rapport aux vents dominants
+-   **LAT** : Latitude (en degrés décimaux de latitude nord)
+-   **LNG** : Longitude (en dégrés décimaux)
+
+### Localisation
+
+Les différentes stations météorologiques peuvent être localisées sur une carte interactive si on dispose d'une connexion internet et si le document est enregistré au format .html. Il suffit alors de cliquer sur une station pour retrouver l'ensemble des informations du tableau. On aplacé en fonds d'écran un fonds de carte indiquant le relief ce qui permet de mieux comprendre la signification de la variable ABR qui indique si la station est face au vent d'ouest (ABR = "Non") ou si elle se trouve sur un versant qui tourne le dos à la mer et reçois alors moins de précipitations (ABR = "Oui").
+
+```{r}
+
+cal<-st_read("PRE-CALIF-1965/shp/CA_State_TIGER2016.shp", quiet=T)
+cal<-st_transform(cal, crs=4326)
+
+
+# Préparation des popups
+      mypopups <- lapply(seq(nrow(don)), function(i) {
+      paste0(  paste("Code                : ",don$CODE[i]), '<br>',
+               paste("Nom                 : " ,don$NOM[i]), '<br>', 
+               paste("Précipitations (mm) : " ,don$PRE[i]), '<br>', 
+               paste("Altitude (m)        : " ,don$ALT[i]), '<br>',   
+               paste("Dist. à la mer (km) : ", don$DIS[i]), '<br>',  
+               paste("Situation d'abri    : ", don$ABR[i]), '<br>',    
+               paste("Latitude  (degrés)  : ", don$LAT[i]), '<br>', 
+               paste("Longitude (degrés)  : ", don$LNG[i])
+            ) 
+            })
+      mypopups<-lapply(mypopups, htmltools::HTML)
+
+leaflet(data=cal) %>% addProviderTiles("Esri.WorldPhysical") %>% addPolygons(data = cal,weight = 1,fill = "blue",fillOpacity=0.1) %>%
+  addMarkers(data=don,lng=~LNG,lat=~LAT,label = ~NOM,popup = mypopups)
+```
+
+Dans le cas où l'on ne dispose pas de connexion internet, on se contentera d'une carte statique indiquant juste la position des stations avec leur code.
+
+```{r, fig.cap = "Code des stations météorologiques", fig.height = 4}
+cal<-st_read("PRE-CALIF-1965/shp/CA_State_TIGER2016.shp", quiet=T)
+cal<-st_transform(cal,crs=4326)
+
+p1<-ggplot(data = cal) +
+geom_sf(size=0.2) +
+geom_point(data= don,aes(x=LNG, y=LAT),color = "black",size=4)+
+  geom_text(data=don, aes(x=LNG, y=LAT, label=CODE),color="white",size=2.5, fontface="bold")+
+  theme_light()+ 
+#  ggtitle("Code et localisation des 30 stations")+
+  scale_x_continuous("Longitude")+
+  scale_y_continuous("Latitude")
+p1
+```
+
+### Carte des précipitations
+
+La carte des précipitations ne montrent pas de schéma spatial d'organisation très évident de prime abord. La station n° 29 qui affiche les précipitations maximales (*Crescent City, 1900 mm*) se situe sur la côte au nord-ouest tandis que la station n°28 qui affiche les précipitations les plus faibles se situe à l'intérieur au sud-est (*Death Valley, 40 mm*). Entre ces deux extrêmes, on trouve de fortes différences entre stations parfois très proches dans l'espace. Ainsi, la station n°9 (*Giant Forest*) reçoit 1080 mm de pluie par an alors que la station n°11 (*Fresno*) qui est située à moins de 100 km ne reçoit que 240 mm par an. 
+
+```{r, fig.cap = "carte des précipitations", fig.height=4}
+p2<-ggplot(data = cal) +
+geom_sf(size=0.2,fill="lightyellow") +
+geom_point(data= don,aes(x=LNG, y=LAT, color=PRE),size=4)+
+#    geom_text(data=don, aes(x=LNG, y=LAT, label=CODE),color="black",size=1.5)+
+  geom_text_repel(data=don, aes(x=LNG, y=LAT, label=PRE),color="black",size=2, fontface="italic")+
+  theme_light()+ 
+ # ggtitle("Carte des précipitations")+
+  scale_x_continuous("Longitude")+
+  scale_y_continuous("Latitude")+ 
+  scale_color_gradient(low="white",high="blue") 
+p2
+```
+
+
+
+
+## C. Hypothèses bivariées
+
+Dans le cadre de l'exemple des précipitations en Californie, on peut émettre un certain nombre d'hypothèses causales sur les déterminants des précipitations qui obéissent aux règles du cycle de l'eau dans les régions de moyenne latitude soumises à une circulation dominante des masses d'airs d'ouest en est. L'exemple serait évidemment différent si l'on analysait les précipitations dans des régions de hautes ou basses latitudes.  
+
+```{r,fig.width=5,fig.cap = "Le cycle de l'eau dans les régions de moyenne latitude",fig.subcap = "Source : manuel scolaire"}
+knitr::include_graphics("PRE-CALIF-1965/img/cycle_eau.jpg",dpi = 200)
+```
+
+### H1 : Les précipitations augmentent avec l'altitude**
+
+Le phénomène s'explique par la diminution de la température de -0.6°C tous les 100 mètres. Une masse d'air chargée d'une certaine quantité d'humidité va se transformer en pluie lorsque la température sera descendue en dessous d'un certain seuil. Cette hypothèse est-elle vérifiée sur le plan statistique
+
+
+```{r}
+x<-cor.test(don$PRE,don$ALT)
+resul<-paste("r = ",round(x$estimate,3),
+             ", df = ",x$parameter,
+             ", t = ",round(x$statistic,3),
+             ", p.value = ",round(x$p.value,4),sep="")
+ggplot(data = don, aes(x = ALT, y = PRE, label=CODE)) +
+        geom_point(color = "red") +
+        geom_text_repel(color="black",cex=2)+
+        geom_smooth(method = "lm", se = FALSE, col = "blue",lwd=0.5) +
+        labs(title = "Test de l'hypothèse H1",
+             subtitle = resul,
+             x = "X1 : Altitude en mètres",
+             y = "Y : Précipitations en mm")
+```
+
+On décèle en effet une légère tendance à l'accroissement des précipitations avec l'altitude, mais la relation observée n'est pas très forte et comporte de nombreuses exceptions. Au total, on ne peut mettre en évidence un effet significatif. 
+
+
+
+### H2 : Les précipitations augmentent avec la latitude
+
+Dans le cas de la Californie qui est très étirée dans le sens Nord-Sud, les précipitations seront en moyenne plus importante au Nord qu'au Sud car les dépressions d'Ouest y circulent plus fréquemment. Cette hypothèse est-elle vérifiée sur le plan statistique ?
+
+```{r}
+x<-cor.test(don$PRE,don$LAT)
+resul<-paste("r = ",round(x$estimate,3),
+             ", df = ",x$parameter,
+             ", t = ",round(x$statistic,3),
+             ", p.value = ",round(x$p.value,4),sep="")
+ggplot(data = don, aes(x = LAT, y = PRE, label=CODE)) +
+        geom_point(color = "red") +
+        geom_text_repel(color="black",cex=2)+
+        geom_smooth(method = "lm", se = FALSE, col = "blue",lwd=0.5) +
+        labs(title = "Test de l'hypothèse H2",
+             subtitle = resul,
+             x = "X2 : Latitude en degrés",
+             y = "Y : Précipitations en mm")
+```
+
+Nous obtenons une relation beaucoup plus forte que précédemment qui est nettement significative (r = 0.58, p <0.001). Il demeure certes des résidus important et l'on peut être par exemple intrigué par le cas des stations n°19 (*Tule Lake*) et n°29 (*Crescent City*) qui affichent des différences considérables de précipitations alors qu'elles sont situées pratiquement à la même latitude.
+
+
+
+### H3 : les précipitations diminuent avec le distance à la mer
+
+Les masses d'airs circulant d'Ouest en Est vont perdre progressivement leur charge en humidité sur les premiers reliefs qu'elles vont rencontrer. Les chaînes de montagne éloignées de la côte recevront moins de précipitations à altitude égale.
+
+```{r}
+x<-cor.test(don$PRE,don$DIS)
+resul<-paste("r = ",round(x$estimate,3),
+             ", df = ",x$parameter,
+             ", t = ",round(x$statistic,3),
+             ", p.value = ",round(x$p.value,4),sep="")
+ggplot(data = don, aes(x = DIS, y = PRE, label=CODE)) +
+        geom_point(color = "red") +
+        geom_text_repel(color="black",cex=2)+
+        geom_smooth(method = "lm", se = FALSE, col = "blue",lwd=0.5) +
+        labs(title = "Test de l'hypothèse H3",
+             subtitle = resul,
+             x = "X3 : Distance à la mer en km",
+             y = "Y : Précipitations en mm")
+```
+
+La relation est bien négative comme nous l'avions prévu mais elle demeure nettement trop faible pour être significative (r = -0.21, p = 0.27). En dehors de l'exception remarquable constituée par la station n°29 (*Crescent City*), on remarque le groupe des stations n°5 (*Soda Springs*), 9 (*Giant Forest*) et 16 (*Mineral*) qui sont toutes caractérisées par un fort niveau de précipitation alors même qu'elles sont éloignées de plus de 200 km de la mer.  Un retour au tableau montre que toutes ces stations ont pour point commun d'être localisée à une altitude supérieure à 1000 mètres. On peut alors commencer à deviner que si l'altitude et la distancd à la mer ne so,nt pas significatives de façon isolée, elles vont peut-être le devenir si on les combine ensemble. 
+
+
+### H4 : Les stations en situation d'abri reçoivent moins de précipitation
+
+En effet les nuages tendent à déverser leur pluie sur le premier versant tournée vers la mer et arrosent moins les versants qui lui tournent le dos ou les dépressions. 
+
+```{r}
+x<-cor.test(don$PRE,as.numeric(don$ABR=="OUI"))
+resul<-paste("r = ",round(x$estimate,3),
+             ", df = ",x$parameter,
+             ", t = ",round(x$statistic,3),
+             ", p.value = ",round(x$p.value,4),sep="")
+ggplot(data = don, aes(x = ABR, y = PRE, label=CODE)) + 
+         geom_boxplot() +
+#        geom_point(color = "red") +
+ #       geom_text_repel(color="black",cex=2)+
+#        geom_smooth(method = "lm", se = FALSE, col = "blue",lwd=0.5) +
+        labs(title = "Test de l'hypothèse H4",
+             subtitle = resul,
+             x = "X4 : Situation d'abri",
+             y = "Y : Précipitations en mm")
+```
+
+Cette dernière hypothèse est un peu différente des précédentes puisqu'elle met en jeu une variable qualitative de type binaire, mais on peut comparer ses résultats avec les précédents en utilisant une astuce statistique consistant à transformer les modalités "OUI" en 1 et les modalités "NON" en 0. Malgré son caractère sommaire, cette variable dichotomique obtient le plus fort niveau de corrélation associé à une très forte significativité (r =  +0.60, p < 0.001)
+
+
+### Discussion
+
+A s'en tenir aux résultats de l'analyse bivariée, on pourrait supposer que seules deux des quatre variables explicatives jouent un rôle dans la prévision et l'explication du niveau des précipitations. ce qui nous conduirait à formuler un modèle PRE = f(LAT,ABR) dans lequel on aurait retiré les variables ALT et DIS en raison de leur absence de significativité lorsqu'elles sont introduites de façon isolée. 
+
+On devine cependant que ces différents facteurs ne sont pas indépendant les uns des autres et qu'ils doivent être prise en compte simultanément si l'on veut rendre compte correctement du phénomène étudié.  Deux cas intéressant sur le plan théorique peuvent d'ailleurs se produire :
+
+- Une variable explicative dont l'effet est significatif lorsqu'elle est utilisée de façon isolée devient non-significative lorsqu'on la combine avec d'autres variables explicatives.
+
+- Une variable explicative dont l'effet est non-significatif lorsqu'elle est utilisée de façon isolée devient significative lorsqu'on la combine avec d'autres variables explicatives.
+
+
+
+**Ce n'est donc qu'en introduisant simultanément l'ensemble des variables dans un même modèle qu'on pourra véritablement évaluer leurs pouvoirs explicatifs respectifs.**
+
+
+## D. Modélisation 
+
+Conformément aux objectifs de cette introduction, nous n'allons pas aborder immédiatement les aspects proprement statistiques de la régression linéaire. Nous allons plutôt suivre une démarche hypothético-déductive de construction progressive d'un modèle explicatif selon le schéma proposé par F. Durand-Dastès (1992) dans le texte intitulé "Le particulier et le général en géographie" et dont la logique est présentée ci-dessous. 
+
+
+```{r,fig.width=5,fig.cap = "La méthode hypothetico déductive (Durand-Dastès F., 1990) ",fig.subcap = "Source : manuel scolaire"}
+knitr::include_graphics("PRE-CALIF-1965/img/hypothetico_deductif.png",dpi = 200)
+```
+
+
+
+
+### Modèle 1 : Latitude + Altitude + Distance
+
+Dans ce premier modèle nous introduisons les trois variables explicatives correspondant aux hypothèses H1, H2 et H3 que nous avons discuté dans la section précédente. Les résultats de la modélisation statsistique apparaissent sous la forme d'un tableau de prime abord complexe à comprendre pour le non spécialiste.
+
+
+```{r, results="asis"}
+mod1<-lm(PRE~LAT+ALT+DIS,data = don)
+stargazer(mod1,title = "Paramètres du modèle 1",header = F,
+                    covariate.labels = c("Latitude (degrés N)","Altitude (m)","Distance à la mer (km)"),
+          dep.var.labels = "Précipitations (en mm)",
+          type = "html"
+          )
+```
+
+On peut traduire les résultats sous la forme de l'équation suivante qui donne les paramètres de prédiction $PRE_i$ d'une station $i$ en fonction de sa latitude $LAT_i$, de son altitude $ALT_i$ et de sa distance à la mer $DIS_i$ avec une erreur égale à $\epsilon_i$ :
+
+$PRE_i = -2609 + (87.9 \times LAT_i) + (0.101 \times ALT_i) - (2.27 \times DIS_i) + \epsilon_i$
+
+Par exemple, la station n°1 (*Eureka*) est située à latitude de 40.8 degrés avvec une altitude de 10 mètres et une distance à la mer de 2 kilomètres. Le modèle prévoit donc que ses précipitations devraient être approximativement égales à :
+
+
+$PRE_1 = -2609 + (87.9 \times 40.8) + (0.101 \times 10) - (2.27 \times 2) = 975.6$
+
+La valeur observée est légèrement plus forte que la prédiction (1010) ce quui donne une erreur résiduelle $\epsilon_1$ égale à 1010-975.6 = +34.4. Comme dans un modèle de régression simple, on peut établir un tableau de résultat présentant les valeurs observées, les valeurs estimées et les résidus qui correspondent à la différence entre les deux. 
+
+```{r}
+code<-don$CODE
+nom<-don$NOM
+obs<-don$PRE
+est<-mod1$fitted.values
+res<-obs-est
+tab<-data.frame(code,nom,obs,est, res)
+kable(tab, digits=1, col.names = c("Code","Nom","Valeur observée", "Valeur estimée", "résidu"),
+      caption = "Valeurs estimées et résiduelles du modèle 1")
+
+```
+
+En comparant la variance des résidus à la variance initiale de la variable dépendante, on peut calculer le pouvoir explicatif de notre modèle qui est le carré du coefficient de corrélation multiple noté en abrégé $R^2$. Dans notre exemple ce pouvoir explicatif est environ de 60% ce qui signifie que près de 40% des différences de précipitations entre les stations demeurent à ce stade inexpliquée par les trois variables que nous avons introduites dans le modèle. Si certaines stations bénéficient de prédiction quasi pafaites comme Fresno (n°11) ou San Diego (n°26), d'autres affichent des erreurs considérables d'estimation. C'est notamment le cas des deux stations situées le plus au nord : Tule Lake (n°19) et Crescent City (n°29).
+
+Une cartographie des résidus peut alors être entreprise afin de vérifier si les erreurs se distribuent au hasard dans l'espace où si elles se regroupent dans certaines situations particulières pouvant révéler l'existence d'une autre variable explicative que l'on n'aurait pas aperçue de prime abord. 
+
+
+```{r, fig.cap = "Résidus du modèle 1", fig.height=4}
+don$resmod1<-round(tab$res,0)
+p3<-ggplot(data = cal) +
+geom_sf(size=0.2,fill="gray90") +
+geom_point(data= don,aes(x=LNG, y=LAT, color=resmod1, shape=ABR),size=4)+
+  labs(color = "Résidus", shape = "Situation d'abri")+
+#    geom_text(data=don, aes(x=LNG, y=LAT, label=CODE),color="black",size=1.5)+
+  geom_text_repel(data=don, aes(x=LNG, y=LAT, label=resmod1),color="black",size=2, fontface="italic")+
+  theme_light()+ 
+ # ggtitle("Carte des précipitations")+
+  scale_x_continuous("Longitude")+
+  scale_y_continuous("Latitude")+ 
+  scale_color_gradient2(low="red",mid="white",high="blue",midpoint=0) 
+p3
+```
+
+On remarque sur la carte que les résidus positifs et négatifs ne se distribuent pas au hasard mais semblent liés aux différentes chaînes de montagnes qui traversent la Californie. On remarque plus précisément que les stations qui sont tournées vers l'ouest face à l'Océan ont en général des résidus positifs ce qui signifie que notre modèle a sous-estime leur quantité de pluie. Inversement, les stations tournées vers l'est et situées en position d'abri ont en général des résidus négtifs, ce qui signifie que notre modèle a surestimé leurs précipitations. Même si la règle comporte des exceptions (certaines stations en situation d'abri ont des résidus positifs), elle semble suffisamement générale pour justifier l'introduction d'une nouvelle variable dans le modèle.
+
+
+### Modèle 2 : Latitude + Altitude + Distance + Abri
+
+La variable situation d'abri étant qualitative, elle est transformée en une variable quantitative binaire (*dummy variable*) où la modalité 1 correspond à la présence du phénomène d'abri et la modalité 0 à son absence. Le modèle va donc rajouter un paramètre supplémentaire dans l'équation pour indiqiuer de combien il faut accroître ou réduire les précipitations en cas de situation d'abri.
+
+
+```{r, results="asis"}
+mod2<-lm(PRE~LAT+ALT+DIS+ABR,data = don)
+stargazer(mod2,title = "Paramètres du modèle 2",header = F,
+          covariate.labels = c("Latitude (degrés N)","Altitude (m)","Distance à la mer (km)", "Abri (Oui/Non)"),
+          dep.var.labels = "Précipitations (en mm)",
+          type="html"
+          )
+```
+
+
+La nouvelle équation du modèle peut maintenant s'écrire : 
+
+$PRE_i = -2493 + (87.9 \times LAT_i) + (0.183 \times ALT_i) - (0.85 \times DIS_i) - (401 \times ABR_i)+ \epsilon_i$
+
+Le paramètre de la variable $ABR$ indique que les stations situées en position d'abri ont des précipitations plus faible d'environ 400 mm que les stations tournées vers l'ouest face aux vents dominants. L'ajout de ce paramètre augmente considérablement le pouvoir explicatif du modèle puisque son coefficient de détermination  $R^2$ passe de 60.0% dans le modèle 1 à 73.7% dans le modèle 2. 
+
+Mais l'ajout de cette nouvelle variable modifie aussi le rôle des trois variables précédentes. Si l'effet de la latitude ne change pas et demeure très significatif, il n'en va pas de même pour la variable altitude. Alors que le modèle 1 suggérait un accroissement des pluies de 0.33 mm de pluies chaque fois que l'altitude auglente d'un mètre, le modèle 2 indique un effet plus limité de 0.183 mm de pluie par mètre d'altitude. Cettevariable demeure significative mais moins que précédemment. Quand à la variable distance à la mer, elle apparaît désormais non significative et pourrait être retiré du modèle. 
+
+Ces modifications suggèrent que l'effet d'abri est corrélé avec les deux variables altitude et distance à la mer ce que confirme l'observation empirique. Leur pouvoir explicatif est donc diminué car il correspondait - au moins en partie - à l'effet d'une variable au pouvoir explicatif plus puissant.    
+
+
+```{r}
+code<-don$CODE
+nom<-don$NOM
+obs<-don$PRE
+est<-mod2$fitted.values
+res<-obs-est
+tab2<-data.frame(code,nom,obs,est, res)
+kable(tab2, digits=1, col.names = c("Code","Nom","Valeur observée", "Valeur estimée", "résidu"),
+      caption = "Valeurs estimées et résiduelles du modèle 2")
+
+```
+
+
+
+```{r, fig.cap = "Résidus du modèle 2", fig.height=4}
+don$resmod2<-round(tab2$res,0)
+p3<-ggplot(data = cal) +
+geom_sf(size=0.2,fill="gray90") +
+geom_point(data= don,aes(x=LNG, y=LAT, color=resmod2, shape=ABR),size=4)+
+  labs(color = "Résidus", shape = "Situation d'abri")+
+#    geom_text(data=don, aes(x=LNG, y=LAT, label=CODE),color="black",size=1.5)+
+  geom_text_repel(data=don, aes(x=LNG, y=LAT, label=resmod1),color="black",size=2, fontface="italic")+
+  theme_light()+ 
+ # ggtitle("Carte des précipitations")+
+  scale_x_continuous("Longitude")+
+  scale_y_continuous("Latitude")+ 
+  scale_color_gradient2(low="red",mid="white",high="blue",midpoint=0) 
+p3
+```
+
+L'examen du tableau et de la carte des résidus montre une amélioration générale des prédictions, même si dans certains cas une station peut voir son erreur augmenter lorsqu'on passe du modèle 1 au modèle 2. Il n'en demeure pas moins que les deux stations du nord de la Californie continuent à afficher des résidus exceptionnellement forts, l'un positif (*Crescent City*) et l'autre négatif (*Tule Lake*) ce qui laisse penser qu'elles relèvent d'un autre modèle climatique que celui des autres stations de Californie. 
+
+Ceci conduit à proposer un troisième modèle où l'on ne conserve que 28 stations en excluant les deux stations septentrionales.
+
+
+### Modèle 3 : idem mais sans les deux stations du nord. 
+
+Ce dernier modèle possède un pouvoir explicatif remarquable puisque son coefficient de détermination $R^2$ est de 89% ce qui signifie qu'à peine 10% des variations de précipitations entre les stations demeurent inexpliquées. On note de plus que les quatre variables sont désormais toutes très significatives, ce qui n'était pas le cas dans le modèle 2 où les variables altitude et distance à la mer avaient vu leur significativité fortement réduite par rapport au modèle 1. On peut donc conclure que nous disposons désormais d'un modèle d'excellente qualité pour prévoir les précipitations en Californie (exception faite de sa partie la plus septentrionale).
+
+Notre modèle permet de voir l'effet de chacune de nos quatre variables explicatives, non plus de façon isolée mais **toutes choses égales quant à l'effet des trois autres** :
+
+- **Latitude** : les précipitations augmentent en moyenne de 78 mm chaque fois que l'on se déplace vers le nord d'un degré. 
+- **Altitude** : les précipitations augmentent en moyenne de 27.5 mm chaque fois que l'altitude augmente de 100 mètre. 
+- **Distance à la mer** : les précipitations diminuent 9 mm chaque fois que l'on s'éloigne de la côte Pacifique de 10 km .
+- **Situation d'abri** : les précipitations sont en moyenne plus faible de 285 mm dans les stations situées à l'abri des vents d'ouest. 
+
+Sur la base de ces résultats on pourrait théoriquement produire des prévisions relativement fiable d'un point quelconque de Californie qui ne disposerait pas de station météorologique mais où l'on connaîtrait chacun des paramètres. 
+
+
+```{r, results="asis"}
+don2<-don[-c(19,29),]
+mod3<-lm(PRE~LAT+ALT+DIS+ABR,data = don2)
+stargazer(mod3,title = "Paramètres du modèle 3",header = F,
+          covariate.labels = c("Latitude (degrés N)","Altitude (m)","Distance à la mer (km)", "Abri (Oui/Non)"),
+          dep.var.labels = "Précipitations (en mm)",
+          type="html"
+          )
+```
+
+### Synthèse et discussion
+
+On peut résumer les étapes de notre démarche hypothético-déductive à l'aide d'un tableau final qui regroupe les paramètres des trois modèles et permet de voir comment la qualité générale de l'ajustement augmente et comment les paramètres de chacune des variables explicatives évolue en fonction de la présence d'autres variables ou de l'exclusion de valeurs exceptionnelles. Nous procédons ce faisant à un *test de stabilité des résultats* qui permet de repérer les facteurs explicatifs dont l'effet est indiscutable (latitude, effet d'abri) et ceux dont la significativité est plus variable et dont les paramètres peuvent se modifier plus ou moins fortement (altitude, distance à la mer).
+
+
+```{r, results="asis"}
+
+stargazer(mod1,mod2,mod3,title = "Synthèse des modèles",header = F,
+          covariate.labels = c("Latitude (degrés N)","Altitude (m)","Distance à la mer (km)", "Abri (Oui/Non)"),
+          dep.var.labels = "Précipitations (en mm)",
+          type="html"
+          )
+```
+
+Concernant la stratégie adoptée dans le modèle 3 (retrait de deux valeurs exceptionnelles) il est important de préciser qu'elle fait l'objet de vives controverses entre les spécialistes de modélisation. Certains auteurs considèrent comme sacrilège de retirer la moindre valeur du tableau initial, estimant qu'il s'agit d'une forme de "tricherie" scientifique. D'autres auteurs y voient au contraire une nécessité dès lors que les valeurs exceptionnelles perturbent l'ensemble des résultats et mettent en péril les conclusions qu'on  pourrait tirer.  Laissons sur ce point la parole à l'auteur de l'étude sur les précipitations en Californie : 
+
+
+> "*We argue that our variables behave differently in the extreme north and so we cannot expect to model that region within the same analysis as the rest of the state. Hence we will omit these two stations and proceed with a third model incorporating just 28 stations. Such a strategy is certainly controversial, for a researcher should not pick and choose what observations include in this way other than in exceptional circumstances. The residuals for stations and 29 are exceptional. (A useful next stage would be to collect data for Washington and Oregon and see whether these two stations fit consistently into a new "north-west region" multiple regression equation."* (**P.J. Taylor, 1980**)
+

@@ -1,0 +1,392 @@
+---
+title: "Exo 3 : Revenus des ménages du Bénin"
+author: "Claude Grasland & Nadege Gbetoton Djossou "
+format: html
+embed-resources: true
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning = FALSE)
+```
+
+
+```{r packages}
+library(knitr)
+library(dplyr, quietly = TRUE,warn.conflicts = F)
+library(car,warn.conflicts = F,quietly=T)
+library(readxl)
+library(sf)
+library(mapsf)
+
+```
+
+L'objectif de la présente est d'analyser un tableau de **données d'enquête** permettant de décrire les revenus des ménages et un certain nombre d'indicateurs de confort en fonction d'attributs du chef de ménage ou du ménage proprement dit. 
+
+
+Nadège : (...)
+
+## A. Données
+
+Nadège : (...)
+
+### Importation
+
+On importe les données depuis Excel
+
+```{r}
+don <- read_excel("FIN-BENIN-2018/data/select.xls",sheet = "data")
+kable(head(don), caption = "Premières lignes du tableau")
+```
+
+### Liste des variables
+
+```{r}
+meta <- read_excel("FIN-BENIN-2018/data/select.xls",sheet = "meta")
+kable(meta,caption = "Liste des variables")
+```
+
+
+**N.B.1**: Nous avons éliminé du tableau initial les individus dont le revenu par personne se situait dans les 5% les plus élevés et les 5% les plus faibles, ainsi que les données incomplètes. Il ne reste donc plus que 4685 observations contre un peu plus de 6000 dans le tableau initial. La pondération n'est donc plus correcte pour effectuer des redressements et elle ne sera pas utilisée. 
+
+**N.B.2**: Le revenu total du ménage a été obtenu soit de façon absolue (la personne donne un chiffre unique), soit par tranche selon une grille de réponse. Dans ce dernier cas, nous avons pris comme valeur le centre de la tranche. Pour les tranches extrêmes nous avons alloué la valeur 20000 pour la modalité "*moins de 40000*" et la valeur 1000000 popur la modalité "*plus de 750000*". Ceci entraîne donc une concentration artificielle des valeurs autour de 20000.
+
+Nadège (...)
+
+### Ajout de nouvelles variables
+
+Nous construisons à partir du tableau deux nouvelles variables :
+
+- **hou_inc_cap** : revenu moyen par habitant d'un ménage
+- **hou_roo_occ** : nombre d'individu par pièces de couchage
+
+```{r}
+don$hou_inc_cap <- don$hou_inc/don$hou_mbr
+don$hou_roo_occ <- don$hou_mbr/don$hou_roo
+```
+
+
+### Sélection 
+
+On n'opère aucune sélection dans l'immédiat
+
+```{r}
+sel<-don
+```
+
+nadège ? (possibilité de réduire l'échantillon ?)
+
+### Paramètres principaux
+
+On résume rapidement les variables retenues 
+
+```{r}
+summary(sel)
+
+```
+
+
+### Fonds de carte
+
+Nous disposons d'un fonds de carte (source : IPUMS) permettant de cartographier éventuellement les résultats de certaines analyses par département.
+
+```{r}
+map<-st_read("FIN-BENIN-2018/shp/geo1_bj2013.shp", quiet=T)
+```
+
+
+Il permet d'ores et déjà de repérer la position des départements
+
+```{r,fig.height=8,fig.width=6}
+
+mf_map(map, type="typo",var="ADMIN_NAME")
+mf_label(map,var = "DEPT2013" )
+mf_layout(title = "Les 12 départements du Bénin",credits = "IPUMS",arrow = F,frame =T)
+```
+
+
+## Modélisation du revenu total des ménages
+
+On se propose d'expliquer la variable **hou_inc** qui mesure le revenu total des ménages en fonction du nombre de membres du ménage.
+
+### Forme de la distribution
+
+```{r}
+Y<-sel$hou_inc
+labelY<-"Revenu total "
+
+hist(Y, main=labelY,breaks = 12)
+hist(log10(Y), main=labelY, xlab = "logarithme décimal", breaks=12)
+```
+
+La distribution comporte une forte anomalie statistique liée au fait que nous avons attribué la valeur 20000 CFA à tous les ménages gagnant "*moins de 40000 CFA*".
+
+### Valeurs exceptionnelles
+
+```{r}
+boxplot(Y, main=labelY, horizontal=T)
+boxplot(log(Y), main=labelY, horizontal=T, xlab = "Logarithme décimal")
+```
+
+La distribution comporte des valeurs exceptionnelles mais celles-ci disparaissent pour la plupart après transformation logarithmique.
+
+### Normalité
+
+```{r}
+shapiro.test(Y)
+shapiro.test(log(Y))
+```
+
+La distribution n'est pas gaussienne et elle ne le devient pas non plus après transformation logarithmique en raison de la cocnentration des valeurs autour de 20000. On décide de poursuivre l'analyse en utilisant désormais le log. du revenu.
+
+
+
+
+
+
+### Modèle 1 : Ajustement linéaire
+
+On commence par un modèle linéaire de type Y = aX+b
+
+```{r}
+Y<-sel$hou_inc
+labelY <- "revenu total"
+X2<-sel$hou_mbr
+labelX2 <-"nombre de membres du ménage"
+
+mod<-lm(Y~X2)
+summary(mod)
+
+plot(X2,Y, cex=1, col="black",pch=20, xlab=labelX2,ylab=labelY)
+abline(mod,col="red")
+abline(v=mean(X2),lty=2, lwd=2)
+abline(h=mean(Y),lty=2)
+```
+
+La relation est assez forte (r2= 21.1%) mais très significative (p < 0.001). Toutefois elle est visiblement influencée par une valeur exceptionnelle correspondant à un ménage de plus de 45 personnes déclarant un revenu d'un million de CFA. On élimine ce cas exceptionnel  (*outlier*) avant de refaire le calcul :
+
+### Modèle 1-bis : Ajustement linéaire sans outlier
+
+
+```{r}
+sel<-sel %>% filter(hou_inc < 500000)
+
+Y<-sel$hou_inc
+labelY <- "revenu total"
+X2<-sel$hou_mbr
+labelX2 <-"nombre de membres du ménage"
+
+mod<-lm(Y~X2)
+summary(mod)
+
+plot(X2,Y, cex=1, col="black",pch=20, xlab=labelX2,ylab=labelY)
+abline(mod,col="red")
+abline(v=mean(X2),lty=2, lwd=2)
+abline(h=mean(Y),lty=2)
+```
+
+La relation est un peu moins forte (r2 =19%) mais toujours très significative (p < 0.001). Toutefois elle est incorrecte sur le plan statistique car elle comporte visiblement une forte **hétéroscédasticité** (i.e. variance des résidus non homogène). Il faut donc procéder à des transformations logarithmiques sur X et/ou Y.
+
+
+### Modèle 2 : Ajustement exponentiel
+
+On passe à un modèle exponentiel de type log(Y) = aX+b 
+
+```{r}
+
+Y<-log(sel$hou_inc)
+labelY <- "revenu total (log)"
+X2<-sel$hou_mbr
+labelX2 <-"nombre de membres du ménage"
+
+mod<-lm(Y~X2)
+summary(mod)
+
+plot(X2,Y, cex=1, col="black",pch=20, xlab=labelX2,ylab=labelY)
+abline(mod,col="red")
+abline(v=mean(X2),lty=2, lwd=2)
+abline(h=mean(Y),lty=2)
+```
+
+Ce nouveau modèle demeure significatif (p<0.001), explique un peu plus de variance (r2 = 20%) et élimine l'effet de l'hétéroscédasticité. Mais on voit que le nuage de point affiche désormais une courbure ce qui crée une **autocorrélation des résidus** indiquant que le modèle n'est toujours pas correct d'un point de vue statistique.
+
+### Modèle 3 : Ajustement puissance
+
+On passe à un modèle exponentiel de type log(Y) = a.log(X)+b
+
+```{r}
+
+Y<-log(sel$hou_inc)
+labelY <- "revenu total (log)"
+X2<-log(sel$hou_mbr)
+labelX2 <-"nombre de membres du ménage (log)"
+
+mod<-lm(Y~X2)
+summary(mod)
+
+plot(X2,Y, cex=1, col="black",pch=20, xlab=labelX2,ylab=labelY)
+abline(mod,col="red")
+abline(v=mean(X2),lty=2, lwd=2)
+abline(h=mean(Y),lty=2)
+exp(9.624)
+```
+
+
+Le pouvoir explicatif du modèle est toujours très significatif un peu plus élevé que précédemment (r2 = 21.5%) et la plupart des défauts statistiques ont été corrigés même s'ils demeurent des imperfections liées au fait qu'on a utilisé des centres de tranches de revenus comportant une certaine imprécision. L'équation du modèle s'écrit donc sous la forme 
+
+$log(Revenu) = 0.523.log(NBmembres) + 9.624$
+
+Ce que l'on peut transformer en :
+
+$Revenu = exp[0.523.log(NBmembres) + 9.624]$
+
+d'où 
+
+$Revenu = exp(9.624) . (NBmembres)^{0.523}$
+
+et finalement
+
+$Revenu = 15123 . (NBmembres)^{0.523}$
+
+
+Cette équation signifie que le revenu total est en théorie de 15123 CFA pour un ménage d'une personne et qu'il augmente ensuite de façon à peu près proportionnelle à la racine carrée du nombre de membres du ménage (en effet $X^{0.5} = \sqrt{X}$). On peut construire un tableau montrant le revenu attendu des ménages en fonction du nombre de personnes : 
+
+
+```{r}
+nb<-c(1:20)
+inc<-15123*nb**0.523
+df<-data.frame(nb,inc)
+kable(df, 
+      caption = "Revenu des ménages en fonction de leur taille",
+      digits = 0,
+      col.names = c("Taille du ménage","Revenu attendu")
+      )
+```
+
+Ou bien sous forme graphique :
+
+```{r}
+nb<-c(1:40)
+inc<-15123*nb**0.523 / 1000
+plot(nb,inc,
+     type="l",
+     xlab = "Taille du ménage (nb. membres)",
+     ylab = "Revenu du ménage (1000 CFA)",
+     main = "Modélisation du revenu des ménages en fonction de leur taille",
+     col="red")
+grid()
+
+
+```
+
+### Discussion
+
+Compte-tenu du caractère non-linéaire de la relation entre revenu et taille du ménage, il serait peu judicieux de calculer un indicateur tel que le revenu moyen par personne. Il semble plus judicieux de prendre comme indicateur de richesse relative du ménage le rapport entre la valeur observée et la valeur théorique selon le modèle défini ci-dessus. 
+
+```{r}
+sel$hou_rich <- sel$hou_inc/(15123*(sel$hou_mbr**0.523))
+```
+
+
+
+## C. Analyse des déterminants de la richesse relative du ménage
+
+On se propose d'expliquer la variable **hou_rich** qui a été créée à l'étape précédente et qui mesure sa richesse relative, toutes choses égales quant à sa taille.
+
+### Forme de la distribution
+
+```{r}
+Y<-sel$hou_rich
+labelY<-"Richesse relative "
+
+hist(Y, main=labelY,breaks = 12)
+hist(log10(Y), main=labelY, xlab = "logarithme décimal", breaks=12)
+```
+
+La distribution est unimodale mais asymétrique à gauche. Après transformation logarithmique elle apparaît plus symétrique.
+
+### Valeurs exceptionnelles
+
+```{r}
+boxplot(Y, main=labelY, horizontal=T)
+boxplot(log(Y), main=labelY, horizontal=T, xlab = "Logarithme décimal")
+```
+
+La distribution comporte des valeurs exceptionnelles mais celles-ci disparaissent pratiquement après transformation logarithmique.
+
+### Normalité
+
+```{r}
+shapiro.test(Y)
+shapiro.test(log(Y))
+```
+
+- **Commentaire** : La distribution n'est pas gaussienne et elle ne le devient pas non plus après transformation logarithmique en raison de la cocnentration des valeurs autour de 20000 (Cf. introduction). On décide de poursuivre l'analyse en utilisant désormais le log. du revenu
+
+```{r}
+Y<-log(sel$hou_rich)
+labelY<-"Richesse relative (log)"
+```
+
+
+On va tester l'effet de variables indépendantes qualitatives
+
+### Modèle 1 : Les ménages urbains sont-ils plus riches ?
+
+```{r}
+Q1<-as.factor(sel$loc_urb)
+levels(Q1)<-c("Rural","Urbain")
+labelQ1 = "Milieu urbain ou rural"
+
+plot(Y~Q1,cex.axis=0.6, xlab=labelQ1, ylab=labelY)
+
+mod<-lm(Y~Q1)
+summary(mod)
+anova(mod)
+
+
+```
+
+- **Commentaire** : les ménages urbains sont légèrement plus riches que les ménages ruraux. La relation est significative mais son pouvoir explicatif est faible. La différence relative est égale à 0.174 en log soit un rapport de $exp(0.174) = 1.19$ qui implique une richesse supérieure d'environ 19% pour les ménages urbains.
+
+
+
+### Modèle 2 : Les ménages dont le chef est un homme sont-ils plus riches ?
+
+```{r}
+Q2<-as.factor(sel$hea_sex)
+levels(Q2)
+levels(Q2)<-c("Femme","Homme")
+labelQ2 = "Sexe du chef de ménage"
+
+plot(Y~Q2,cex.axis=0.6, xlab=labelQ2, ylab=labelY)
+
+mod<-lm(Y~Q2)
+summary(mod)
+anova(mod)
+
+
+```
+
+- **Commentaire** : les ménages dont le chef est un homme sont légèrement plus riches que les ménages dont le chef est une femme . La relation est significative mais son pouvoir explicatif est faible. La différence relative est égale à 0.126 en log soit un rapport de $exp(0.126) = 1.13$ qui implique une richesse supérieure d'environ 13% pour les ménages dont le chef est un homme.
+
+
+
+### Modèle 3 : La richesse des ménages varie-t-elle selon les départements
+
+```{r}
+Q3<-as.factor(substr(sel$loc_dep,1,3))
+labelQ3 <- "Département"
+
+plot(Y~Q3,cex.axis=0.6, xlab=labelQ3, ylab=labelY)
+
+mod<-lm(Y~Q3)
+summary(mod)
+anova(mod)
+
+```
+
+
+
+
+
+
