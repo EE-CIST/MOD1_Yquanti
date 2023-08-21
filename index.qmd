@@ -3,7 +3,7 @@ title: "Modélisation d'une variable quantitative"
 subtitle: "EE CIST 2023, Ouidah, Bénin"
 author: "Claude Grasland & Nadège Djossou"
 ---
-
+ups
 
 Ce site est la version **provisoire** du cours de modélisation d'une variable quantitative qui sera dispensé lors de l'école d'été CIST 2023 à Ouidah au Bénin. Il a été mis au point par Claude Grasland (Géographe, Université Paris Cité) et Nadège Gbetoton (économiste Université de Parakou) puis relu et complété par les autres formateurs. 
 
